@@ -3,7 +3,8 @@ from capstone import *
 from pwn import *
 
 elf = ELF("./test1.elf")
-
+movt = 0x0000
+movw = 0x080C
 function_names = ['a','b','c','main']
 # retn address -> 각각 table index가 됨
 # functino offset -> 함수의 위치
@@ -59,12 +60,14 @@ for i in analysis_table:
         call_name = k[0]
         if call_name != 0:
             return_value = k[1]
-            buf.append(function_name+str(cnt))
+            buf.append(function_name+"_"+str(cnt)+"_"+"FORPUSH")
+            buf.append(hex(movt))
             buf.append(return_value)
             buf.append(function_info[call_name])
             function_table.append(buf)
             buf = []
             cnt += 1
+            movt += 4
         else:
             pass
 

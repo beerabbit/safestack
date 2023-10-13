@@ -73,4 +73,4 @@ attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 1, !"min_enum_size", i32 4}
 !2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git ca57aba38883a0f018b42378ceb988b892f1acd9)"}
+!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 9e505eddd0ddb64833e98c352f5619f1353db354)"}

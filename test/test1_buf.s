@@ -34,7 +34,7 @@ a:
 	sub	sp, #8
 	@APP
 a_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x0
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -44,18 +44,18 @@ a_0_FORPUSH:
 	movs	r1, #2
 	movs	r2, #3
 	movs	r3, #4
-	bl	b
+	bl	MasterForward
 	str	r0, [sp, #4]
 	@APP
 a_1_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x4
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
-	bl	c
+	bl	MasterForward
 	@APP
 a_2_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x8
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -65,7 +65,7 @@ a_2_FORPUSH:
 	movs	r1, #2
 	movs	r2, #3
 	movs	r3, #4
-	bl	b
+	bl	MasterForward
 	str	r0, [sp, #4]
 	ldr	r0, [sp, #4]
 	add	sp, #8
@@ -106,11 +106,11 @@ b:
 	str	r0, [sp, #4]
 	@APP
 b_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0xc
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
-	bl	c
+	bl	MasterForward
 	ldr	r0, [sp, #4]
 	add	sp, #24
 	pop	{r7, pc}
@@ -156,11 +156,11 @@ main:
 	sub	sp, #8
 	@APP
 main_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x10
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
-	bl	a
+	bl	MasterForward
 	str	r0, [sp, #4]
 	ldr	r1, [sp, #4]
 	movw	r0, :lower16:.L.str.1

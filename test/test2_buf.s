@@ -26,15 +26,15 @@
 a:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
+	.save	{r4, r6, r7, lr}
+	push	{r4, r6, r7, lr}
+	.setfp	r7, sp, #8
+	add	r7, sp, #8
 	.pad	#8
 	sub	sp, #8
 	@APP
 a_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x0
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -45,17 +45,20 @@ a_0_FORPUSH:
 	movs	r2, #3
 	movs	r3, #4
 	bl	b
-	str	r0, [sp, #4]
+	mov	r4, r0
+	bl	MasterForward
+	str	r4, [sp, #4]
 	@APP
 a_1_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x4
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	c
+	bl	MasterForward
 	@APP
 a_2_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x8
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -66,10 +69,15 @@ a_2_FORPUSH:
 	movs	r2, #3
 	movs	r3, #4
 	bl	b
-	str	r0, [sp, #4]
+	mov	r4, r0
+	bl	MasterForward
+	str	r4, [sp, #4]
 	ldr	r0, [sp, #4]
+	@APP
+	bl	MasterBackward
+	@NO_APP
 	add	sp, #8
-	pop	{r7, pc}
+	pop	{r4, r6, r7, pc}
 .Lfunc_end0:
 	.size	a, .Lfunc_end0-a
 	.cantunwind
@@ -106,12 +114,16 @@ b:
 	str	r0, [sp, #4]
 	@APP
 b_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0xc
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	c
+	bl	MasterForward
 	ldr	r0, [sp, #4]
+	@APP
+	bl	MasterBackward
+	@NO_APP
 	add	sp, #24
 	pop	{r7, pc}
 .Lfunc_end1:
@@ -134,6 +146,9 @@ c:
 	movw	r0, :lower16:.L.str
 	movt	r0, :upper16:.L.str
 	bl	printf
+	@APP
+	bl	MasterBackward
+	@NO_APP
 	pop	{r7, pc}
 .Lfunc_end2:
 	.size	c, .Lfunc_end2-c
@@ -148,27 +163,32 @@ c:
 main:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
+	.save	{r4, r6, r7, lr}
+	push	{r4, r6, r7, lr}
+	.setfp	r7, sp, #8
+	add	r7, sp, #8
 	.pad	#8
 	sub	sp, #8
 	@APP
 main_0_FORPUSH:
-	movt	lr, #0
+	movt	lr, #0x10
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	a
-	str	r0, [sp, #4]
+	mov	r4, r0
+	bl	MasterForward
+	str	r4, [sp, #4]
 	ldr	r1, [sp, #4]
 	movw	r0, :lower16:.L.str.1
 	movt	r0, :upper16:.L.str.1
 	bl	printf
+	@APP
+	bl	MasterBackward
+	@NO_APP
 	movs	r0, #0
 	add	sp, #8
-	pop	{r7, pc}
+	pop	{r4, r6, r7, pc}
 .Lfunc_end3:
 	.size	main, .Lfunc_end3-main
 	.cantunwind

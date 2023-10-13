@@ -11,13 +11,17 @@ define dso_local i32 @a() #0 {
   %1 = alloca i32, align 4
   call void asm sideeffect "a_0_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", ""()
   %2 = call i32 @b(i32 noundef 1, i32 noundef 2, i32 noundef 3, i32 noundef 4, i32 noundef 5)
+  call void @MasterForward()
   store i32 %2, ptr %1, align 4
   call void asm sideeffect "a_1_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", ""()
   call void @c()
+  call void @MasterForward()
   call void asm sideeffect "a_2_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", ""()
   %3 = call i32 @b(i32 noundef 1, i32 noundef 2, i32 noundef 3, i32 noundef 4, i32 noundef 6)
+  call void @MasterForward()
   store i32 %3, ptr %1, align 4
   %4 = load i32, ptr %1, align 4
+  call void asm sideeffect "bl MasterBackward", ""()
   ret i32 %4
 }
 
@@ -46,13 +50,16 @@ define dso_local i32 @b(i32 noundef %0, i32 noundef %1, i32 noundef %2, i32 noun
   store i32 %20, ptr %11, align 4
   call void asm sideeffect "b_0_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", ""()
   call void @c()
+  call void @MasterForward()
   %21 = load i32, ptr %11, align 4
+  call void asm sideeffect "bl MasterBackward", ""()
   ret i32 %21
 }
 
 ; Function Attrs: noinline nounwind optnone
 define dso_local void @c() #0 {
   %1 = call i32 (ptr, ...) @printf(ptr noundef @.str)
+  call void asm sideeffect "bl MasterBackward", ""()
   ret void
 }
 
@@ -63,9 +70,11 @@ define dso_local i32 @main() #0 {
   %1 = alloca i32, align 4
   call void asm sideeffect "main_0_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", ""()
   %2 = call i32 @a()
+  call void @MasterForward()
   store i32 %2, ptr %1, align 4
   %3 = load i32, ptr %1, align 4
   %4 = call i32 (ptr, ...) @printf(ptr noundef @.str.1, i32 noundef %3)
+  call void asm sideeffect "bl MasterBackward", ""()
   ret i32 0
 }
 
