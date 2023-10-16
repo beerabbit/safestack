@@ -42,7 +42,6 @@ namespace {
                     
                     for(Instruction &I : BB){
                         CallInst *callInstr = dyn_cast<CallInst>(&I);
-                        
                         if(callInstr){
                             Function *calledFunc = callInstr->getCalledFunction();
                             Instruction *Next = I.getNextNode();      

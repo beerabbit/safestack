@@ -2,7 +2,7 @@ from elftools.elf.elffile import ELFFile
 from capstone import *
 from pwn import *
 
-elf = ELF("./test1.elf")
+elf = ELF("./test2.elf")
 movt = 0x0000
 movw = 0x080C
 function_names = ['a','b','c','main']
