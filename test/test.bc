@@ -3,8 +3,7 @@ source_filename = "test.c"
 target datalayout = "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
 target triple = "thumbv7em-none-unknown-eabihf"
 
-@.str = private unnamed_addr constant [5 x i8] c"EOF\0A\00", align 1
-@.str.1 = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@.str = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
 
 ; Function Attrs: noinline nounwind optnone
 define dso_local i32 @a() #0 {
@@ -48,11 +47,10 @@ define dso_local i32 @b(i32 noundef %0, i32 noundef %1, i32 noundef %2, i32 noun
 
 ; Function Attrs: noinline nounwind optnone
 define dso_local void @c() #0 {
-  %1 = call i32 (ptr, ...) @printf(ptr noundef @.str)
+  %1 = alloca i32, align 4
+  store i32 0, ptr %1, align 4
   ret void
 }
-
-declare dso_local i32 @printf(ptr noundef, ...) #1
 
 ; Function Attrs: noinline nounwind optnone
 define dso_local i32 @main() #0 {
@@ -60,9 +58,11 @@ define dso_local i32 @main() #0 {
   %2 = call i32 @a()
   store i32 %2, ptr %1, align 4
   %3 = load i32, ptr %1, align 4
-  %4 = call i32 (ptr, ...) @printf(ptr noundef @.str.1, i32 noundef %3)
+  %4 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %3)
   ret i32 0
 }
+
+declare dso_local i32 @printf(ptr noundef, ...) #1
 
 attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
@@ -73,4 +73,4 @@ attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 1, !"min_enum_size", i32 4}
 !2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 9e505eddd0ddb64833e98c352f5619f1353db354)"}
+!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"}

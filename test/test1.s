@@ -30,45 +30,51 @@ a:
 	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
-	.pad	#8
-	sub	sp, #8
+	.pad	#24
+	sub	sp, #24
 	@APP
 a_0_FORPUSH:
-	movt	lr, #0
-	movw	lr, #2060
+	movw	lr, #0
+	movt	lr, #2060
 	push	{lr}
 	@NO_APP
+	mov	r1, sp
 	movs	r0, #5
-	str	r0, [sp]
+	str	r0, [r1]
 	movs	r0, #1
+	str	r0, [sp, #4]                    @ 4-byte Spill
 	movs	r1, #2
+	str	r1, [sp, #8]                    @ 4-byte Spill
 	movs	r2, #3
+	str	r2, [sp, #12]                   @ 4-byte Spill
 	movs	r3, #4
+	str	r3, [sp, #16]                   @ 4-byte Spill
 	bl	b
-	str	r0, [sp, #4]
+	str	r0, [sp, #20]
 	@APP
-a_1_FORPUSH:
-	movt	lr, #0
-	movw	lr, #2060
+a_4_FORPUSH:
+	movw	lr, #12
+	movt	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	c
+	ldr	r0, [sp, #4]                    @ 4-byte Reload
+	ldr	r1, [sp, #8]                    @ 4-byte Reload
+	ldr	r2, [sp, #12]                   @ 4-byte Reload
+	ldr	r3, [sp, #16]                   @ 4-byte Reload
 	@APP
-a_2_FORPUSH:
-	movt	lr, #0
-	movw	lr, #2060
+a_8_FORPUSH:
+	movw	lr, #24
+	movt	lr, #2060
 	push	{lr}
 	@NO_APP
-	movs	r0, #6
-	str	r0, [sp]
-	movs	r0, #1
-	movs	r1, #2
-	movs	r2, #3
-	movs	r3, #4
+	mov	lr, sp
+	mov.w	r12, #6
+	str.w	r12, [lr]
 	bl	b
-	str	r0, [sp, #4]
-	ldr	r0, [sp, #4]
-	add	sp, #8
+	str	r0, [sp, #20]
+	ldr	r0, [sp, #20]
+	add	sp, #24
 	pop	{r7, pc}
 .Lfunc_end0:
 	.size	a, .Lfunc_end0-a
@@ -105,9 +111,9 @@ b:
 	add	r0, r1
 	str	r0, [sp, #4]
 	@APP
-b_0_FORPUSH:
-	movt	lr, #0
-	movw	lr, #2060
+b_12_FORPUSH:
+	movw	lr, #36
+	movt	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	c
@@ -127,14 +133,12 @@ b_0_FORPUSH:
 c:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
-	movw	r0, :lower16:.L.str
-	movt	r0, :upper16:.L.str
-	bl	printf
-	pop	{r7, pc}
+	.pad	#4
+	sub	sp, #4
+	movs	r0, #0
+	str	r0, [sp]
+	add	sp, #4
+	bx	lr
 .Lfunc_end2:
 	.size	c, .Lfunc_end2-c
 	.cantunwind
@@ -155,16 +159,21 @@ main:
 	.pad	#8
 	sub	sp, #8
 	@APP
-main_0_FORPUSH:
-	movt	lr, #0
-	movw	lr, #2060
+	ldr	r0, .Ltmp0
+	ldr	r1, .Ltmp1
+	str	r1, [r0]
+	@NO_APP
+	@APP
+main_16_FORPUSH:
+	movw	lr, #48
+	movt	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	a
 	str	r0, [sp, #4]
 	ldr	r1, [sp, #4]
-	movw	r0, :lower16:.L.str.1
-	movt	r0, :upper16:.L.str.1
+	movw	r0, :lower16:.L.str
+	movt	r0, :upper16:.L.str
 	bl	printf
 	movs	r0, #0
 	add	sp, #8
@@ -215,13 +224,15 @@ MasterBackward:
 	@APP
 	ldr	r1, .Ltmp0
 	ldr	r2, [r1]
-	add.w	r2, r2, #8
+	sub.w	r2, r2, #4
 	ldr	r3, [r2]
+	add.w	r3, r3, #8
+	ldr	r3, [r3]
 	cmp	r3, lr
 	bne	fail_back
-	ldr.w	lr, [r1]
-	sub.w	r1, r1, #4
-	str	r1, [r1]
+	ldr	r3, [r2]
+	ldr.w	lr, [r3]
+	str	r2, [r1]
 	bx	lr
 fail_back:
 	@NO_APP
@@ -233,17 +244,15 @@ fail_back:
 	.type	.L.str,%object                  @ @.str
 	.section	.rodata.str1.1,"aMS",%progbits,1
 .L.str:
-	.asciz	"EOF\n"
-	.size	.L.str, 5
-
-	.type	.L.str.1,%object                @ @.str.1
-.L.str.1:
 	.asciz	"%d\n"
-	.size	.L.str.1, 4
+	.size	.L.str, 4
 
 	.text
 	.p2align	2, 0x0
 .Ltmp0:
-	.long	135004160
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 9e505eddd0ddb64833e98c352f5619f1353db354)"
+	.long	536936448
+	.p2align	2, 0x0
+.Ltmp1:
+	.long	536936452
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"
 	.section	".note.GNU-stack","",%progbits

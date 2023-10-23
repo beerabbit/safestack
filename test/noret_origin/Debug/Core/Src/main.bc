@@ -1,0 +1,1077 @@
+; ModuleID = '<stdin>'
+source_filename = "../Core/Src/main.c"
+target datalayout = "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "thumbv7em-none-unknown-eabihf"
+
+%struct.__UART_HandleTypeDef = type { ptr, %struct.UART_InitTypeDef, ptr, i16, i16, ptr, i16, i16, i32, ptr, ptr, i32, i32, i32, i32 }
+%struct.UART_InitTypeDef = type { i32, i32, i32, i32, i32, i32, i32 }
+%struct.I2C_HandleTypeDef = type { ptr, %struct.I2C_InitTypeDef, ptr, i16, i16, i32, i32, ptr, ptr, i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.I2C_InitTypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.__I2S_HandleTypeDef = type { ptr, %struct.I2S_InitTypeDef, ptr, i16, i16, ptr, i16, i16, ptr, ptr, ptr, i32, i32, i32 }
+%struct.I2S_InitTypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.__SPI_HandleTypeDef = type { ptr, %struct.SPI_InitTypeDef, ptr, i16, i16, ptr, i16, i16, ptr, ptr, ptr, ptr, i32, i32, i32 }
+%struct.SPI_InitTypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.RCC_OscInitTypeDef = type { i32, i32, i32, i32, i32, i32, %struct.RCC_PLLInitTypeDef }
+%struct.RCC_PLLInitTypeDef = type { i32, i32, i32, i32, i32, i32 }
+%struct.RCC_ClkInitTypeDef = type { i32, i32, i32, i32, i32 }
+%struct.RCC_TypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, [2 x i32], i32, i32 }
+%struct.GPIO_InitTypeDef = type { i32, i32, i32, i32, i32 }
+
+@Array = dso_local global [101 x i32] zeroinitializer, align 4
+@factor = dso_local global i32 0, align 4
+@__const.verify_benchmark.expected = private unnamed_addr constant [100 x i32] [i32 -99, i32 -98, i32 -97, i32 -96, i32 -95, i32 -94, i32 -93, i32 -92, i32 -91, i32 -90, i32 -89, i32 -88, i32 -87, i32 -86, i32 -85, i32 -84, i32 -83, i32 -82, i32 -81, i32 -80, i32 -79, i32 -78, i32 -77, i32 -76, i32 -75, i32 -74, i32 -73, i32 -72, i32 -71, i32 -70, i32 -69, i32 -68, i32 -67, i32 -66, i32 -65, i32 -64, i32 -63, i32 -62, i32 -61, i32 -60, i32 -59, i32 -58, i32 -57, i32 -56, i32 -55, i32 -54, i32 -53, i32 -52, i32 -51, i32 -50, i32 -49, i32 -48, i32 -47, i32 -46, i32 -45, i32 -44, i32 -43, i32 -42, i32 -41, i32 -40, i32 -39, i32 -38, i32 -37, i32 -36, i32 -35, i32 -34, i32 -33, i32 -32, i32 -31, i32 -30, i32 -29, i32 -28, i32 -27, i32 -26, i32 -25, i32 -24, i32 -23, i32 -22, i32 -21, i32 -20, i32 -19, i32 -18, i32 -17, i32 -16, i32 -15, i32 -14, i32 -13, i32 -12, i32 -11, i32 -10, i32 -9, i32 -8, i32 -7, i32 -6, i32 -5, i32 -4, i32 -3, i32 -2, i32 -1, i32 0], align 4
+@huart2 = dso_local global %struct.__UART_HandleTypeDef zeroinitializer, align 4
+@.str = private unnamed_addr constant [5 x i8] c"%d\0D\0A\00", align 1
+@hi2c1 = dso_local global %struct.I2C_HandleTypeDef zeroinitializer, align 4
+@hi2s3 = dso_local global %struct.__I2S_HandleTypeDef zeroinitializer, align 4
+@hspi1 = dso_local global %struct.__SPI_HandleTypeDef zeroinitializer, align 4
+@Seed = dso_local global i32 0, align 4
+
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @benchmark() #0 !dbg !7 {
+  call void asm sideeffect "benchmark_0_FORPUSH:;movw lr, 0;movt lr, 0x080C;push {lr}", ""(), !dbg !10
+  call void @BubbleSort(ptr noundef @Array), !dbg !10
+  ret i32 0, !dbg !11
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @BubbleSort(ptr noundef %0) #0 !dbg !12 {
+  %2 = alloca ptr, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  store ptr %0, ptr %2, align 4
+  store i32 0, ptr %3, align 4, !dbg !13
+  store i32 0, ptr %6, align 4, !dbg !14
+  br label %7, !dbg !15
+
+7:                                                ; preds = %58, %1
+  %8 = load i32, ptr %6, align 4, !dbg !16
+  %9 = icmp slt i32 %8, 100, !dbg !17
+  br i1 %9, label %10, label %61, !dbg !18
+
+10:                                               ; preds = %7
+  store i32 1, ptr %3, align 4, !dbg !19
+  store i32 0, ptr %5, align 4, !dbg !20
+  br label %11, !dbg !21
+
+11:                                               ; preds = %50, %10
+  %12 = load i32, ptr %5, align 4, !dbg !22
+  %13 = icmp slt i32 %12, 100, !dbg !23
+  br i1 %13, label %14, label %53, !dbg !24
+
+14:                                               ; preds = %11
+  %15 = load i32, ptr %5, align 4, !dbg !25
+  %16 = load i32, ptr %6, align 4, !dbg !26
+  %17 = sub nsw i32 100, %16, !dbg !27
+  %18 = icmp sge i32 %15, %17, !dbg !28
+  br i1 %18, label %19, label %20, !dbg !25
+
+19:                                               ; preds = %14
+  br label %53, !dbg !29
+
+20:                                               ; preds = %14
+  %21 = load ptr, ptr %2, align 4, !dbg !30
+  %22 = load i32, ptr %5, align 4, !dbg !31
+  %23 = getelementptr inbounds i32, ptr %21, i32 %22, !dbg !30
+  %24 = load i32, ptr %23, align 4, !dbg !30
+  %25 = load ptr, ptr %2, align 4, !dbg !32
+  %26 = load i32, ptr %5, align 4, !dbg !33
+  %27 = add nsw i32 %26, 1, !dbg !34
+  %28 = getelementptr inbounds i32, ptr %25, i32 %27, !dbg !32
+  %29 = load i32, ptr %28, align 4, !dbg !32
+  %30 = icmp sgt i32 %24, %29, !dbg !35
+  br i1 %30, label %31, label %49, !dbg !30
+
+31:                                               ; preds = %20
+  %32 = load ptr, ptr %2, align 4, !dbg !36
+  %33 = load i32, ptr %5, align 4, !dbg !37
+  %34 = getelementptr inbounds i32, ptr %32, i32 %33, !dbg !36
+  %35 = load i32, ptr %34, align 4, !dbg !36
+  store i32 %35, ptr %4, align 4, !dbg !38
+  %36 = load ptr, ptr %2, align 4, !dbg !39
+  %37 = load i32, ptr %5, align 4, !dbg !40
+  %38 = add nsw i32 %37, 1, !dbg !41
+  %39 = getelementptr inbounds i32, ptr %36, i32 %38, !dbg !39
+  %40 = load i32, ptr %39, align 4, !dbg !39
+  %41 = load ptr, ptr %2, align 4, !dbg !42
+  %42 = load i32, ptr %5, align 4, !dbg !43
+  %43 = getelementptr inbounds i32, ptr %41, i32 %42, !dbg !42
+  store i32 %40, ptr %43, align 4, !dbg !44
+  %44 = load i32, ptr %4, align 4, !dbg !45
+  %45 = load ptr, ptr %2, align 4, !dbg !46
+  %46 = load i32, ptr %5, align 4, !dbg !47
+  %47 = add nsw i32 %46, 1, !dbg !48
+  %48 = getelementptr inbounds i32, ptr %45, i32 %47, !dbg !46
+  store i32 %44, ptr %48, align 4, !dbg !49
+  store i32 0, ptr %3, align 4, !dbg !50
+  br label %49, !dbg !51
+
+49:                                               ; preds = %31, %20
+  br label %50, !dbg !52
+
+50:                                               ; preds = %49
+  %51 = load i32, ptr %5, align 4, !dbg !53
+  %52 = add nsw i32 %51, 1, !dbg !53
+  store i32 %52, ptr %5, align 4, !dbg !53
+  br label %11, !dbg !24, !llvm.loop !54
+
+53:                                               ; preds = %19, %11
+  %54 = load i32, ptr %3, align 4, !dbg !56
+  %55 = icmp ne i32 %54, 0, !dbg !56
+  br i1 %55, label %56, label %57, !dbg !56
+
+56:                                               ; preds = %53
+  br label %61, !dbg !57
+
+57:                                               ; preds = %53
+  br label %58, !dbg !58
+
+58:                                               ; preds = %57
+  %59 = load i32, ptr %6, align 4, !dbg !59
+  %60 = add nsw i32 %59, 1, !dbg !59
+  store i32 %60, ptr %6, align 4, !dbg !59
+  br label %7, !dbg !18, !llvm.loop !60
+
+61:                                               ; preds = %56, %7
+  ret void, !dbg !61
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @initialise_benchmark() #0 !dbg !62 {
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  store i32 -1, ptr @factor, align 4, !dbg !63
+  %3 = load i32, ptr @factor, align 4, !dbg !64
+  store i32 %3, ptr %2, align 4, !dbg !65
+  store i32 0, ptr %1, align 4, !dbg !66
+  br label %4, !dbg !67
+
+4:                                                ; preds = %13, %0
+  %5 = load i32, ptr %1, align 4, !dbg !68
+  %6 = icmp slt i32 %5, 100, !dbg !69
+  br i1 %6, label %7, label %16, !dbg !70
+
+7:                                                ; preds = %4
+  %8 = load i32, ptr %1, align 4, !dbg !71
+  %9 = load i32, ptr %2, align 4, !dbg !72
+  %10 = mul nsw i32 %8, %9, !dbg !73
+  %11 = load i32, ptr %1, align 4, !dbg !74
+  %12 = getelementptr inbounds [101 x i32], ptr @Array, i32 0, i32 %11, !dbg !75
+  store i32 %10, ptr %12, align 4, !dbg !76
+  br label %13, !dbg !75
+
+13:                                               ; preds = %7
+  %14 = load i32, ptr %1, align 4, !dbg !77
+  %15 = add nsw i32 %14, 1, !dbg !77
+  store i32 %15, ptr %1, align 4, !dbg !77
+  br label %4, !dbg !70, !llvm.loop !78
+
+16:                                               ; preds = %4
+  ret void, !dbg !79
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @verify_benchmark(i32 noundef %0) #0 !dbg !80 {
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca [100 x i32], align 4
+  %5 = alloca i32, align 4
+  store i32 %0, ptr %3, align 4
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %4, ptr align 4 @__const.verify_benchmark.expected, i32 400, i1 false), !dbg !81
+  store i32 0, ptr %5, align 4, !dbg !82
+  br label %6, !dbg !83
+
+6:                                                ; preds = %19, %1
+  %7 = load i32, ptr %5, align 4, !dbg !84
+  %8 = icmp slt i32 %7, 100, !dbg !85
+  br i1 %8, label %9, label %22, !dbg !86
+
+9:                                                ; preds = %6
+  %10 = load i32, ptr %5, align 4, !dbg !87
+  %11 = getelementptr inbounds [101 x i32], ptr @Array, i32 0, i32 %10, !dbg !88
+  %12 = load i32, ptr %11, align 4, !dbg !88
+  %13 = load i32, ptr %5, align 4, !dbg !89
+  %14 = getelementptr inbounds [100 x i32], ptr %4, i32 0, i32 %13, !dbg !90
+  %15 = load i32, ptr %14, align 4, !dbg !90
+  %16 = icmp ne i32 %12, %15, !dbg !91
+  br i1 %16, label %17, label %18, !dbg !88
+
+17:                                               ; preds = %9
+  store i32 0, ptr %2, align 4, !dbg !92
+  br label %23, !dbg !92
+
+18:                                               ; preds = %9
+  br label %19, !dbg !93
+
+19:                                               ; preds = %18
+  %20 = load i32, ptr %5, align 4, !dbg !94
+  %21 = add nsw i32 %20, 1, !dbg !94
+  store i32 %21, ptr %5, align 4, !dbg !94
+  br label %6, !dbg !86, !llvm.loop !95
+
+22:                                               ; preds = %6
+  store i32 1, ptr %2, align 4, !dbg !96
+  br label %23, !dbg !96
+
+23:                                               ; preds = %22, %17
+  %24 = load i32, ptr %2, align 4, !dbg !97
+  ret i32 %24, !dbg !97
+}
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i32(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i32, i1 immarg) #1
+
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @__io_putchar(i32 noundef %0) #0 !dbg !98 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  %3 = call i32 @HAL_UART_Transmit(ptr noundef @huart2, ptr noundef %2, i16 noundef zeroext 1, i32 noundef 100), !dbg !99
+  %4 = load i32, ptr %2, align 4, !dbg !100
+  ret i32 %4, !dbg !101
+}
+
+declare dso_local i32 @HAL_UART_Transmit(ptr noundef, ptr noundef, i16 noundef zeroext, i32 noundef) #2
+
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @main() #0 !dbg !102 {
+  call void asm sideeffect "ldr r0 , =0x20010000; ldr r1, =0x20010004; str r1, [r0]", ""()
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 0, ptr %1, align 4
+  %5 = call i32 @HAL_Init(), !dbg !103
+  call void asm sideeffect "main_4_FORPUSH:;movw lr, 12;movt lr, 0x080C;push {lr}", ""(), !dbg !104
+  call void @SystemClock_Config(), !dbg !104
+  call void asm sideeffect "main_8_FORPUSH:;movw lr, 24;movt lr, 0x080C;push {lr}", ""(), !dbg !105
+  call void @MX_GPIO_Init(), !dbg !105
+  call void asm sideeffect "main_12_FORPUSH:;movw lr, 36;movt lr, 0x080C;push {lr}", ""(), !dbg !106
+  call void @MX_I2C1_Init(), !dbg !106
+  call void asm sideeffect "main_16_FORPUSH:;movw lr, 48;movt lr, 0x080C;push {lr}", ""(), !dbg !107
+  call void @MX_I2S3_Init(), !dbg !107
+  call void asm sideeffect "main_20_FORPUSH:;movw lr, 60;movt lr, 0x080C;push {lr}", ""(), !dbg !108
+  call void @MX_SPI1_Init(), !dbg !108
+  call void @MX_USB_HOST_Init(), !dbg !109
+  call void asm sideeffect "main_24_FORPUSH:;movw lr, 72;movt lr, 0x080C;push {lr}", ""(), !dbg !110
+  call void @MX_USART2_UART_Init(), !dbg !110
+  %6 = call i32 @HAL_GetTick(), !dbg !111
+  store i32 %6, ptr %2, align 4, !dbg !112
+  call void asm sideeffect "main_28_FORPUSH:;movw lr, 84;movt lr, 0x080C;push {lr}", ""(), !dbg !113
+  call void @initialise_benchmark(), !dbg !113
+  br label %7, !dbg !114
+
+7:                                                ; preds = %25, %0
+  call void @MX_USB_HOST_Process(), !dbg !115
+  store i32 0, ptr %3, align 4, !dbg !116
+  br label %8, !dbg !117
+
+8:                                                ; preds = %13, %7
+  %9 = load i32, ptr %3, align 4, !dbg !118
+  %10 = icmp slt i32 %9, 10000, !dbg !119
+  br i1 %10, label %11, label %16, !dbg !120
+
+11:                                               ; preds = %8
+  call void asm sideeffect "main_32_FORPUSH:;movw lr, 96;movt lr, 0x080C;push {lr}", ""(), !dbg !121
+  %12 = call i32 @benchmark(), !dbg !121
+  br label %13, !dbg !122
+
+13:                                               ; preds = %11
+  %14 = load i32, ptr %3, align 4, !dbg !123
+  %15 = add nsw i32 %14, 1, !dbg !123
+  store i32 %15, ptr %3, align 4, !dbg !123
+  br label %8, !dbg !120, !llvm.loop !124
+
+16:                                               ; preds = %8
+  call void asm sideeffect "main_36_FORPUSH:;movw lr, 108;movt lr, 0x080C;push {lr}", ""(), !dbg !125
+  %17 = call i32 @verify_benchmark(i32 noundef 1), !dbg !125
+  store i32 %17, ptr %4, align 4, !dbg !126
+  %18 = load i32, ptr %4, align 4, !dbg !127
+  %19 = icmp eq i32 %18, 1, !dbg !128
+  br i1 %19, label %20, label %25, !dbg !127
+
+20:                                               ; preds = %16
+  %21 = call i32 @HAL_GetTick(), !dbg !129
+  %22 = load i32, ptr %2, align 4, !dbg !130
+  %23 = sub i32 %21, %22, !dbg !131
+  %24 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %23), !dbg !132
+  br label %25, !dbg !133
+
+25:                                               ; preds = %20, %16
+  %26 = call i32 @HAL_GetTick(), !dbg !134
+  store i32 %26, ptr %2, align 4, !dbg !135
+  br label %7, !dbg !114, !llvm.loop !136
+}
+
+declare dso_local i32 @HAL_Init() #2
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @SystemClock_Config() #0 !dbg !138 {
+  %1 = alloca %struct.RCC_OscInitTypeDef, align 4
+  %2 = alloca %struct.RCC_ClkInitTypeDef, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  call void @llvm.memset.p0.i32(ptr align 4 %1, i8 0, i32 48, i1 false), !dbg !139
+  call void @llvm.memset.p0.i32(ptr align 4 %2, i8 0, i32 20, i1 false), !dbg !140
+  br label %5, !dbg !141
+
+5:                                                ; preds = %0
+  store volatile i32 0, ptr %3, align 4, !dbg !141
+  %6 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !141
+  %7 = or i32 %6, 268435456, !dbg !141
+  store volatile i32 %7, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !141
+  %8 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !141
+  %9 = and i32 %8, 268435456, !dbg !141
+  store volatile i32 %9, ptr %3, align 4, !dbg !141
+  %10 = load volatile i32, ptr %3, align 4, !dbg !141
+  br label %11, !dbg !141
+
+11:                                               ; preds = %5
+  br label %12, !dbg !142
+
+12:                                               ; preds = %11
+  store volatile i32 0, ptr %4, align 4, !dbg !142
+  %13 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !142
+  %14 = and i32 %13, -16385, !dbg !142
+  %15 = or i32 %14, 16384, !dbg !142
+  store volatile i32 %15, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !142
+  %16 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !142
+  %17 = and i32 %16, 16384, !dbg !142
+  store volatile i32 %17, ptr %4, align 4, !dbg !142
+  %18 = load volatile i32, ptr %4, align 4, !dbg !142
+  br label %19, !dbg !142
+
+19:                                               ; preds = %12
+  %20 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 0, !dbg !143
+  store i32 1, ptr %20, align 4, !dbg !144
+  %21 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 1, !dbg !145
+  store i32 65536, ptr %21, align 4, !dbg !146
+  %22 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !147
+  %23 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %22, i32 0, i32 0, !dbg !148
+  store i32 2, ptr %23, align 4, !dbg !149
+  %24 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !150
+  %25 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %24, i32 0, i32 1, !dbg !151
+  store i32 4194304, ptr %25, align 4, !dbg !152
+  %26 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !153
+  %27 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %26, i32 0, i32 2, !dbg !154
+  store i32 8, ptr %27, align 4, !dbg !155
+  %28 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !156
+  %29 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %28, i32 0, i32 3, !dbg !157
+  store i32 336, ptr %29, align 4, !dbg !158
+  %30 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !159
+  %31 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %30, i32 0, i32 4, !dbg !160
+  store i32 2, ptr %31, align 4, !dbg !161
+  %32 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %1, i32 0, i32 6, !dbg !162
+  %33 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %32, i32 0, i32 5, !dbg !163
+  store i32 7, ptr %33, align 4, !dbg !164
+  %34 = call i32 @HAL_RCC_OscConfig(ptr noundef %1), !dbg !165
+  %35 = icmp ne i32 %34, 0, !dbg !166
+  br i1 %35, label %36, label %37, !dbg !165
+
+36:                                               ; preds = %19
+  call void asm sideeffect "SystemClock_Config_40_FORPUSH:;movw lr, 120;movt lr, 0x080C;push {lr}", ""(), !dbg !167
+  call void @Error_Handler(), !dbg !167
+  br label %37, !dbg !168
+
+37:                                               ; preds = %36, %19
+  %38 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %2, i32 0, i32 0, !dbg !169
+  store i32 15, ptr %38, align 4, !dbg !170
+  %39 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %2, i32 0, i32 1, !dbg !171
+  store i32 2, ptr %39, align 4, !dbg !172
+  %40 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %2, i32 0, i32 2, !dbg !173
+  store i32 0, ptr %40, align 4, !dbg !174
+  %41 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %2, i32 0, i32 3, !dbg !175
+  store i32 5120, ptr %41, align 4, !dbg !176
+  %42 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %2, i32 0, i32 4, !dbg !177
+  store i32 4096, ptr %42, align 4, !dbg !178
+  %43 = call i32 @HAL_RCC_ClockConfig(ptr noundef %2, i32 noundef 5), !dbg !179
+  %44 = icmp ne i32 %43, 0, !dbg !180
+  br i1 %44, label %45, label %46, !dbg !179
+
+45:                                               ; preds = %37
+  call void asm sideeffect "SystemClock_Config_44_FORPUSH:;movw lr, 132;movt lr, 0x080C;push {lr}", ""(), !dbg !181
+  call void @Error_Handler(), !dbg !181
+  br label %46, !dbg !182
+
+46:                                               ; preds = %45, %37
+  ret void, !dbg !183
+}
+
+; Function Attrs: noinline nounwind optnone
+define internal void @MX_GPIO_Init() #0 !dbg !184 {
+  %1 = alloca %struct.GPIO_InitTypeDef, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  call void @llvm.memset.p0.i32(ptr align 4 %1, i8 0, i32 20, i1 false), !dbg !185
+  br label %8, !dbg !186
+
+8:                                                ; preds = %0
+  store volatile i32 0, ptr %2, align 4, !dbg !186
+  %9 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !186
+  %10 = or i32 %9, 16, !dbg !186
+  store volatile i32 %10, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !186
+  %11 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !186
+  %12 = and i32 %11, 16, !dbg !186
+  store volatile i32 %12, ptr %2, align 4, !dbg !186
+  %13 = load volatile i32, ptr %2, align 4, !dbg !186
+  br label %14, !dbg !186
+
+14:                                               ; preds = %8
+  br label %15, !dbg !187
+
+15:                                               ; preds = %14
+  store volatile i32 0, ptr %3, align 4, !dbg !187
+  %16 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !187
+  %17 = or i32 %16, 4, !dbg !187
+  store volatile i32 %17, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !187
+  %18 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !187
+  %19 = and i32 %18, 4, !dbg !187
+  store volatile i32 %19, ptr %3, align 4, !dbg !187
+  %20 = load volatile i32, ptr %3, align 4, !dbg !187
+  br label %21, !dbg !187
+
+21:                                               ; preds = %15
+  br label %22, !dbg !188
+
+22:                                               ; preds = %21
+  store volatile i32 0, ptr %4, align 4, !dbg !188
+  %23 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !188
+  %24 = or i32 %23, 128, !dbg !188
+  store volatile i32 %24, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !188
+  %25 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !188
+  %26 = and i32 %25, 128, !dbg !188
+  store volatile i32 %26, ptr %4, align 4, !dbg !188
+  %27 = load volatile i32, ptr %4, align 4, !dbg !188
+  br label %28, !dbg !188
+
+28:                                               ; preds = %22
+  br label %29, !dbg !189
+
+29:                                               ; preds = %28
+  store volatile i32 0, ptr %5, align 4, !dbg !189
+  %30 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !189
+  %31 = or i32 %30, 1, !dbg !189
+  store volatile i32 %31, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !189
+  %32 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !189
+  %33 = and i32 %32, 1, !dbg !189
+  store volatile i32 %33, ptr %5, align 4, !dbg !189
+  %34 = load volatile i32, ptr %5, align 4, !dbg !189
+  br label %35, !dbg !189
+
+35:                                               ; preds = %29
+  br label %36, !dbg !190
+
+36:                                               ; preds = %35
+  store volatile i32 0, ptr %6, align 4, !dbg !190
+  %37 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !190
+  %38 = or i32 %37, 2, !dbg !190
+  store volatile i32 %38, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !190
+  %39 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !190
+  %40 = and i32 %39, 2, !dbg !190
+  store volatile i32 %40, ptr %6, align 4, !dbg !190
+  %41 = load volatile i32, ptr %6, align 4, !dbg !190
+  br label %42, !dbg !190
+
+42:                                               ; preds = %36
+  br label %43, !dbg !191
+
+43:                                               ; preds = %42
+  store volatile i32 0, ptr %7, align 4, !dbg !191
+  %44 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !191
+  %45 = or i32 %44, 8, !dbg !191
+  store volatile i32 %45, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !191
+  %46 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 11), align 4, !dbg !191
+  %47 = and i32 %46, 8, !dbg !191
+  store volatile i32 %47, ptr %7, align 4, !dbg !191
+  %48 = load volatile i32, ptr %7, align 4, !dbg !191
+  br label %49, !dbg !191
+
+49:                                               ; preds = %43
+  call void @HAL_GPIO_WritePin(ptr noundef inttoptr (i32 1073876992 to ptr), i16 noundef zeroext 8, i32 noundef 0), !dbg !192
+  call void @HAL_GPIO_WritePin(ptr noundef inttoptr (i32 1073874944 to ptr), i16 noundef zeroext 1, i32 noundef 1), !dbg !193
+  call void @HAL_GPIO_WritePin(ptr noundef inttoptr (i32 1073875968 to ptr), i16 noundef zeroext -4080, i32 noundef 0), !dbg !194
+  %50 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !195
+  store i32 8, ptr %50, align 4, !dbg !196
+  %51 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !197
+  store i32 1, ptr %51, align 4, !dbg !198
+  %52 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !199
+  store i32 0, ptr %52, align 4, !dbg !200
+  %53 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 3, !dbg !201
+  store i32 0, ptr %53, align 4, !dbg !202
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073876992 to ptr), ptr noundef %1), !dbg !203
+  %54 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !204
+  store i32 1, ptr %54, align 4, !dbg !205
+  %55 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !206
+  store i32 1, ptr %55, align 4, !dbg !207
+  %56 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !208
+  store i32 0, ptr %56, align 4, !dbg !209
+  %57 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 3, !dbg !210
+  store i32 0, ptr %57, align 4, !dbg !211
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073874944 to ptr), ptr noundef %1), !dbg !212
+  %58 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !213
+  store i32 8, ptr %58, align 4, !dbg !214
+  %59 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !215
+  store i32 2, ptr %59, align 4, !dbg !216
+  %60 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !217
+  store i32 0, ptr %60, align 4, !dbg !218
+  %61 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 3, !dbg !219
+  store i32 0, ptr %61, align 4, !dbg !220
+  %62 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 4, !dbg !221
+  store i32 5, ptr %62, align 4, !dbg !222
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073874944 to ptr), ptr noundef %1), !dbg !223
+  %63 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !224
+  store i32 1, ptr %63, align 4, !dbg !225
+  %64 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !226
+  store i32 1179648, ptr %64, align 4, !dbg !227
+  %65 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !228
+  store i32 0, ptr %65, align 4, !dbg !229
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073872896 to ptr), ptr noundef %1), !dbg !230
+  %66 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !231
+  store i32 4, ptr %66, align 4, !dbg !232
+  %67 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !233
+  store i32 0, ptr %67, align 4, !dbg !234
+  %68 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !235
+  store i32 0, ptr %68, align 4, !dbg !236
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073873920 to ptr), ptr noundef %1), !dbg !237
+  %69 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !238
+  store i32 1024, ptr %69, align 4, !dbg !239
+  %70 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !240
+  store i32 2, ptr %70, align 4, !dbg !241
+  %71 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !242
+  store i32 0, ptr %71, align 4, !dbg !243
+  %72 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 3, !dbg !244
+  store i32 0, ptr %72, align 4, !dbg !245
+  %73 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 4, !dbg !246
+  store i32 5, ptr %73, align 4, !dbg !247
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073873920 to ptr), ptr noundef %1), !dbg !248
+  %74 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !249
+  store i32 61456, ptr %74, align 4, !dbg !250
+  %75 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !251
+  store i32 1, ptr %75, align 4, !dbg !252
+  %76 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !253
+  store i32 0, ptr %76, align 4, !dbg !254
+  %77 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 3, !dbg !255
+  store i32 0, ptr %77, align 4, !dbg !256
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073875968 to ptr), ptr noundef %1), !dbg !257
+  %78 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !258
+  store i32 32, ptr %78, align 4, !dbg !259
+  %79 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !260
+  store i32 0, ptr %79, align 4, !dbg !261
+  %80 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !262
+  store i32 0, ptr %80, align 4, !dbg !263
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073875968 to ptr), ptr noundef %1), !dbg !264
+  %81 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 0, !dbg !265
+  store i32 2, ptr %81, align 4, !dbg !266
+  %82 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 1, !dbg !267
+  store i32 1179648, ptr %82, align 4, !dbg !268
+  %83 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %1, i32 0, i32 2, !dbg !269
+  store i32 0, ptr %83, align 4, !dbg !270
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1073876992 to ptr), ptr noundef %1), !dbg !271
+  ret void, !dbg !272
+}
+
+; Function Attrs: noinline nounwind optnone
+define internal void @MX_I2C1_Init() #0 !dbg !273 {
+  store ptr inttoptr (i32 1073763328 to ptr), ptr @hi2c1, align 4, !dbg !274
+  store i32 100000, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1), align 4, !dbg !275
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 1), align 4, !dbg !276
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 2), align 4, !dbg !277
+  store i32 16384, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 3), align 4, !dbg !278
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 4), align 4, !dbg !279
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 5), align 4, !dbg !280
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 6), align 4, !dbg !281
+  store i32 0, ptr getelementptr inbounds (%struct.I2C_HandleTypeDef, ptr @hi2c1, i32 0, i32 1, i32 7), align 4, !dbg !282
+  %1 = call i32 @HAL_I2C_Init(ptr noundef @hi2c1), !dbg !283
+  %2 = icmp ne i32 %1, 0, !dbg !284
+  br i1 %2, label %3, label %4, !dbg !283
+
+3:                                                ; preds = %0
+  call void asm sideeffect "MX_I2C1_Init_48_FORPUSH:;movw lr, 144;movt lr, 0x080C;push {lr}", ""(), !dbg !285
+  call void @Error_Handler(), !dbg !285
+  br label %4, !dbg !286
+
+4:                                                ; preds = %3, %0
+  ret void, !dbg !287
+}
+
+; Function Attrs: noinline nounwind optnone
+define internal void @MX_I2S3_Init() #0 !dbg !288 {
+  store ptr inttoptr (i32 1073757184 to ptr), ptr @hi2s3, align 4, !dbg !289
+  store i32 512, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1), align 4, !dbg !290
+  store i32 0, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 1), align 4, !dbg !291
+  store i32 0, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 2), align 4, !dbg !292
+  store i32 512, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 3), align 4, !dbg !293
+  store i32 96000, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 4), align 4, !dbg !294
+  store i32 0, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 5), align 4, !dbg !295
+  store i32 0, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 6), align 4, !dbg !296
+  store i32 0, ptr getelementptr inbounds (%struct.__I2S_HandleTypeDef, ptr @hi2s3, i32 0, i32 1, i32 7), align 4, !dbg !297
+  %1 = call i32 @HAL_I2S_Init(ptr noundef @hi2s3), !dbg !298
+  %2 = icmp ne i32 %1, 0, !dbg !299
+  br i1 %2, label %3, label %4, !dbg !298
+
+3:                                                ; preds = %0
+  call void asm sideeffect "MX_I2S3_Init_52_FORPUSH:;movw lr, 156;movt lr, 0x080C;push {lr}", ""(), !dbg !300
+  call void @Error_Handler(), !dbg !300
+  br label %4, !dbg !301
+
+4:                                                ; preds = %3, %0
+  ret void, !dbg !302
+}
+
+; Function Attrs: noinline nounwind optnone
+define internal void @MX_SPI1_Init() #0 !dbg !303 {
+  store ptr inttoptr (i32 1073819648 to ptr), ptr @hspi1, align 4, !dbg !304
+  store i32 260, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1), align 4, !dbg !305
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 1), align 4, !dbg !306
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 2), align 4, !dbg !307
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 3), align 4, !dbg !308
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 4), align 4, !dbg !309
+  store i32 512, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 5), align 4, !dbg !310
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 6), align 4, !dbg !311
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 7), align 4, !dbg !312
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 8), align 4, !dbg !313
+  store i32 0, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 9), align 4, !dbg !314
+  store i32 10, ptr getelementptr inbounds (%struct.__SPI_HandleTypeDef, ptr @hspi1, i32 0, i32 1, i32 10), align 4, !dbg !315
+  %1 = call i32 @HAL_SPI_Init(ptr noundef @hspi1), !dbg !316
+  %2 = icmp ne i32 %1, 0, !dbg !317
+  br i1 %2, label %3, label %4, !dbg !316
+
+3:                                                ; preds = %0
+  call void asm sideeffect "MX_SPI1_Init_56_FORPUSH:;movw lr, 168;movt lr, 0x080C;push {lr}", ""(), !dbg !318
+  call void @Error_Handler(), !dbg !318
+  br label %4, !dbg !319
+
+4:                                                ; preds = %3, %0
+  ret void, !dbg !320
+}
+
+declare dso_local void @MX_USB_HOST_Init() #2
+
+; Function Attrs: noinline nounwind optnone
+define internal void @MX_USART2_UART_Init() #0 !dbg !321 {
+  store ptr inttoptr (i32 1073759232 to ptr), ptr @huart2, align 4, !dbg !322
+  store i32 115200, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1), align 4, !dbg !323
+  store i32 0, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 1), align 4, !dbg !324
+  store i32 0, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 2), align 4, !dbg !325
+  store i32 0, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 3), align 4, !dbg !326
+  store i32 12, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 4), align 4, !dbg !327
+  store i32 0, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 5), align 4, !dbg !328
+  store i32 0, ptr getelementptr inbounds (%struct.__UART_HandleTypeDef, ptr @huart2, i32 0, i32 1, i32 6), align 4, !dbg !329
+  %1 = call i32 @HAL_UART_Init(ptr noundef @huart2), !dbg !330
+  %2 = icmp ne i32 %1, 0, !dbg !331
+  br i1 %2, label %3, label %4, !dbg !330
+
+3:                                                ; preds = %0
+  call void asm sideeffect "MX_USART2_UART_Init_60_FORPUSH:;movw lr, 180;movt lr, 0x080C;push {lr}", ""(), !dbg !332
+  call void @Error_Handler(), !dbg !332
+  br label %4, !dbg !333
+
+4:                                                ; preds = %3, %0
+  ret void, !dbg !334
+}
+
+declare dso_local i32 @HAL_GetTick() #2
+
+declare dso_local void @MX_USB_HOST_Process() #2
+
+declare dso_local i32 @printf(ptr noundef, ...) #2
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i32(ptr nocapture writeonly, i8, i32, i1 immarg) #3
+
+declare dso_local i32 @HAL_RCC_OscConfig(ptr noundef) #2
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @Error_Handler() #0 !dbg !335 {
+  call void asm sideeffect "cpsid i", "~{memory}"() #4, !dbg !336, !srcloc !340
+  br label %1, !dbg !341
+
+1:                                                ; preds = %1, %0
+  br label %1, !dbg !341, !llvm.loop !342
+}
+
+declare dso_local i32 @HAL_RCC_ClockConfig(ptr noundef, i32 noundef) #2
+
+declare dso_local i32 @HAL_I2C_Init(ptr noundef) #2
+
+declare dso_local i32 @HAL_I2S_Init(ptr noundef) #2
+
+declare dso_local i32 @HAL_SPI_Init(ptr noundef) #2
+
+declare dso_local i32 @HAL_UART_Init(ptr noundef) #2
+
+declare dso_local void @HAL_GPIO_WritePin(ptr noundef, i16 noundef zeroext, i32 noundef) #2
+
+declare dso_local void @HAL_GPIO_Init(ptr noundef, ptr noundef) #2
+
+define void @MasterForward() {
+MasterForward_:
+  call void asm sideeffect "PUSH {r0 - r3};            ldr r0, [sp, #16];            ldr r1, [r0];            cmp r1, lr;            BNE fail;            ldr r1, =0x20010000;            ldr r2, [r1];            str r0, [r2];            add r2, r2, #4;            str r2, [r1];            pop {r0 -r3, lr};            add lr, lr, 4;            ldr lr, [lr];            BX LR;            fail:", ""()
+  ret void
+}
+
+define void @MasterBackward() {
+MasterBackward_:
+  call void asm sideeffect "ldr r1, =0x20010000;            ldr r2, [r1];            sub r2, r2, 4;            ldr r3, [r2];            add r3, r3, #8;            ldr r3, [r3];            cmp r3, lr;            BNE fail_back;            ldr r3, [r2];            ldr lr, [r3];            str r2, [r1];            bx lr;            fail_back:", ""()
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+attributes #3 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #4 = { nounwind }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5}
+!llvm.ident = !{!6}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)", isOptimized: false, runtimeVersion: 0, emissionKind: NoDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "../Core/Src/main.c", directory: "/home/creaker00/safestack/test/noret_origin/Debug")
+!2 = !{i32 2, !"Debug Info Version", i32 3}
+!3 = !{i32 1, !"wchar_size", i32 4}
+!4 = !{i32 1, !"min_enum_size", i32 4}
+!5 = !{i32 7, !"frame-pointer", i32 2}
+!6 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"}
+!7 = distinct !DISubprogram(name: "benchmark", scope: !1, file: !1, line: 92, type: !8, scopeLine: 93, spFlags: DISPFlagDefinition, unit: !0)
+!8 = !DISubroutineType(types: !9)
+!9 = !{}
+!10 = !DILocation(line: 94, column: 4, scope: !7)
+!11 = !DILocation(line: 95, column: 4, scope: !7)
+!12 = distinct !DISubprogram(name: "BubbleSort", scope: !1, file: !1, line: 119, type: !8, scopeLine: 123, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!13 = !DILocation(line: 124, column: 8, scope: !12)
+!14 = !DILocation(line: 127, column: 11, scope: !12)
+!15 = !DILocation(line: 127, column: 9, scope: !12)
+!16 = !DILocation(line: 127, column: 16, scope: !12)
+!17 = !DILocation(line: 127, column: 18, scope: !12)
+!18 = !DILocation(line: 127, column: 4, scope: !12)
+!19 = !DILocation(line: 129, column: 14, scope: !12)
+!20 = !DILocation(line: 130, column: 18, scope: !12)
+!21 = !DILocation(line: 130, column: 12, scope: !12)
+!22 = !DILocation(line: 130, column: 23, scope: !12)
+!23 = !DILocation(line: 130, column: 29, scope: !12)
+!24 = !DILocation(line: 130, column: 7, scope: !12)
+!25 = !DILocation(line: 131, column: 14, scope: !12)
+!26 = !DILocation(line: 131, column: 32, scope: !12)
+!27 = !DILocation(line: 131, column: 31, scope: !12)
+!28 = !DILocation(line: 131, column: 20, scope: !12)
+!29 = !DILocation(line: 132, column: 13, scope: !12)
+!30 = !DILocation(line: 133, column: 14, scope: !12)
+!31 = !DILocation(line: 133, column: 20, scope: !12)
+!32 = !DILocation(line: 133, column: 29, scope: !12)
+!33 = !DILocation(line: 133, column: 35, scope: !12)
+!34 = !DILocation(line: 133, column: 41, scope: !12)
+!35 = !DILocation(line: 133, column: 27, scope: !12)
+!36 = !DILocation(line: 135, column: 20, scope: !12)
+!37 = !DILocation(line: 135, column: 26, scope: !12)
+!38 = !DILocation(line: 135, column: 18, scope: !12)
+!39 = !DILocation(line: 136, column: 28, scope: !12)
+!40 = !DILocation(line: 136, column: 34, scope: !12)
+!41 = !DILocation(line: 136, column: 39, scope: !12)
+!42 = !DILocation(line: 136, column: 13, scope: !12)
+!43 = !DILocation(line: 136, column: 19, scope: !12)
+!44 = !DILocation(line: 136, column: 26, scope: !12)
+!45 = !DILocation(line: 137, column: 30, scope: !12)
+!46 = !DILocation(line: 137, column: 13, scope: !12)
+!47 = !DILocation(line: 137, column: 19, scope: !12)
+!48 = !DILocation(line: 137, column: 24, scope: !12)
+!49 = !DILocation(line: 137, column: 28, scope: !12)
+!50 = !DILocation(line: 138, column: 20, scope: !12)
+!51 = !DILocation(line: 139, column: 10, scope: !12)
+!52 = !DILocation(line: 140, column: 7, scope: !12)
+!53 = !DILocation(line: 130, column: 47, scope: !12)
+!54 = distinct !{!54, !24, !52, !55}
+!55 = !{!"llvm.loop.mustprogress"}
+!56 = !DILocation(line: 142, column: 11, scope: !12)
+!57 = !DILocation(line: 143, column: 10, scope: !12)
+!58 = !DILocation(line: 144, column: 4, scope: !12)
+!59 = !DILocation(line: 127, column: 31, scope: !12)
+!60 = distinct !{!60, !18, !58, !55}
+!61 = !DILocation(line: 145, column: 1, scope: !12)
+!62 = distinct !DISubprogram(name: "initialise_benchmark", scope: !1, file: !1, line: 99, type: !8, scopeLine: 103, spFlags: DISPFlagDefinition, unit: !0)
+!63 = !DILocation(line: 107, column: 11, scope: !62)
+!64 = !DILocation(line: 112, column: 8, scope: !62)
+!65 = !DILocation(line: 112, column: 6, scope: !62)
+!66 = !DILocation(line: 113, column: 12, scope: !62)
+!67 = !DILocation(line: 113, column: 6, scope: !62)
+!68 = !DILocation(line: 113, column: 17, scope: !62)
+!69 = !DILocation(line: 113, column: 23, scope: !62)
+!70 = !DILocation(line: 113, column: 1, scope: !62)
+!71 = !DILocation(line: 114, column: 20, scope: !62)
+!72 = !DILocation(line: 114, column: 26, scope: !62)
+!73 = !DILocation(line: 114, column: 25, scope: !62)
+!74 = !DILocation(line: 114, column: 11, scope: !62)
+!75 = !DILocation(line: 114, column: 5, scope: !62)
+!76 = !DILocation(line: 114, column: 18, scope: !62)
+!77 = !DILocation(line: 113, column: 41, scope: !62)
+!78 = distinct !{!78, !70, !72, !55}
+!79 = !DILocation(line: 115, column: 1, scope: !62)
+!80 = distinct !DISubprogram(name: "verify_benchmark", scope: !1, file: !1, line: 147, type: !8, scopeLine: 147, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!81 = !DILocation(line: 148, column: 8, scope: !80)
+!82 = !DILocation(line: 159, column: 10, scope: !80)
+!83 = !DILocation(line: 159, column: 9, scope: !80)
+!84 = !DILocation(line: 159, column: 14, scope: !80)
+!85 = !DILocation(line: 159, column: 15, scope: !80)
+!86 = !DILocation(line: 159, column: 4, scope: !80)
+!87 = !DILocation(line: 160, column: 17, scope: !80)
+!88 = !DILocation(line: 160, column: 11, scope: !80)
+!89 = !DILocation(line: 160, column: 32, scope: !80)
+!90 = !DILocation(line: 160, column: 23, scope: !80)
+!91 = !DILocation(line: 160, column: 20, scope: !80)
+!92 = !DILocation(line: 161, column: 10, scope: !80)
+!93 = !DILocation(line: 162, column: 4, scope: !80)
+!94 = !DILocation(line: 159, column: 27, scope: !80)
+!95 = distinct !{!95, !86, !93, !55}
+!96 = !DILocation(line: 163, column: 4, scope: !80)
+!97 = !DILocation(line: 164, column: 1, scope: !80)
+!98 = distinct !DISubprogram(name: "__io_putchar", scope: !1, file: !1, line: 166, type: !8, scopeLine: 167, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!99 = !DILocation(line: 168, column: 13, scope: !98)
+!100 = !DILocation(line: 169, column: 13, scope: !98)
+!101 = !DILocation(line: 169, column: 6, scope: !98)
+!102 = distinct !DISubprogram(name: "main", scope: !1, file: !1, line: 173, type: !8, scopeLine: 174, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!103 = !DILocation(line: 182, column: 3, scope: !102)
+!104 = !DILocation(line: 189, column: 3, scope: !102)
+!105 = !DILocation(line: 196, column: 3, scope: !102)
+!106 = !DILocation(line: 197, column: 3, scope: !102)
+!107 = !DILocation(line: 198, column: 3, scope: !102)
+!108 = !DILocation(line: 199, column: 3, scope: !102)
+!109 = !DILocation(line: 200, column: 3, scope: !102)
+!110 = !DILocation(line: 201, column: 3, scope: !102)
+!111 = !DILocation(line: 207, column: 24, scope: !102)
+!112 = !DILocation(line: 207, column: 12, scope: !102)
+!113 = !DILocation(line: 208, column: 3, scope: !102)
+!114 = !DILocation(line: 209, column: 3, scope: !102)
+!115 = !DILocation(line: 212, column: 5, scope: !102)
+!116 = !DILocation(line: 213, column: 13, scope: !102)
+!117 = !DILocation(line: 213, column: 9, scope: !102)
+!118 = !DILocation(line: 213, column: 18, scope: !102)
+!119 = !DILocation(line: 213, column: 19, scope: !102)
+!120 = !DILocation(line: 213, column: 5, scope: !102)
+!121 = !DILocation(line: 214, column: 5, scope: !102)
+!122 = !DILocation(line: 215, column: 5, scope: !102)
+!123 = !DILocation(line: 213, column: 28, scope: !102)
+!124 = distinct !{!124, !120, !122, !55}
+!125 = !DILocation(line: 216, column: 15, scope: !102)
+!126 = !DILocation(line: 216, column: 9, scope: !102)
+!127 = !DILocation(line: 217, column: 8, scope: !102)
+!128 = !DILocation(line: 217, column: 12, scope: !102)
+!129 = !DILocation(line: 218, column: 22, scope: !102)
+!130 = !DILocation(line: 218, column: 38, scope: !102)
+!131 = !DILocation(line: 218, column: 36, scope: !102)
+!132 = !DILocation(line: 218, column: 6, scope: !102)
+!133 = !DILocation(line: 219, column: 5, scope: !102)
+!134 = !DILocation(line: 220, column: 17, scope: !102)
+!135 = !DILocation(line: 220, column: 15, scope: !102)
+!136 = distinct !{!136, !114, !137}
+!137 = !DILocation(line: 222, column: 3, scope: !102)
+!138 = distinct !DISubprogram(name: "SystemClock_Config", scope: !1, file: !1, line: 230, type: !8, scopeLine: 231, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!139 = !DILocation(line: 232, column: 22, scope: !138)
+!140 = !DILocation(line: 233, column: 22, scope: !138)
+!141 = !DILocation(line: 237, column: 3, scope: !138)
+!142 = !DILocation(line: 238, column: 3, scope: !138)
+!143 = !DILocation(line: 243, column: 21, scope: !138)
+!144 = !DILocation(line: 243, column: 36, scope: !138)
+!145 = !DILocation(line: 244, column: 21, scope: !138)
+!146 = !DILocation(line: 244, column: 30, scope: !138)
+!147 = !DILocation(line: 245, column: 21, scope: !138)
+!148 = !DILocation(line: 245, column: 25, scope: !138)
+!149 = !DILocation(line: 245, column: 34, scope: !138)
+!150 = !DILocation(line: 246, column: 21, scope: !138)
+!151 = !DILocation(line: 246, column: 25, scope: !138)
+!152 = !DILocation(line: 246, column: 35, scope: !138)
+!153 = !DILocation(line: 247, column: 21, scope: !138)
+!154 = !DILocation(line: 247, column: 25, scope: !138)
+!155 = !DILocation(line: 247, column: 30, scope: !138)
+!156 = !DILocation(line: 248, column: 21, scope: !138)
+!157 = !DILocation(line: 248, column: 25, scope: !138)
+!158 = !DILocation(line: 248, column: 30, scope: !138)
+!159 = !DILocation(line: 249, column: 21, scope: !138)
+!160 = !DILocation(line: 249, column: 25, scope: !138)
+!161 = !DILocation(line: 249, column: 30, scope: !138)
+!162 = !DILocation(line: 250, column: 21, scope: !138)
+!163 = !DILocation(line: 250, column: 25, scope: !138)
+!164 = !DILocation(line: 250, column: 30, scope: !138)
+!165 = !DILocation(line: 251, column: 7, scope: !138)
+!166 = !DILocation(line: 251, column: 45, scope: !138)
+!167 = !DILocation(line: 253, column: 5, scope: !138)
+!168 = !DILocation(line: 254, column: 3, scope: !138)
+!169 = !DILocation(line: 258, column: 21, scope: !138)
+!170 = !DILocation(line: 258, column: 31, scope: !138)
+!171 = !DILocation(line: 260, column: 21, scope: !138)
+!172 = !DILocation(line: 260, column: 34, scope: !138)
+!173 = !DILocation(line: 261, column: 21, scope: !138)
+!174 = !DILocation(line: 261, column: 35, scope: !138)
+!175 = !DILocation(line: 262, column: 21, scope: !138)
+!176 = !DILocation(line: 262, column: 36, scope: !138)
+!177 = !DILocation(line: 263, column: 21, scope: !138)
+!178 = !DILocation(line: 263, column: 36, scope: !138)
+!179 = !DILocation(line: 265, column: 7, scope: !138)
+!180 = !DILocation(line: 265, column: 64, scope: !138)
+!181 = !DILocation(line: 267, column: 5, scope: !138)
+!182 = !DILocation(line: 268, column: 3, scope: !138)
+!183 = !DILocation(line: 269, column: 1, scope: !138)
+!184 = distinct !DISubprogram(name: "MX_GPIO_Init", scope: !1, file: !1, line: 415, type: !8, scopeLine: 416, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!185 = !DILocation(line: 417, column: 20, scope: !184)
+!186 = !DILocation(line: 420, column: 3, scope: !184)
+!187 = !DILocation(line: 421, column: 3, scope: !184)
+!188 = !DILocation(line: 422, column: 3, scope: !184)
+!189 = !DILocation(line: 423, column: 3, scope: !184)
+!190 = !DILocation(line: 424, column: 3, scope: !184)
+!191 = !DILocation(line: 425, column: 3, scope: !184)
+!192 = !DILocation(line: 428, column: 3, scope: !184)
+!193 = !DILocation(line: 431, column: 3, scope: !184)
+!194 = !DILocation(line: 434, column: 3, scope: !184)
+!195 = !DILocation(line: 438, column: 19, scope: !184)
+!196 = !DILocation(line: 438, column: 23, scope: !184)
+!197 = !DILocation(line: 439, column: 19, scope: !184)
+!198 = !DILocation(line: 439, column: 24, scope: !184)
+!199 = !DILocation(line: 440, column: 19, scope: !184)
+!200 = !DILocation(line: 440, column: 24, scope: !184)
+!201 = !DILocation(line: 441, column: 19, scope: !184)
+!202 = !DILocation(line: 441, column: 25, scope: !184)
+!203 = !DILocation(line: 442, column: 3, scope: !184)
+!204 = !DILocation(line: 445, column: 19, scope: !184)
+!205 = !DILocation(line: 445, column: 23, scope: !184)
+!206 = !DILocation(line: 446, column: 19, scope: !184)
+!207 = !DILocation(line: 446, column: 24, scope: !184)
+!208 = !DILocation(line: 447, column: 19, scope: !184)
+!209 = !DILocation(line: 447, column: 24, scope: !184)
+!210 = !DILocation(line: 448, column: 19, scope: !184)
+!211 = !DILocation(line: 448, column: 25, scope: !184)
+!212 = !DILocation(line: 449, column: 3, scope: !184)
+!213 = !DILocation(line: 452, column: 19, scope: !184)
+!214 = !DILocation(line: 452, column: 23, scope: !184)
+!215 = !DILocation(line: 453, column: 19, scope: !184)
+!216 = !DILocation(line: 453, column: 24, scope: !184)
+!217 = !DILocation(line: 454, column: 19, scope: !184)
+!218 = !DILocation(line: 454, column: 24, scope: !184)
+!219 = !DILocation(line: 455, column: 19, scope: !184)
+!220 = !DILocation(line: 455, column: 25, scope: !184)
+!221 = !DILocation(line: 456, column: 19, scope: !184)
+!222 = !DILocation(line: 456, column: 29, scope: !184)
+!223 = !DILocation(line: 457, column: 3, scope: !184)
+!224 = !DILocation(line: 460, column: 19, scope: !184)
+!225 = !DILocation(line: 460, column: 23, scope: !184)
+!226 = !DILocation(line: 461, column: 19, scope: !184)
+!227 = !DILocation(line: 461, column: 24, scope: !184)
+!228 = !DILocation(line: 462, column: 19, scope: !184)
+!229 = !DILocation(line: 462, column: 24, scope: !184)
+!230 = !DILocation(line: 463, column: 3, scope: !184)
+!231 = !DILocation(line: 466, column: 19, scope: !184)
+!232 = !DILocation(line: 466, column: 23, scope: !184)
+!233 = !DILocation(line: 467, column: 19, scope: !184)
+!234 = !DILocation(line: 467, column: 24, scope: !184)
+!235 = !DILocation(line: 468, column: 19, scope: !184)
+!236 = !DILocation(line: 468, column: 24, scope: !184)
+!237 = !DILocation(line: 469, column: 3, scope: !184)
+!238 = !DILocation(line: 472, column: 19, scope: !184)
+!239 = !DILocation(line: 472, column: 23, scope: !184)
+!240 = !DILocation(line: 473, column: 19, scope: !184)
+!241 = !DILocation(line: 473, column: 24, scope: !184)
+!242 = !DILocation(line: 474, column: 19, scope: !184)
+!243 = !DILocation(line: 474, column: 24, scope: !184)
+!244 = !DILocation(line: 475, column: 19, scope: !184)
+!245 = !DILocation(line: 475, column: 25, scope: !184)
+!246 = !DILocation(line: 476, column: 19, scope: !184)
+!247 = !DILocation(line: 476, column: 29, scope: !184)
+!248 = !DILocation(line: 477, column: 3, scope: !184)
+!249 = !DILocation(line: 481, column: 19, scope: !184)
+!250 = !DILocation(line: 481, column: 23, scope: !184)
+!251 = !DILocation(line: 483, column: 19, scope: !184)
+!252 = !DILocation(line: 483, column: 24, scope: !184)
+!253 = !DILocation(line: 484, column: 19, scope: !184)
+!254 = !DILocation(line: 484, column: 24, scope: !184)
+!255 = !DILocation(line: 485, column: 19, scope: !184)
+!256 = !DILocation(line: 485, column: 25, scope: !184)
+!257 = !DILocation(line: 486, column: 3, scope: !184)
+!258 = !DILocation(line: 489, column: 19, scope: !184)
+!259 = !DILocation(line: 489, column: 23, scope: !184)
+!260 = !DILocation(line: 490, column: 19, scope: !184)
+!261 = !DILocation(line: 490, column: 24, scope: !184)
+!262 = !DILocation(line: 491, column: 19, scope: !184)
+!263 = !DILocation(line: 491, column: 24, scope: !184)
+!264 = !DILocation(line: 492, column: 3, scope: !184)
+!265 = !DILocation(line: 495, column: 19, scope: !184)
+!266 = !DILocation(line: 495, column: 23, scope: !184)
+!267 = !DILocation(line: 496, column: 19, scope: !184)
+!268 = !DILocation(line: 496, column: 24, scope: !184)
+!269 = !DILocation(line: 497, column: 19, scope: !184)
+!270 = !DILocation(line: 497, column: 24, scope: !184)
+!271 = !DILocation(line: 498, column: 3, scope: !184)
+!272 = !DILocation(line: 500, column: 1, scope: !184)
+!273 = distinct !DISubprogram(name: "MX_I2C1_Init", scope: !1, file: !1, line: 276, type: !8, scopeLine: 277, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!274 = !DILocation(line: 286, column: 18, scope: !273)
+!275 = !DILocation(line: 287, column: 25, scope: !273)
+!276 = !DILocation(line: 288, column: 24, scope: !273)
+!277 = !DILocation(line: 289, column: 26, scope: !273)
+!278 = !DILocation(line: 290, column: 29, scope: !273)
+!279 = !DILocation(line: 291, column: 30, scope: !273)
+!280 = !DILocation(line: 292, column: 26, scope: !273)
+!281 = !DILocation(line: 293, column: 30, scope: !273)
+!282 = !DILocation(line: 294, column: 28, scope: !273)
+!283 = !DILocation(line: 295, column: 7, scope: !273)
+!284 = !DILocation(line: 295, column: 28, scope: !273)
+!285 = !DILocation(line: 297, column: 5, scope: !273)
+!286 = !DILocation(line: 298, column: 3, scope: !273)
+!287 = !DILocation(line: 303, column: 1, scope: !273)
+!288 = distinct !DISubprogram(name: "MX_I2S3_Init", scope: !1, file: !1, line: 310, type: !8, scopeLine: 311, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!289 = !DILocation(line: 320, column: 18, scope: !288)
+!290 = !DILocation(line: 321, column: 19, scope: !288)
+!291 = !DILocation(line: 322, column: 23, scope: !288)
+!292 = !DILocation(line: 323, column: 25, scope: !288)
+!293 = !DILocation(line: 324, column: 25, scope: !288)
+!294 = !DILocation(line: 325, column: 24, scope: !288)
+!295 = !DILocation(line: 326, column: 19, scope: !288)
+!296 = !DILocation(line: 327, column: 26, scope: !288)
+!297 = !DILocation(line: 328, column: 29, scope: !288)
+!298 = !DILocation(line: 329, column: 7, scope: !288)
+!299 = !DILocation(line: 329, column: 28, scope: !288)
+!300 = !DILocation(line: 331, column: 5, scope: !288)
+!301 = !DILocation(line: 332, column: 3, scope: !288)
+!302 = !DILocation(line: 337, column: 1, scope: !288)
+!303 = distinct !DISubprogram(name: "MX_SPI1_Init", scope: !1, file: !1, line: 344, type: !8, scopeLine: 345, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!304 = !DILocation(line: 355, column: 18, scope: !303)
+!305 = !DILocation(line: 356, column: 19, scope: !303)
+!306 = !DILocation(line: 357, column: 24, scope: !303)
+!307 = !DILocation(line: 358, column: 23, scope: !303)
+!308 = !DILocation(line: 359, column: 26, scope: !303)
+!309 = !DILocation(line: 360, column: 23, scope: !303)
+!310 = !DILocation(line: 361, column: 18, scope: !303)
+!311 = !DILocation(line: 362, column: 32, scope: !303)
+!312 = !DILocation(line: 363, column: 23, scope: !303)
+!313 = !DILocation(line: 364, column: 21, scope: !303)
+!314 = !DILocation(line: 365, column: 29, scope: !303)
+!315 = !DILocation(line: 366, column: 28, scope: !303)
+!316 = !DILocation(line: 367, column: 7, scope: !303)
+!317 = !DILocation(line: 367, column: 28, scope: !303)
+!318 = !DILocation(line: 369, column: 5, scope: !303)
+!319 = !DILocation(line: 370, column: 3, scope: !303)
+!320 = !DILocation(line: 375, column: 1, scope: !303)
+!321 = distinct !DISubprogram(name: "MX_USART2_UART_Init", scope: !1, file: !1, line: 382, type: !8, scopeLine: 383, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!322 = !DILocation(line: 392, column: 19, scope: !321)
+!323 = !DILocation(line: 393, column: 24, scope: !321)
+!324 = !DILocation(line: 394, column: 26, scope: !321)
+!325 = !DILocation(line: 395, column: 24, scope: !321)
+!326 = !DILocation(line: 396, column: 22, scope: !321)
+!327 = !DILocation(line: 397, column: 20, scope: !321)
+!328 = !DILocation(line: 398, column: 25, scope: !321)
+!329 = !DILocation(line: 399, column: 28, scope: !321)
+!330 = !DILocation(line: 400, column: 7, scope: !321)
+!331 = !DILocation(line: 400, column: 30, scope: !321)
+!332 = !DILocation(line: 402, column: 5, scope: !321)
+!333 = !DILocation(line: 403, column: 3, scope: !321)
+!334 = !DILocation(line: 408, column: 1, scope: !321)
+!335 = distinct !DISubprogram(name: "Error_Handler", scope: !1, file: !1, line: 510, type: !8, scopeLine: 511, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!336 = !DILocation(line: 142, column: 3, scope: !337, inlinedAt: !339)
+!337 = distinct !DISubprogram(name: "__disable_irq", scope: !338, file: !338, line: 140, type: !8, scopeLine: 141, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0)
+!338 = !DIFile(filename: "../Drivers/CMSIS/Include/cmsis_gcc.h", directory: "/home/creaker00/safestack/test/noret_origin/Debug")
+!339 = distinct !DILocation(line: 514, column: 3, scope: !335)
+!340 = !{i64 1697896}
+!341 = !DILocation(line: 515, column: 3, scope: !335)
+!342 = distinct !{!342, !341, !343}
+!343 = !DILocation(line: 517, column: 3, scope: !335)

@@ -19,7 +19,7 @@ int b(int b1, int b2, int b3, int b4, int b5){
 }
 
 void c(){
- printf("EOF\n");
+ int i=0;
 }
 
 int main(){

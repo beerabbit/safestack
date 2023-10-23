@@ -41,7 +41,10 @@ Core/Src/%.s: Core/Src/%.bc Core/Src/subdir.mk
 
 Core/Src/main.s: Core/Src/main.bc Core/Src/subdir.mk
 	/home/creaker00/safestack/build/bin/llc "$<" -o "$@"
-	python3 /home/creaker00/safestack/test/noret/Debug/Core/Src/parse.py
+	python3 /home/creaker00/safestack/test/modifyASM.py /home/creaker00/safestack/test/noret/Debug/Core/Src/main.s /home/creaker00/safestack/test/noret/Debug/Core/Src/main_res.s
+	cp /home/creaker00/safestack/test/noret/Debug/Core/Src/main.s /home/creaker00/safestack/test/noret/Debug/Core/Src/main_origin.s
+	mv /home/creaker00/safestack/test/noret/Debug/Core/Src/main_res.s /home/creaker00/safestack/test/noret/Debug/Core/Src/main.s
+	
 
 
 Core/Src/%.bc: ../Core/Src/%.c Core/Src/subdir.mk
@@ -50,7 +53,7 @@ Core/Src/%.bc: ../Core/Src/%.c Core/Src/subdir.mk
 Core/Src/main.bc: ../Core/Src/main.c Core/Src/subdir.mk
 	/home/creaker00/safestack/build/bin/clang -S -emit-llvm "$<" -I/usr/lib/arm-none-eabi/include/ -mcpu=cortex-m4 -std=gnu11 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -I../USB_HOST/App -I../USB_HOST/Target -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.bc=%.d)" -MT"$@" -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 	~/safestack/build/bin/opt -S --bugpoint-enable-legacy-pm -load ~/safestack/build/lib/LLVMMasterCFI.so --masterCFI < /home/creaker00/safestack/test/noret/Debug/Core/Src/main.bc > /home/creaker00/safestack/test/noret/Debug/Core/Src/main1.bc		
-	cp /home/creaker00/safestack/test/noret/Debug/Core/Src/main1.bc /home/creaker00/safestack/test/noret/Debug/Core/Src/main.bc
+	mv /home/creaker00/safestack/test/noret/Debug/Core/Src/main1.bc /home/creaker00/safestack/test/noret/Debug/Core/Src/main.bc
 	
 
 

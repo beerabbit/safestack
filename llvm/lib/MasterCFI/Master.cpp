@@ -15,26 +15,45 @@ using namespace llvm;
 using namespace std;
 namespace {
     //전역변수들
-    
+    vector<int> table_arr;
+    vector<string> table_name;
     //
     struct masterCFI : public ModulePass {
         static char ID;
         masterCFI() : ModulePass(ID) {}
         bool runOnModule(Module &M) override {
-            LLVMContext &context = M.getContext();
+            LLVMContext &Context = M.getContext();
+            const char *assemblyCode = "ldr r0 , =0x20010000; ldr r1, =0x20010004; str r1, [r0]";
+            InlineAsm *inlineAsm = InlineAsm::get(FunctionType::get(Type::getVoidTy(Context), false),
+                                    assemblyCode, "", true, false);
+            Function *mainFunc = M.getFunction("main");
+            if (mainFunc) {
+                BasicBlock &entryBlock = mainFunc->getEntryBlock();
+                Instruction* firstInstruction = entryBlock.getFirstNonPHIOrDbgOrLifetime();
+                IRBuilder<> Builder(Context);
+                Builder.SetInsertPoint(firstInstruction);
+                Builder.CreateCall(inlineAsm, {});
+            }
             addMasterForwardFunction(M);
             addMasterBackwardFunction(M);
             getFunctionNameinBC(M);
             addPushBeforeInsertFunctionTable(M);
+            for(int i=0; i<table_arr.size(); i++){
+                errs() << "[" << table_name[i] << ", ";
+                errs() << table_arr[i] << "],";
+            }
+            
             return false;
         }
         
         void getFunctionNameinBC(Module &M){
+            errs() << "[";
             for(Function &F : M){
                 if(!F.isDeclaration()){
-                    errs() << F.getName() << "\n";
+                    errs() << "\""<< F.getName() << "\",";
                 }
             }
+            errs() << "]\n";
         }
 
         void addMasterForwardFunction(Module &M){
@@ -59,7 +78,7 @@ namespace {
             ldr r1, [r0];\
             cmp r1, lr;\
             BNE fail;\
-            ldr r1, =0x080C0000;\
+            ldr r1, =0x20010000;\
             ldr r2, [r1];\
             str r0, [r2];\
             add r2, r2, #4;\
@@ -92,15 +111,17 @@ namespace {
             BasicBlock *EntryBlock = BasicBlock::Create(Context, "MasterBackward_",MasterFunc);
             IRBuilder<> Builder(EntryBlock);
             InlineAsm *asmCode = InlineAsm::get(FunctionType::get(Type::getVoidTy(Context), false),
-            "ldr r1, =0x080C0000;\
+            "ldr r1, =0x20010000;\
             ldr r2, [r1];\
-            add r2, r2, #8;\
+            sub r2, r2, 4;\
             ldr r3, [r2];\
+            add r3, r3, #8;\
+            ldr r3, [r3];\
             cmp r3, lr;\
             BNE fail_back;\
-            ldr lr, [r1];\
-            sub r1, r1, 4;\
-            str r1, [r1];\
+            ldr r3, [r2];\
+            ldr lr, [r3];\
+            str r2, [r1];\
             bx lr;\
             fail_back:",
              "", true,false);
@@ -110,8 +131,9 @@ namespace {
 
         void addPushBeforeInsertFunctionTable(Module &M){
             LLVMContext &Mcontext = M.getContext();
+            int cnt = 0;
             for(Function &F: M){
-                int cnt = 0;
+                
                 for(BasicBlock &BB : F){
                     for(Instruction &I : BB){
                         CallInst *callInstr = dyn_cast<CallInst>(&I);
@@ -119,7 +141,10 @@ namespace {
                             Function *calledFunc = callInstr->getCalledFunction();
                             if (calledFunc && !calledFunc->isIntrinsic() && !calledFunc->isDeclaration()){           
                                 IRBuilder<> builder(callInstr);
-                                InlineAsm *asmCode = InlineAsm::get(FunctionType::get(Type::getVoidTy(Mcontext), false), F.getName().str() +"_" + to_string(cnt)  +"_FORPUSH:;movt lr, 0x0000;movw lr, 0x080C;push {lr}", "", true,false);
+                                string Tname = F.getName().str();
+                                table_arr.push_back(cnt*4);
+                                table_name.push_back(Tname + to_string(cnt));
+                                InlineAsm *asmCode = InlineAsm::get(FunctionType::get(Type::getVoidTy(Mcontext), false), Tname +"_" + to_string(cnt*4)  +"_FORPUSH:;movw lr, "+ to_string(cnt*4*3) +";movt lr, 0x080C;push {lr}", "", true,false);
                                 builder.CreateCall(asmCode);
                                 cnt++;
                             }

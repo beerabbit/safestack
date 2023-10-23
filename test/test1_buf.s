@@ -26,15 +26,13 @@
 a:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
 	.pad	#8
 	sub	sp, #8
 	@APP
 a_0_FORPUSH:
-	movt	lr, #0x0
+	movt	lr, #0
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -47,15 +45,15 @@ a_0_FORPUSH:
 	bl	MasterForward
 	str	r0, [sp, #4]
 	@APP
-a_1_FORPUSH:
-	movt	lr, #0x4
+a_4_FORPUSH:
+	movt	lr, #4
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	MasterForward
 	@APP
-a_2_FORPUSH:
-	movt	lr, #0x8
+a_8_FORPUSH:
+	movt	lr, #8
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -69,7 +67,7 @@ a_2_FORPUSH:
 	str	r0, [sp, #4]
 	ldr	r0, [sp, #4]
 	add	sp, #8
-	pop	{r7, pc}
+	bl	MasterBackward
 .Lfunc_end0:
 	.size	a, .Lfunc_end0-a
 	.cantunwind
@@ -83,8 +81,6 @@ a_2_FORPUSH:
 b:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
 	.pad	#24
@@ -105,15 +101,15 @@ b:
 	add	r0, r1
 	str	r0, [sp, #4]
 	@APP
-b_0_FORPUSH:
-	movt	lr, #0xc
+b_12_FORPUSH:
+	movt	lr, #12
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	MasterForward
 	ldr	r0, [sp, #4]
 	add	sp, #24
-	pop	{r7, pc}
+	bl	MasterBackward
 .Lfunc_end1:
 	.size	b, .Lfunc_end1-b
 	.cantunwind
@@ -127,14 +123,12 @@ b_0_FORPUSH:
 c:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
-	movw	r0, :lower16:.L.str
-	movt	r0, :upper16:.L.str
-	bl	printf
-	pop	{r7, pc}
+	.pad	#4
+	sub	sp, #4
+	movs	r0, #0
+	str	r0, [sp]
+	add	sp, #4
+	bl	MasterBackward
 .Lfunc_end2:
 	.size	c, .Lfunc_end2-c
 	.cantunwind
@@ -148,27 +142,25 @@ c:
 main:
 	.fnstart
 @ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
 	.pad	#8
 	sub	sp, #8
 	@APP
-main_0_FORPUSH:
-	movt	lr, #0x10
+main_16_FORPUSH:
+	movt	lr, #16
 	movw	lr, #2060
 	push	{lr}
 	@NO_APP
 	bl	MasterForward
 	str	r0, [sp, #4]
 	ldr	r1, [sp, #4]
-	movw	r0, :lower16:.L.str.1
-	movt	r0, :upper16:.L.str.1
+	movw	r0, :lower16:.L.str
+	movt	r0, :upper16:.L.str
 	bl	printf
 	movs	r0, #0
 	add	sp, #8
-	pop	{r7, pc}
+	bl	MasterBackward
 .Lfunc_end3:
 	.size	main, .Lfunc_end3-main
 	.cantunwind
@@ -233,17 +225,12 @@ fail_back:
 	.type	.L.str,%object                  @ @.str
 	.section	.rodata.str1.1,"aMS",%progbits,1
 .L.str:
-	.asciz	"EOF\n"
-	.size	.L.str, 5
-
-	.type	.L.str.1,%object                @ @.str.1
-.L.str.1:
 	.asciz	"%d\n"
-	.size	.L.str.1, 4
+	.size	.L.str, 4
 
 	.text
 	.p2align	2, 0x0
 .Ltmp0:
 	.long	135004160
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 9e505eddd0ddb64833e98c352f5619f1353db354)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"
 	.section	".note.GNU-stack","",%progbits
