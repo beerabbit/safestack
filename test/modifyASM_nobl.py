@@ -8,7 +8,7 @@ res_path = sys.argv[2]
 # 결과를 저장할 임시 리스트
 movt = 0x0000
 movw = 0x080C
-function_names = ["benchmark","BubbleSort","initialise_benchmark","verify_benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+function_names = ["fir_filter_int","verify_benchmark","initialise_benchmark","benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
 # 파일 읽기
 with open(file_path, 'r') as file:
     lines = file.readlines()
@@ -17,6 +17,9 @@ flag = 0
 now_f = ""
 callee = ""
 calleeregs = ["r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12"]
+movw = ""
+movt = ""
+pushs = ""
 for i in range(len(lines)):
     for fn in function_names:
         if "@ -- Begin function " in lines[i]:
@@ -40,7 +43,7 @@ for i in range(len(lines)):
                 callee = (buf[2].split("\n"))[0]
                 print("Push is " + callee + " in " + now_f )
         if (("bx\tlr" in lines[i]) or ("pop" in lines[i]) ):
-            if(not(("Master" in lines[i+2])) and ("end" in lines[i+1]) ):
+            if((not(("Master" in lines[i+2])) and ("end" in lines[i+1])) or ("align" in lines[i+1]) ):
                 if callee == "":
                     print("There is no callee..")
                     print("Changed \n" + lines[i].replace("\n", "") + "\n to\n\tbl\tMasterBackward; in " + now_f )
@@ -53,8 +56,7 @@ for i in range(len(lines)):
                     lines[i] = "\tpop\t" + callee + "\n\tbl\tMasterBackward\n"
                     callee = ""
                 #print(fnctest)
-        else:
-            pass
+        
 # 결과를 파일에 쓰기
 with open(res_path, 'w') as file:
     file.writelines(lines)

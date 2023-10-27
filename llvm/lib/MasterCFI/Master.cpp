@@ -39,8 +39,9 @@ namespace {
             getFunctionNameinBC(M);
             addPushBeforeInsertFunctionTable(M);
             for(int i=0; i<table_arr.size(); i++){
-                errs() << "[" << table_name[i] << ", ";
-                errs() << table_arr[i] << "],";
+                
+                    errs() << "[" << table_name[i] << ", ";
+                    errs() << table_arr[i] << "],";
             }
             
             return false;
@@ -50,7 +51,10 @@ namespace {
             errs() << "[";
             for(Function &F : M){
                 if(!F.isDeclaration()){
-                    errs() << "\""<< F.getName() << "\",";
+                    string buf = F.getName().str();
+                    if((buf != "MasterForward") && (buf != "MasterBackward") && (buf != "__io_putchar") ){
+                        errs() << "\""<< F.getName() << "\",";
+                    }
                 }
             }
             errs() << "]\n";
@@ -139,9 +143,10 @@ namespace {
                         CallInst *callInstr = dyn_cast<CallInst>(&I);
                         if(callInstr){
                             Function *calledFunc = callInstr->getCalledFunction();
-                            if (calledFunc && !calledFunc->isIntrinsic() && !calledFunc->isDeclaration()){           
+                            string Tname = F.getName().str();
+                            if (calledFunc && !calledFunc->isIntrinsic() && !calledFunc->isDeclaration() ){           
+                                errs() << calledFunc->getName().str() << "\n";
                                 IRBuilder<> builder(callInstr);
-                                string Tname = F.getName().str();
                                 table_arr.push_back(cnt*4);
                                 table_name.push_back(Tname + to_string(cnt));
                                 InlineAsm *asmCode = InlineAsm::get(FunctionType::get(Type::getVoidTy(Mcontext), false), Tname +"_" + to_string(cnt*4)  +"_FORPUSH:;movw lr, "+ to_string(cnt*4*3) +";movt lr, 0x080C;push {lr}", "", true,false);

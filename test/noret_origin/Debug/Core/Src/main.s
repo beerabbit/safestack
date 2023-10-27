@@ -18,6 +18,178 @@
 	.eabi_attribute	26, 2	@ Tag_ABI_enum_size
 	.eabi_attribute	14, 0	@ Tag_ABI_PCS_R9_use
 	.file	"main.c"
+	.globl	fir_filter_int                  @ -- Begin function fir_filter_int
+	.p2align	2
+	.type	fir_filter_int,%function
+	.code	16                              @ @fir_filter_int
+	.thumb_func
+fir_filter_int:
+	.fnstart
+@ %bb.0:
+	.pad	#56
+	sub	sp, #56
+	ldr.w	r12, [sp, #60]
+	ldr.w	r12, [sp, #56]
+	str	r0, [sp, #52]
+	str	r1, [sp, #48]
+	str	r2, [sp, #44]
+	str	r3, [sp, #40]
+	ldr	r0, [sp, #40]
+	str	r0, [sp, #8]
+	ldr	r0, [sp, #56]
+	adds	r0, #1
+	asrs	r0, r0, #1
+	str	r0, [sp, #28]
+	ldr	r0, [sp, #52]
+	ldr	r1, [sp, #44]
+	add.w	r0, r0, r1, lsl #2
+	subs	r0, #4
+	str	r0, [sp]
+	ldr	r0, [sp, #52]
+	ldr	r1, [sp, #28]
+	add.w	r0, r0, r1, lsl #2
+	subs	r0, #4
+	str	r0, [sp, #16]
+	ldr	r0, [sp, #28]
+	str	r0, [sp, #24]
+	movs	r0, #0
+	str	r0, [sp, #36]
+	b	.LBB0_1
+.LBB0_1:                                @ =>This Loop Header: Depth=1
+                                        @     Child Loop BB0_3 Depth 2
+	ldr	r0, [sp, #36]
+	ldr	r1, [sp, #44]
+	cmp	r0, r1
+	bge	.LBB0_13
+	b	.LBB0_2
+.LBB0_2:                                @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #16]
+	str	r0, [sp, #12]
+	ldr	r0, [sp, #8]
+	str	r0, [sp, #4]
+	ldr	r0, [sp, #4]
+	adds	r1, r0, #4
+	str	r1, [sp, #4]
+	ldr	r0, [r0]
+	ldr	r1, [sp, #12]
+	subs	r2, r1, #4
+	str	r2, [sp, #12]
+	ldr	r1, [r1]
+	muls	r0, r1, r0
+	str	r0, [sp, #20]
+	movs	r0, #1
+	str	r0, [sp, #32]
+	b	.LBB0_3
+.LBB0_3:                                @   Parent Loop BB0_1 Depth=1
+                                        @ =>  This Inner Loop Header: Depth=2
+	ldr	r0, [sp, #32]
+	ldr	r1, [sp, #24]
+	cmp	r0, r1
+	bge	.LBB0_6
+	b	.LBB0_4
+.LBB0_4:                                @   in Loop: Header=BB0_3 Depth=2
+	ldr	r0, [sp, #4]
+	adds	r1, r0, #4
+	str	r1, [sp, #4]
+	ldr	r0, [r0]
+	ldr	r1, [sp, #12]
+	subs	r2, r1, #4
+	str	r2, [sp, #12]
+	ldr	r1, [r1]
+	ldr	r2, [sp, #20]
+	mla	r0, r0, r1, r2
+	str	r0, [sp, #20]
+	b	.LBB0_5
+.LBB0_5:                                @   in Loop: Header=BB0_3 Depth=2
+	ldr	r0, [sp, #32]
+	adds	r0, #1
+	str	r0, [sp, #32]
+	b	.LBB0_3
+.LBB0_6:                                @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #20]
+	ldr	r1, [sp, #60]
+	sdiv	r0, r0, r1
+	ldr	r1, [sp, #48]
+	adds	r2, r1, #4
+	str	r2, [sp, #48]
+	str	r0, [r1]
+	ldr	r0, [sp, #16]
+	ldr	r1, [sp]
+	cmp	r0, r1
+	bne	.LBB0_8
+	b	.LBB0_7
+.LBB0_7:                                @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #24]
+	subs	r0, #1
+	str	r0, [sp, #24]
+	ldr	r0, [sp, #8]
+	adds	r0, #4
+	str	r0, [sp, #8]
+	b	.LBB0_11
+.LBB0_8:                                @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #24]
+	ldr	r1, [sp, #56]
+	cmp	r0, r1
+	bge	.LBB0_10
+	b	.LBB0_9
+.LBB0_9:                                @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #24]
+	adds	r0, #1
+	str	r0, [sp, #24]
+	b	.LBB0_10
+.LBB0_10:                               @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #16]
+	adds	r0, #4
+	str	r0, [sp, #16]
+	b	.LBB0_11
+.LBB0_11:                               @   in Loop: Header=BB0_1 Depth=1
+	b	.LBB0_12
+.LBB0_12:                               @   in Loop: Header=BB0_1 Depth=1
+	ldr	r0, [sp, #36]
+	adds	r0, #1
+	str	r0, [sp, #36]
+	b	.LBB0_1
+.LBB0_13:
+	add	sp, #56
+	bl	MasterBackward
+.Lfunc_end0:
+	.size	fir_filter_int, .Lfunc_end0-fir_filter_int
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	verify_benchmark                @ -- Begin function verify_benchmark
+	.p2align	2
+	.type	verify_benchmark,%function
+	.code	16                              @ @verify_benchmark
+	.thumb_func
+verify_benchmark:
+	.fnstart
+@ %bb.0:
+	.pad	#4
+	sub	sp, #4
+	str	r0, [sp]
+	mov.w	r0, #-1
+	add	sp, #4
+	bl	MasterBackward
+.Lfunc_end1:
+	.size	verify_benchmark, .Lfunc_end1-verify_benchmark
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	initialise_benchmark            @ -- Begin function initialise_benchmark
+	.p2align	2
+	.type	initialise_benchmark,%function
+	.code	16                              @ @initialise_benchmark
+	.thumb_func
+initialise_benchmark:
+	.fnstart
+@ %bb.0:
+	bl	MasterBackward
+.Lfunc_end2:
+	.size	initialise_benchmark, .Lfunc_end2-initialise_benchmark
+	.cantunwind
+	.fnend
+                                        @ -- End function
 	.globl	benchmark                       @ -- Begin function benchmark
 	.p2align	2
 	.type	benchmark,%function
@@ -30,230 +202,31 @@ benchmark:
 	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
+	.pad	#2888
+	subw	sp, sp, #2888
 	@APP
 benchmark_0_FORPUSH:
 	movw	lr, #0
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
-	movw	r0, :lower16:Array
-	movt	r0, :upper16:Array
-	bl	BubbleSort
-	movs	r0, #0
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end0:
-	.size	benchmark, .Lfunc_end0-benchmark
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	BubbleSort                      @ -- Begin function BubbleSort
-	.p2align	2
-	.type	BubbleSort,%function
-	.code	16                              @ @BubbleSort
-	.thumb_func
-BubbleSort:
-	.fnstart
-@ %bb.0:
-	.pad	#20
-	sub	sp, #20
-	str	r0, [sp, #16]
-	movs	r0, #0
-	str	r0, [sp, #12]
+	movw	r0, #285
+	str	r0, [sp, #4]
+	movs	r0, #35
 	str	r0, [sp]
-	b	.LBB1_1
-.LBB1_1:                                @ =>This Loop Header: Depth=1
-                                        @     Child Loop BB1_3 Depth 2
-	ldr	r0, [sp]
-	cmp	r0, #99
-	bgt	.LBB1_15
-	b	.LBB1_2
-.LBB1_2:                                @   in Loop: Header=BB1_1 Depth=1
-	movs	r0, #1
-	str	r0, [sp, #12]
+	movw	r0, :lower16:in_data
+	movt	r0, :upper16:in_data
+	movw	r3, :lower16:fir_int
+	movt	r3, :upper16:fir_int
+	add	r1, sp, #8
+	mov.w	r2, #700
+	bl	fir_filter_int
 	movs	r0, #0
-	str	r0, [sp, #4]
-	b	.LBB1_3
-.LBB1_3:                                @   Parent Loop BB1_1 Depth=1
-                                        @ =>  This Inner Loop Header: Depth=2
-	ldr	r0, [sp, #4]
-	cmp	r0, #99
-	bgt	.LBB1_10
-	b	.LBB1_4
-.LBB1_4:                                @   in Loop: Header=BB1_3 Depth=2
-	ldr	r0, [sp, #4]
-	ldr	r1, [sp]
-	rsb.w	r1, r1, #100
-	cmp	r0, r1
-	blt	.LBB1_6
-	b	.LBB1_5
-.LBB1_5:                                @   in Loop: Header=BB1_1 Depth=1
-	b	.LBB1_11
-.LBB1_6:                                @   in Loop: Header=BB1_3 Depth=2
-	ldr	r0, [sp, #16]
-	ldr	r1, [sp, #4]
-	add.w	r2, r0, r1, lsl #2
-	ldr.w	r0, [r0, r1, lsl #2]
-	ldr	r1, [r2, #4]
-	cmp	r0, r1
-	ble	.LBB1_8
-	b	.LBB1_7
-.LBB1_7:                                @   in Loop: Header=BB1_3 Depth=2
-	ldr	r0, [sp, #16]
-	ldr	r1, [sp, #4]
-	ldr.w	r0, [r0, r1, lsl #2]
-	str	r0, [sp, #8]
-	ldr	r0, [sp, #16]
-	ldr	r1, [sp, #4]
-	add.w	r2, r0, r1, lsl #2
-	ldr	r2, [r2, #4]
-	str.w	r2, [r0, r1, lsl #2]
-	ldr	r0, [sp, #8]
-	ldr	r1, [sp, #16]
-	ldr	r2, [sp, #4]
-	add.w	r1, r1, r2, lsl #2
-	str	r0, [r1, #4]
-	movs	r0, #0
-	str	r0, [sp, #12]
-	b	.LBB1_8
-.LBB1_8:                                @   in Loop: Header=BB1_3 Depth=2
-	b	.LBB1_9
-.LBB1_9:                                @   in Loop: Header=BB1_3 Depth=2
-	ldr	r0, [sp, #4]
-	adds	r0, #1
-	str	r0, [sp, #4]
-	b	.LBB1_3
-.LBB1_10:                               @ %.loopexit
-                                        @   in Loop: Header=BB1_1 Depth=1
-	b	.LBB1_11
-.LBB1_11:                               @   in Loop: Header=BB1_1 Depth=1
-	ldr	r0, [sp, #12]
-	cbz	r0, .LBB1_13
-	b	.LBB1_12
-.LBB1_12:
-	b	.LBB1_16
-.LBB1_13:                               @   in Loop: Header=BB1_1 Depth=1
-	b	.LBB1_14
-.LBB1_14:                               @   in Loop: Header=BB1_1 Depth=1
-	ldr	r0, [sp]
-	adds	r0, #1
-	str	r0, [sp]
-	b	.LBB1_1
-.LBB1_15:                               @ %.loopexit1
-	b	.LBB1_16
-.LBB1_16:
-	add	sp, #20
-	bl	MasterBackward
-.Lfunc_end1:
-	.size	BubbleSort, .Lfunc_end1-BubbleSort
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	initialise_benchmark            @ -- Begin function initialise_benchmark
-	.p2align	2
-	.type	initialise_benchmark,%function
-	.code	16                              @ @initialise_benchmark
-	.thumb_func
-initialise_benchmark:
-	.fnstart
-@ %bb.0:
-	.pad	#8
-	sub	sp, #8
-	movw	r0, :lower16:factor
-	movt	r0, :upper16:factor
-	mov.w	r1, #-1
-	str	r1, [r0]
-	ldr	r0, [r0]
-	str	r0, [sp]
-	movs	r0, #0
-	str	r0, [sp, #4]
-	b	.LBB2_1
-.LBB2_1:                                @ =>This Inner Loop Header: Depth=1
-	ldr	r0, [sp, #4]
-	cmp	r0, #99
-	bgt	.LBB2_4
-	b	.LBB2_2
-.LBB2_2:                                @   in Loop: Header=BB2_1 Depth=1
-	ldr	r0, [sp, #4]
-	ldr	r1, [sp]
-	muls	r1, r0, r1
-	movw	r2, :lower16:Array
-	movt	r2, :upper16:Array
-	str.w	r1, [r2, r0, lsl #2]
-	b	.LBB2_3
-.LBB2_3:                                @   in Loop: Header=BB2_1 Depth=1
-	ldr	r0, [sp, #4]
-	adds	r0, #1
-	str	r0, [sp, #4]
-	b	.LBB2_1
-.LBB2_4:
-	add	sp, #8
-	bl	MasterBackward
-.Lfunc_end2:
-	.size	initialise_benchmark, .Lfunc_end2-initialise_benchmark
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	verify_benchmark                @ -- Begin function verify_benchmark
-	.p2align	2
-	.type	verify_benchmark,%function
-	.code	16                              @ @verify_benchmark
-	.thumb_func
-verify_benchmark:
-	.fnstart
-@ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
-	.pad	#416
-	sub	sp, #416
-	str	r0, [sp, #408]
-	movw	r1, :lower16:.L__const.verify_benchmark.expected
-	movt	r1, :upper16:.L__const.verify_benchmark.expected
-	add	r0, sp, #8
-	mov.w	r2, #400
-	bl	__aeabi_memcpy4
-	movs	r0, #0
-	str	r0, [sp, #4]
-	b	.LBB3_1
-.LBB3_1:                                @ =>This Inner Loop Header: Depth=1
-	ldr	r0, [sp, #4]
-	cmp	r0, #99
-	bgt	.LBB3_6
-	b	.LBB3_2
-.LBB3_2:                                @   in Loop: Header=BB3_1 Depth=1
-	ldr	r0, [sp, #4]
-	movw	r1, :lower16:Array
-	movt	r1, :upper16:Array
-	ldr.w	r1, [r1, r0, lsl #2]
-	add	r2, sp, #8
-	ldr.w	r0, [r2, r0, lsl #2]
-	cmp	r1, r0
-	beq	.LBB3_4
-	b	.LBB3_3
-.LBB3_3:
-	movs	r0, #0
-	str	r0, [sp, #412]
-	b	.LBB3_7
-.LBB3_4:                                @   in Loop: Header=BB3_1 Depth=1
-	b	.LBB3_5
-.LBB3_5:                                @   in Loop: Header=BB3_1 Depth=1
-	ldr	r0, [sp, #4]
-	adds	r0, #1
-	str	r0, [sp, #4]
-	b	.LBB3_1
-.LBB3_6:
-	movs	r0, #1
-	str	r0, [sp, #412]
-	b	.LBB3_7
-.LBB3_7:
-	ldr	r0, [sp, #412]
-	add	sp, #416
+	addw	sp, sp, #2888
 	pop	{r7, lr}
 	bl	MasterBackward
 .Lfunc_end3:
-	.size	verify_benchmark, .Lfunc_end3-verify_benchmark
+	.size	benchmark, .Lfunc_end3-benchmark
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -370,9 +343,8 @@ main_28_FORPUSH:
 .LBB5_2:                                @   Parent Loop BB5_1 Depth=1
                                         @ =>  This Inner Loop Header: Depth=2
 	ldr	r0, [sp, #4]
-	movw	r1, #9999
-	cmp	r0, r1
-	bgt	.LBB5_5
+	cmp.w	r0, #500
+	bge	.LBB5_5
 	b	.LBB5_3
 .LBB5_3:                                @   in Loop: Header=BB5_2 Depth=2
 	@APP
@@ -389,28 +361,12 @@ main_32_FORPUSH:
 	str	r0, [sp, #4]
 	b	.LBB5_2
 .LBB5_5:                                @   in Loop: Header=BB5_1 Depth=1
-	@APP
-main_36_FORPUSH:
-	movw	lr, #108
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	movs	r0, #1
-	bl	verify_benchmark
-	str	r0, [sp]
-	ldr	r0, [sp]
-	cmp	r0, #1
-	bne	.LBB5_7
-	b	.LBB5_6
-.LBB5_6:                                @   in Loop: Header=BB5_1 Depth=1
 	bl	HAL_GetTick
 	ldr	r1, [sp, #8]
 	subs	r1, r0, r1
 	movw	r0, :lower16:.L.str
 	movt	r0, :upper16:.L.str
 	bl	printf
-	b	.LBB5_7
-.LBB5_7:                                @   in Loop: Header=BB5_1 Depth=1
 	bl	HAL_GetTick
 	str	r0, [sp, #8]
 	b	.LBB5_1
@@ -493,8 +449,8 @@ SystemClock_Config:
 	b	.LBB6_5
 .LBB6_5:
 	@APP
-SystemClock_Config_40_FORPUSH:
-	movw	lr, #120
+SystemClock_Config_36_FORPUSH:
+	movw	lr, #108
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -518,8 +474,8 @@ SystemClock_Config_40_FORPUSH:
 	b	.LBB6_7
 .LBB6_7:
 	@APP
-SystemClock_Config_44_FORPUSH:
-	movw	lr, #132
+SystemClock_Config_40_FORPUSH:
+	movw	lr, #120
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -782,8 +738,8 @@ MX_I2C1_Init:
 	b	.LBB8_1
 .LBB8_1:
 	@APP
-MX_I2C1_Init_48_FORPUSH:
-	movw	lr, #144
+MX_I2C1_Init_44_FORPUSH:
+	movw	lr, #132
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -830,8 +786,8 @@ MX_I2S3_Init:
 	b	.LBB9_1
 .LBB9_1:
 	@APP
-MX_I2S3_Init_52_FORPUSH:
-	movw	lr, #156
+MX_I2S3_Init_48_FORPUSH:
+	movw	lr, #144
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -881,8 +837,8 @@ MX_SPI1_Init:
 	b	.LBB10_1
 .LBB10_1:
 	@APP
-MX_SPI1_Init_56_FORPUSH:
-	movw	lr, #168
+MX_SPI1_Init_52_FORPUSH:
+	movw	lr, #156
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -927,8 +883,8 @@ MX_USART2_UART_Init:
 	b	.LBB11_1
 .LBB11_1:
 	@APP
-MX_USART2_UART_Init_60_FORPUSH:
-	movw	lr, #180
+MX_USART2_UART_Init_56_FORPUSH:
+	movw	lr, #168
 	movt	lr, #2060
 	push	{lr}
 	@NO_APP
@@ -1019,126 +975,1463 @@ fail_back:
 	.size	MasterBackward, .Lfunc_end14-MasterBackward
 	.fnend
                                         @ -- End function
-	.type	Array,%object                   @ @Array
-	.bss
-	.globl	Array
+	.type	fir_int,%object                 @ @fir_int
+	.section	.rodata,"a",%progbits
+	.globl	fir_int
 	.p2align	2, 0x0
-Array:
-	.zero	404
-	.size	Array, 404
-
-	.type	factor,%object                  @ @factor
-	.globl	factor
-	.p2align	2, 0x0
-factor:
+fir_int:
+	.long	4294967294                      @ 0xfffffffe
+	.long	1                               @ 0x1
+	.long	4                               @ 0x4
+	.long	3                               @ 0x3
+	.long	4294967294                      @ 0xfffffffe
+	.long	4294967292                      @ 0xfffffffc
+	.long	2                               @ 0x2
+	.long	7                               @ 0x7
 	.long	0                               @ 0x0
-	.size	factor, 4
-
-	.type	.L__const.verify_benchmark.expected,%object @ @__const.verify_benchmark.expected
-	.section	.rodata.str4.4,"aMS",%progbits,4
-	.p2align	2, 0x0
-.L__const.verify_benchmark.expected:
-	.long	4294967197                      @ 0xffffff9d
-	.long	4294967198                      @ 0xffffff9e
-	.long	4294967199                      @ 0xffffff9f
-	.long	4294967200                      @ 0xffffffa0
-	.long	4294967201                      @ 0xffffffa1
-	.long	4294967202                      @ 0xffffffa2
-	.long	4294967203                      @ 0xffffffa3
-	.long	4294967204                      @ 0xffffffa4
-	.long	4294967205                      @ 0xffffffa5
-	.long	4294967206                      @ 0xffffffa6
-	.long	4294967207                      @ 0xffffffa7
-	.long	4294967208                      @ 0xffffffa8
-	.long	4294967209                      @ 0xffffffa9
-	.long	4294967210                      @ 0xffffffaa
-	.long	4294967211                      @ 0xffffffab
-	.long	4294967212                      @ 0xffffffac
-	.long	4294967213                      @ 0xffffffad
-	.long	4294967214                      @ 0xffffffae
-	.long	4294967215                      @ 0xffffffaf
-	.long	4294967216                      @ 0xffffffb0
-	.long	4294967217                      @ 0xffffffb1
-	.long	4294967218                      @ 0xffffffb2
-	.long	4294967219                      @ 0xffffffb3
-	.long	4294967220                      @ 0xffffffb4
-	.long	4294967221                      @ 0xffffffb5
-	.long	4294967222                      @ 0xffffffb6
-	.long	4294967223                      @ 0xffffffb7
-	.long	4294967224                      @ 0xffffffb8
-	.long	4294967225                      @ 0xffffffb9
-	.long	4294967226                      @ 0xffffffba
-	.long	4294967227                      @ 0xffffffbb
-	.long	4294967228                      @ 0xffffffbc
-	.long	4294967229                      @ 0xffffffbd
-	.long	4294967230                      @ 0xffffffbe
-	.long	4294967231                      @ 0xffffffbf
-	.long	4294967232                      @ 0xffffffc0
-	.long	4294967233                      @ 0xffffffc1
-	.long	4294967234                      @ 0xffffffc2
-	.long	4294967235                      @ 0xffffffc3
-	.long	4294967236                      @ 0xffffffc4
-	.long	4294967237                      @ 0xffffffc5
-	.long	4294967238                      @ 0xffffffc6
-	.long	4294967239                      @ 0xffffffc7
-	.long	4294967240                      @ 0xffffffc8
-	.long	4294967241                      @ 0xffffffc9
-	.long	4294967242                      @ 0xffffffca
-	.long	4294967243                      @ 0xffffffcb
-	.long	4294967244                      @ 0xffffffcc
-	.long	4294967245                      @ 0xffffffcd
-	.long	4294967246                      @ 0xffffffce
-	.long	4294967247                      @ 0xffffffcf
-	.long	4294967248                      @ 0xffffffd0
-	.long	4294967249                      @ 0xffffffd1
-	.long	4294967250                      @ 0xffffffd2
-	.long	4294967251                      @ 0xffffffd3
-	.long	4294967252                      @ 0xffffffd4
-	.long	4294967253                      @ 0xffffffd5
-	.long	4294967254                      @ 0xffffffd6
-	.long	4294967255                      @ 0xffffffd7
-	.long	4294967256                      @ 0xffffffd8
-	.long	4294967257                      @ 0xffffffd9
-	.long	4294967258                      @ 0xffffffda
-	.long	4294967259                      @ 0xffffffdb
-	.long	4294967260                      @ 0xffffffdc
-	.long	4294967261                      @ 0xffffffdd
-	.long	4294967262                      @ 0xffffffde
-	.long	4294967263                      @ 0xffffffdf
-	.long	4294967264                      @ 0xffffffe0
-	.long	4294967265                      @ 0xffffffe1
-	.long	4294967266                      @ 0xffffffe2
-	.long	4294967267                      @ 0xffffffe3
-	.long	4294967268                      @ 0xffffffe4
-	.long	4294967269                      @ 0xffffffe5
-	.long	4294967270                      @ 0xffffffe6
-	.long	4294967271                      @ 0xffffffe7
-	.long	4294967272                      @ 0xffffffe8
-	.long	4294967273                      @ 0xffffffe9
-	.long	4294967274                      @ 0xffffffea
-	.long	4294967275                      @ 0xffffffeb
-	.long	4294967276                      @ 0xffffffec
-	.long	4294967277                      @ 0xffffffed
-	.long	4294967278                      @ 0xffffffee
-	.long	4294967279                      @ 0xffffffef
-	.long	4294967280                      @ 0xfffffff0
-	.long	4294967281                      @ 0xfffffff1
+	.long	4294967287                      @ 0xfffffff7
+	.long	4294967292                      @ 0xfffffffc
+	.long	12                              @ 0xc
+	.long	11                              @ 0xb
 	.long	4294967282                      @ 0xfffffff2
-	.long	4294967283                      @ 0xfffffff3
+	.long	4294967270                      @ 0xffffffe6
+	.long	15                              @ 0xf
+	.long	89                              @ 0x59
+	.long	127                             @ 0x7f
+	.long	89                              @ 0x59
+	.long	15                              @ 0xf
+	.long	4294967270                      @ 0xffffffe6
+	.long	4294967282                      @ 0xfffffff2
+	.long	11                              @ 0xb
+	.long	12                              @ 0xc
+	.long	4294967292                      @ 0xfffffffc
+	.long	4294967287                      @ 0xfffffff7
+	.long	0                               @ 0x0
+	.long	7                               @ 0x7
+	.long	2                               @ 0x2
+	.long	4294967292                      @ 0xfffffffc
+	.long	4294967294                      @ 0xfffffffe
+	.long	3                               @ 0x3
+	.long	4                               @ 0x4
+	.long	1                               @ 0x1
+	.long	4294967294                      @ 0xfffffffe
+	.long	0                               @ 0x0
+	.size	fir_int, 144
+
+	.type	in_data,%object                 @ @in_data
+	.globl	in_data
+	.p2align	2, 0x0
+in_data:
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	121                             @ 0x79
+	.long	114                             @ 0x72
+	.long	121                             @ 0x79
+	.long	13                              @ 0xd
+	.long	13                              @ 0xd
+	.long	0                               @ 0x0
+	.long	3                               @ 0x3
+	.long	5                               @ 0x5
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	127                             @ 0x7f
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	1                               @ 0x1
+	.long	126                             @ 0x7e
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	3                               @ 0x3
+	.long	1                               @ 0x1
+	.long	127                             @ 0x7f
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	125                             @ 0x7d
+	.long	123                             @ 0x7b
+	.long	115                             @ 0x73
+	.long	106                             @ 0x6a
+	.long	119                             @ 0x77
+	.long	16                              @ 0x10
+	.long	14                              @ 0xe
+	.long	1                               @ 0x1
+	.long	5                               @ 0x5
+	.long	5                               @ 0x5
+	.long	5                               @ 0x5
+	.long	5                               @ 0x5
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	2                               @ 0x2
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	1                               @ 0x1
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	3                               @ 0x3
+	.long	124                             @ 0x7c
+	.long	126                             @ 0x7e
+	.long	6                               @ 0x6
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	3                               @ 0x3
+	.long	2                               @ 0x2
+	.long	127                             @ 0x7f
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	127                             @ 0x7f
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	3                               @ 0x3
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	3                               @ 0x3
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	3                               @ 0x3
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	3                               @ 0x3
+	.long	127                             @ 0x7f
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	5                               @ 0x5
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	5                               @ 0x5
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	3                               @ 0x3
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	126                             @ 0x7e
+	.long	125                             @ 0x7d
+	.long	114                             @ 0x72
+	.long	104                             @ 0x68
+	.long	113                             @ 0x71
+	.long	5                               @ 0x5
+	.long	12                              @ 0xc
+	.long	7                               @ 0x7
+	.long	2                               @ 0x2
+	.long	6                               @ 0x6
+	.long	13                              @ 0xd
+	.long	5                               @ 0x5
+	.long	125                             @ 0x7d
+	.long	3                               @ 0x3
+	.long	2                               @ 0x2
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	122                             @ 0x7a
+	.long	3                               @ 0x3
+	.long	126                             @ 0x7e
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	125                             @ 0x7d
+	.long	8                               @ 0x8
+	.long	3                               @ 0x3
+	.long	124                             @ 0x7c
+	.long	6                               @ 0x6
+	.long	0                               @ 0x0
+	.long	122                             @ 0x7a
+	.long	6                               @ 0x6
+	.long	2                               @ 0x2
+	.long	124                             @ 0x7c
+	.long	3                               @ 0x3
+	.long	126                             @ 0x7e
+	.long	121                             @ 0x79
+	.long	6                               @ 0x6
+	.long	5                               @ 0x5
+	.long	116                             @ 0x74
+	.long	127                             @ 0x7f
+	.long	13                              @ 0xd
+	.long	122                             @ 0x7a
+	.long	120                             @ 0x78
+	.long	6                               @ 0x6
+	.long	5                               @ 0x5
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	4                               @ 0x4
+	.long	124                             @ 0x7c
+	.long	127                             @ 0x7f
+	.long	3                               @ 0x3
+	.long	127                             @ 0x7f
+	.long	5                               @ 0x5
+	.long	3                               @ 0x3
+	.long	122                             @ 0x7a
+	.long	6                               @ 0x6
+	.long	10                              @ 0xa
+	.long	118                             @ 0x76
+	.long	124                             @ 0x7c
+	.long	10                              @ 0xa
+	.long	124                             @ 0x7c
+	.long	127                             @ 0x7f
+	.long	6                               @ 0x6
+	.long	121                             @ 0x79
+	.long	3                               @ 0x3
+	.long	12                              @ 0xc
+	.long	117                             @ 0x75
+	.long	120                             @ 0x78
+	.long	10                              @ 0xa
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	3                               @ 0x3
+	.long	126                             @ 0x7e
+	.long	124                             @ 0x7c
+	.long	6                               @ 0x6
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	2                               @ 0x2
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	6                               @ 0x6
+	.long	118                             @ 0x76
+	.long	127                             @ 0x7f
+	.long	13                              @ 0xd
+	.long	121                             @ 0x79
+	.long	127                             @ 0x7f
+	.long	6                               @ 0x6
+	.long	121                             @ 0x79
+	.long	6                               @ 0x6
+	.long	3                               @ 0x3
+	.long	113                             @ 0x71
+	.long	6                               @ 0x6
+	.long	10                              @ 0xa
+	.long	115                             @ 0x73
+	.long	127                             @ 0x7f
+	.long	10                              @ 0xa
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	122                             @ 0x7a
+	.long	124                             @ 0x7c
+	.long	10                              @ 0xa
+	.long	0                               @ 0x0
+	.long	117                             @ 0x75
+	.long	127                             @ 0x7f
+	.long	12                              @ 0xc
+	.long	10                              @ 0xa
+	.long	124                             @ 0x7c
+	.long	121                             @ 0x79
+	.long	9                               @ 0x9
+	.long	13                              @ 0xd
+	.long	125                             @ 0x7d
+	.long	122                             @ 0x7a
+	.long	5                               @ 0x5
+	.long	11                              @ 0xb
+	.long	10                              @ 0xa
+	.long	121                             @ 0x79
+	.long	124                             @ 0x7c
+	.long	22                              @ 0x16
+	.long	3                               @ 0x3
+	.long	114                             @ 0x72
+	.long	13                              @ 0xd
+	.long	7                               @ 0x7
+	.long	121                             @ 0x79
+	.long	12                              @ 0xc
+	.long	7                               @ 0x7
+	.long	122                             @ 0x7a
+	.long	11                              @ 0xb
+	.long	7                               @ 0x7
+	.long	122                             @ 0x7a
+	.long	10                              @ 0xa
+	.long	7                               @ 0x7
+	.long	121                             @ 0x79
+	.long	10                              @ 0xa
+	.long	5                               @ 0x5
+	.long	117                             @ 0x75
+	.long	6                               @ 0x6
+	.long	5                               @ 0x5
+	.long	121                             @ 0x79
+	.long	5                               @ 0x5
+	.long	6                               @ 0x6
+	.long	1                               @ 0x1
+	.long	6                               @ 0x6
+	.long	0                               @ 0x0
+	.long	122                             @ 0x7a
+	.long	2                               @ 0x2
+	.long	7                               @ 0x7
+	.long	3                               @ 0x3
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	10                              @ 0xa
+	.long	7                               @ 0x7
+	.long	2                               @ 0x2
+	.long	127                             @ 0x7f
+	.long	127                             @ 0x7f
+	.long	9                               @ 0x9
+	.long	7                               @ 0x7
+	.long	121                             @ 0x79
+	.long	121                             @ 0x79
+	.long	6                               @ 0x6
+	.long	8                               @ 0x8
+	.long	125                             @ 0x7d
+	.long	122                             @ 0x7a
+	.long	6                               @ 0x6
+	.long	12                              @ 0xc
+	.long	6                               @ 0x6
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	13                              @ 0xd
+	.long	7                               @ 0x7
+	.long	121                             @ 0x79
+	.long	1                               @ 0x1
+	.long	6                               @ 0x6
+	.long	127                             @ 0x7f
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	1                               @ 0x1
+	.long	126                             @ 0x7e
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	6                               @ 0x6
+	.long	3                               @ 0x3
+	.long	125                             @ 0x7d
+	.long	5                               @ 0x5
+	.long	7                               @ 0x7
+	.long	127                             @ 0x7f
+	.long	124                             @ 0x7c
+	.long	1                               @ 0x1
+	.long	6                               @ 0x6
+	.long	6                               @ 0x6
+	.long	124                             @ 0x7c
+	.long	122                             @ 0x7a
+	.long	7                               @ 0x7
+	.long	10                              @ 0xa
+	.long	0                               @ 0x0
+	.long	120                             @ 0x78
+	.long	1                               @ 0x1
+	.long	8                               @ 0x8
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	122                             @ 0x7a
+	.long	4                               @ 0x4
+	.long	10                              @ 0xa
+	.long	0                               @ 0x0
+	.long	120                             @ 0x78
+	.long	1                               @ 0x1
+	.long	6                               @ 0x6
+	.long	122                             @ 0x7a
+	.long	117                             @ 0x75
+	.long	122                             @ 0x7a
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	118                             @ 0x76
+	.long	127                             @ 0x7f
+	.long	7                               @ 0x7
+	.long	0                               @ 0x0
+	.long	122                             @ 0x7a
+	.long	125                             @ 0x7d
+	.long	2                               @ 0x2
+	.long	4                               @ 0x4
+	.long	124                             @ 0x7c
+	.long	122                             @ 0x7a
+	.long	2                               @ 0x2
+	.long	5                               @ 0x5
+	.long	124                             @ 0x7c
+	.long	122                             @ 0x7a
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	120                             @ 0x78
+	.long	117                             @ 0x75
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	120                             @ 0x78
+	.long	121                             @ 0x79
+	.long	1                               @ 0x1
+	.long	3                               @ 0x3
+	.long	121                             @ 0x79
+	.long	121                             @ 0x79
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	127                             @ 0x7f
+	.long	121                             @ 0x79
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	122                             @ 0x7a
+	.long	124                             @ 0x7c
+	.long	125                             @ 0x7d
+	.long	124                             @ 0x7c
+	.long	127                             @ 0x7f
+	.long	125                             @ 0x7d
+	.long	121                             @ 0x79
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	122                             @ 0x7a
+	.long	124                             @ 0x7c
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	3                               @ 0x3
+	.long	3                               @ 0x3
+	.long	125                             @ 0x7d
+	.long	1                               @ 0x1
+	.long	5                               @ 0x5
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	3                               @ 0x3
+	.long	125                             @ 0x7d
+	.long	121                             @ 0x79
+	.long	1                               @ 0x1
+	.long	2                               @ 0x2
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	127                             @ 0x7f
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	124                             @ 0x7c
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	121                             @ 0x79
+	.long	120                             @ 0x78
+	.long	124                             @ 0x7c
+	.long	124                             @ 0x7c
+	.long	123                             @ 0x7b
+	.long	123                             @ 0x7b
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	1                               @ 0x1
+	.long	2                               @ 0x2
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	2                               @ 0x2
+	.long	6                               @ 0x6
+	.long	5                               @ 0x5
+	.long	3                               @ 0x3
+	.long	6                               @ 0x6
+	.long	8                               @ 0x8
+	.long	5                               @ 0x5
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	3                               @ 0x3
+	.long	0                               @ 0x0
+	.long	125                             @ 0x7d
+	.long	127                             @ 0x7f
+	.long	0                               @ 0x0
+	.long	127                             @ 0x7f
+	.long	126                             @ 0x7e
+	.long	0                               @ 0x0
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	2                               @ 0x2
+	.long	1                               @ 0x1
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	1                               @ 0x1
+	.long	124                             @ 0x7c
+	.long	125                             @ 0x7d
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	124                             @ 0x7c
+	.long	127                             @ 0x7f
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	124                             @ 0x7c
+	.long	127                             @ 0x7f
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	126                             @ 0x7e
+	.long	127                             @ 0x7f
+	.long	2                               @ 0x2
+	.long	3                               @ 0x3
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	4                               @ 0x4
+	.long	6                               @ 0x6
+	.long	5                               @ 0x5
+	.long	6                               @ 0x6
+	.long	7                               @ 0x7
+	.long	10                              @ 0xa
+	.long	10                              @ 0xa
+	.long	4                               @ 0x4
+	.long	2                               @ 0x2
+	.long	5                               @ 0x5
+	.long	8                               @ 0x8
+	.long	9                               @ 0x9
+	.long	8                               @ 0x8
+	.long	7                               @ 0x7
+	.long	12                              @ 0xc
+	.long	20                              @ 0x14
+	.long	20                              @ 0x14
+	.long	16                              @ 0x10
+	.long	14                              @ 0xe
+	.long	20                              @ 0x14
+	.long	21                              @ 0x15
+	.long	15                              @ 0xf
+	.long	9                               @ 0x9
+	.long	7                               @ 0x7
+	.long	4                               @ 0x4
+	.long	126                             @ 0x7e
+	.long	118                             @ 0x76
+	.long	100                             @ 0x64
+	.long	65                              @ 0x41
+	.long	72                              @ 0x48
+	.long	125                             @ 0x7d
+	.long	108                             @ 0x6c
+	.long	61                              @ 0x3d
+	.long	103                             @ 0x67
+	.long	16                              @ 0x10
+	.long	6                               @ 0x6
+	.long	125                             @ 0x7d
+	.long	117                             @ 0x75
+	.long	7                               @ 0x7
+	.long	29                              @ 0x1d
+	.long	0                               @ 0x0
+	.long	108                             @ 0x6c
+	.long	2                               @ 0x2
+	.long	125                             @ 0x7d
+	.long	120                             @ 0x78
+	.long	119                             @ 0x77
+	.long	111                             @ 0x6f
+	.long	119                             @ 0x77
+	.long	1                               @ 0x1
+	.long	0                               @ 0x0
+	.long	2                               @ 0x2
+	.long	7                               @ 0x7
+	.long	10                              @ 0xa
+	.long	28                              @ 0x1c
+	.long	28                              @ 0x1c
+	.long	23                              @ 0x17
+	.long	35                              @ 0x23
+	.long	47                              @ 0x2f
+	.long	65                              @ 0x41
+	.long	67                              @ 0x43
+	.long	79                              @ 0x4f
+	.long	85                              @ 0x55
+	.long	88                              @ 0x58
+	.long	126                             @ 0x7e
+	.long	2                               @ 0x2
+	.long	76                              @ 0x4c
+	.long	16                              @ 0x10
+	.long	105                             @ 0x69
+	.long	44                              @ 0x2c
+	.long	13                              @ 0xd
+	.long	116                             @ 0x74
+	.long	42                              @ 0x2a
+	.long	116                             @ 0x74
+	.long	99                              @ 0x63
+	.long	41                              @ 0x29
+	.long	124                             @ 0x7c
+	.long	94                              @ 0x5e
+	.long	33                              @ 0x21
+	.long	53                              @ 0x35
+	.long	70                              @ 0x46
+	.long	36                              @ 0x24
+	.long	103                             @ 0x67
+	.long	53                              @ 0x35
+	.long	60                              @ 0x3c
+	.long	60                              @ 0x3c
+	.long	38                              @ 0x26
+	.long	38                              @ 0x26
+	.long	47                              @ 0x2f
+	.long	71                              @ 0x47
+	.long	100                             @ 0x64
+	.long	4                               @ 0x4
+	.long	19                              @ 0x13
+	.long	24                              @ 0x18
+	.long	39                              @ 0x27
+	.long	43                              @ 0x2b
+	.long	48                              @ 0x30
+	.long	27                              @ 0x1b
+	.long	127                             @ 0x7f
+	.long	120                             @ 0x78
+	.long	114                             @ 0x72
+	.long	104                             @ 0x68
+	.long	92                              @ 0x5c
+	.long	90                              @ 0x5a
+	.long	104                             @ 0x68
+	.long	124                             @ 0x7c
+	.long	3                               @ 0x3
+	.long	13                              @ 0xd
+	.long	38                              @ 0x26
+	.long	65                              @ 0x41
+	.long	81                              @ 0x51
+	.long	90                              @ 0x5a
+	.long	106                             @ 0x6a
+	.long	108                             @ 0x6c
+	.long	84                              @ 0x54
+	.long	120                             @ 0x78
+	.long	9                               @ 0x9
+	.long	69                              @ 0x45
+	.long	121                             @ 0x79
+	.long	31                              @ 0x1f
+	.long	11                              @ 0xb
+	.long	46                              @ 0x2e
+	.long	96                              @ 0x60
+	.long	11                              @ 0xb
+	.long	102                             @ 0x66
+	.long	127                             @ 0x7f
+	.long	104                             @ 0x68
+	.long	119                             @ 0x77
+	.long	78                              @ 0x4e
+	.long	70                              @ 0x46
+	.long	74                              @ 0x4a
+	.long	59                              @ 0x3b
+	.long	18                              @ 0x12
+	.long	91                              @ 0x5b
+	.long	55                              @ 0x37
+	.long	49                              @ 0x31
+	.long	33                              @ 0x21
+	.long	11                              @ 0xb
+	.long	18                              @ 0x12
+	.long	46                              @ 0x2e
+	.long	87                              @ 0x57
+	.long	126                             @ 0x7e
+	.long	25                              @ 0x19
+	.long	34                              @ 0x22
+	.long	43                              @ 0x2b
+	.long	63                              @ 0x3f
+	.long	58                              @ 0x3a
+	.long	37                              @ 0x25
+	.long	11                              @ 0xb
+	.long	121                             @ 0x79
+	.long	113                             @ 0x71
+	.long	104                             @ 0x68
+	.long	97                              @ 0x61
+	.long	92                              @ 0x5c
+	.long	102                             @ 0x66
+	.long	114                             @ 0x72
+	.long	6                               @ 0x6
+	.long	22                              @ 0x16
+	.long	41                              @ 0x29
+	.long	65                              @ 0x41
+	.long	94                              @ 0x5e
+	.long	109                             @ 0x6d
+	.long	102                             @ 0x66
+	.long	96                              @ 0x60
+	.long	110                             @ 0x6e
+	.long	23                              @ 0x17
+	.long	72                              @ 0x48
+	.long	54                              @ 0x36
+	.long	18                              @ 0x12
+	.long	23                              @ 0x17
+	.long	47                              @ 0x2f
+	.long	99                              @ 0x63
+	.long	120                             @ 0x78
+	.long	92                              @ 0x5c
+	.long	119                             @ 0x77
+	.long	108                             @ 0x6c
+	.long	117                             @ 0x75
+	.long	65                              @ 0x41
+	.long	73                              @ 0x49
+	.long	79                              @ 0x4f
+	.long	59                              @ 0x3b
+	.long	11                              @ 0xb
+	.long	84                              @ 0x54
+	.long	55                              @ 0x37
+	.long	0                               @ 0x0
+	.size	in_data, 2804
+
+	.type	out_data,%object                @ @out_data
+	.data
+	.globl	out_data
+	.p2align	2, 0x0
+out_data:
+	.long	3                               @ 0x3
+	.long	4294967290                      @ 0xfffffffa
+	.long	4294967293                      @ 0xfffffffd
+	.long	29                              @ 0x1d
+	.long	88                              @ 0x58
+	.long	137                             @ 0x89
+	.long	135                             @ 0x87
+	.long	86                              @ 0x56
+	.long	32                              @ 0x20
+	.long	7                               @ 0x7
+	.long	7                               @ 0x7
+	.long	4                               @ 0x4
+	.long	4294967289                      @ 0xfffffff9
+	.long	0                               @ 0x0
+	.long	40                              @ 0x28
+	.long	91                              @ 0x5b
+	.long	107                             @ 0x6b
+	.long	79                              @ 0x4f
+	.long	43                              @ 0x2b
+	.long	33                              @ 0x21
+	.long	45                              @ 0x2d
+	.long	48                              @ 0x30
+	.long	39                              @ 0x27
+	.long	39                              @ 0x27
+	.long	55                              @ 0x37
+	.long	71                              @ 0x47
+	.long	66                              @ 0x42
+	.long	39                              @ 0x27
+	.long	8                               @ 0x8
 	.long	4294967284                      @ 0xfffffff4
 	.long	4294967285                      @ 0xfffffff5
-	.long	4294967286                      @ 0xfffffff6
-	.long	4294967287                      @ 0xfffffff7
+	.long	13                              @ 0xd
+	.long	46                              @ 0x2e
+	.long	59                              @ 0x3b
+	.long	37                              @ 0x25
+	.long	0                               @ 0x0
 	.long	4294967288                      @ 0xfffffff8
-	.long	4294967289                      @ 0xfffffff9
-	.long	4294967290                      @ 0xfffffffa
+	.long	29                              @ 0x1d
+	.long	89                              @ 0x59
+	.long	131                             @ 0x83
+	.long	135                             @ 0x87
+	.long	111                             @ 0x6f
+	.long	78                              @ 0x4e
+	.long	47                              @ 0x2f
+	.long	18                              @ 0x12
+	.long	4294967295                      @ 0xffffffff
 	.long	4294967291                      @ 0xfffffffb
-	.long	4294967292                      @ 0xfffffffc
-	.long	4294967293                      @ 0xfffffffd
-	.long	4294967294                      @ 0xfffffffe
+	.long	4                               @ 0x4
+	.long	21                              @ 0x15
+	.long	35                              @ 0x23
+	.long	45                              @ 0x2d
+	.long	49                              @ 0x31
+	.long	47                              @ 0x2f
+	.long	41                              @ 0x29
+	.long	38                              @ 0x26
+	.long	42                              @ 0x2a
+	.long	54                              @ 0x36
+	.long	72                              @ 0x48
+	.long	88                              @ 0x58
+	.long	95                              @ 0x5f
+	.long	90                              @ 0x5a
+	.long	79                              @ 0x4f
+	.long	70                              @ 0x46
+	.long	65                              @ 0x41
+	.long	50                              @ 0x32
+	.long	27                              @ 0x1b
+	.long	23                              @ 0x17
+	.long	55                              @ 0x37
+	.long	105                             @ 0x69
+	.long	123                             @ 0x7b
+	.long	89                              @ 0x59
+	.long	47                              @ 0x2f
+	.long	36                              @ 0x24
+	.long	48                              @ 0x30
+	.long	42                              @ 0x2a
+	.long	8                               @ 0x8
+	.long	4294967286                      @ 0xfffffff6
+	.long	7                               @ 0x7
+	.long	36                              @ 0x24
+	.long	49                              @ 0x31
+	.long	47                              @ 0x2f
+	.long	51                              @ 0x33
+	.long	50                              @ 0x32
+	.long	30                              @ 0x1e
+	.long	4                               @ 0x4
+	.long	7                               @ 0x7
+	.long	35                              @ 0x23
+	.long	51                              @ 0x33
+	.long	33                              @ 0x21
+	.long	14                              @ 0xe
+	.long	30                              @ 0x1e
+	.long	74                              @ 0x4a
+	.long	97                              @ 0x61
+	.long	75                              @ 0x4b
+	.long	33                              @ 0x21
+	.long	14                              @ 0xe
+	.long	34                              @ 0x22
+	.long	73                              @ 0x49
+	.long	94                              @ 0x5e
+	.long	77                              @ 0x4d
+	.long	37                              @ 0x25
+	.long	11                              @ 0xb
+	.long	24                              @ 0x18
+	.long	50                              @ 0x32
+	.long	51                              @ 0x33
+	.long	21                              @ 0x15
+	.long	5                               @ 0x5
+	.long	41                              @ 0x29
+	.long	100                             @ 0x64
+	.long	118                             @ 0x76
+	.long	77                              @ 0x4d
+	.long	22                              @ 0x16
+	.long	9                               @ 0x9
+	.long	38                              @ 0x26
+	.long	55                              @ 0x37
+	.long	35                              @ 0x23
+	.long	11                              @ 0xb
+	.long	21                              @ 0x15
+	.long	60                              @ 0x3c
+	.long	82                              @ 0x52
+	.long	64                              @ 0x40
+	.long	35                              @ 0x23
+	.long	29                              @ 0x1d
+	.long	45                              @ 0x2d
+	.long	54                              @ 0x36
+	.long	45                              @ 0x2d
+	.long	36                              @ 0x24
+	.long	41                              @ 0x29
+	.long	50                              @ 0x32
+	.long	44                              @ 0x2c
+	.long	33                              @ 0x21
+	.long	43                              @ 0x2b
+	.long	80                              @ 0x50
+	.long	123                             @ 0x7b
+	.long	141                             @ 0x8d
+	.long	115                             @ 0x73
+	.long	71                              @ 0x47
+	.long	34                              @ 0x22
+	.long	15                              @ 0xf
+	.long	7                               @ 0x7
 	.long	4294967295                      @ 0xffffffff
 	.long	0                               @ 0x0
-	.size	.L__const.verify_benchmark.expected, 400
+	.long	19                              @ 0x13
+	.long	45                              @ 0x2d
+	.long	54                              @ 0x36
+	.long	43                              @ 0x2b
+	.long	35                              @ 0x23
+	.long	50                              @ 0x32
+	.long	78                              @ 0x4e
+	.long	92                              @ 0x5c
+	.long	85                              @ 0x55
+	.long	79                              @ 0x4f
+	.long	85                              @ 0x55
+	.long	92                              @ 0x5c
+	.long	80                              @ 0x50
+	.long	52                              @ 0x34
+	.long	32                              @ 0x20
+	.long	34                              @ 0x22
+	.long	50                              @ 0x32
+	.long	56                              @ 0x38
+	.long	47                              @ 0x2f
+	.long	37                              @ 0x25
+	.long	42                              @ 0x2a
+	.long	53                              @ 0x35
+	.long	50                              @ 0x32
+	.long	35                              @ 0x23
+	.long	31                              @ 0x1f
+	.long	54                              @ 0x36
+	.long	87                              @ 0x57
+	.long	96                              @ 0x60
+	.long	76                              @ 0x4c
+	.long	49                              @ 0x31
+	.long	45                              @ 0x2d
+	.long	64                              @ 0x40
+	.long	87                              @ 0x57
+	.long	103                             @ 0x67
+	.long	103                             @ 0x67
+	.long	76                              @ 0x4c
+	.long	33                              @ 0x21
+	.long	4                               @ 0x4
+	.long	8                               @ 0x8
+	.long	32                              @ 0x20
+	.long	48                              @ 0x30
+	.long	44                              @ 0x2c
+	.long	51                              @ 0x33
+	.long	78                              @ 0x4e
+	.long	97                              @ 0x61
+	.long	86                              @ 0x56
+	.long	57                              @ 0x39
+	.long	38                              @ 0x26
+	.long	38                              @ 0x26
+	.long	43                              @ 0x2b
+	.long	46                              @ 0x2e
+	.long	56                              @ 0x38
+	.long	74                              @ 0x4a
+	.long	87                              @ 0x57
+	.long	88                              @ 0x58
+	.long	92                              @ 0x5c
+	.long	95                              @ 0x5f
+	.long	80                              @ 0x50
+	.long	49                              @ 0x31
+	.long	29                              @ 0x1d
+	.long	49                              @ 0x31
+	.long	88                              @ 0x58
+	.long	93                              @ 0x5d
+	.long	55                              @ 0x37
+	.long	22                              @ 0x16
+	.long	35                              @ 0x23
+	.long	85                              @ 0x55
+	.long	113                             @ 0x71
+	.long	86                              @ 0x56
+	.long	40                              @ 0x28
+	.long	24                              @ 0x18
+	.long	48                              @ 0x30
+	.long	81                              @ 0x51
+	.long	96                              @ 0x60
+	.long	92                              @ 0x5c
+	.long	82                              @ 0x52
+	.long	79                              @ 0x4f
+	.long	84                              @ 0x54
+	.long	94                              @ 0x5e
+	.long	98                              @ 0x62
+	.long	87                              @ 0x57
+	.long	69                              @ 0x45
+	.long	58                              @ 0x3a
+	.long	53                              @ 0x35
+	.long	38                              @ 0x26
+	.long	23                              @ 0x17
+	.long	35                              @ 0x23
+	.long	71                              @ 0x47
+	.long	93                              @ 0x5d
+	.long	72                              @ 0x48
+	.long	39                              @ 0x27
+	.long	48                              @ 0x30
+	.long	97                              @ 0x61
+	.long	121                             @ 0x79
+	.long	90                              @ 0x5a
+	.long	49                              @ 0x31
+	.long	45                              @ 0x2d
+	.long	69                              @ 0x45
+	.long	79                              @ 0x4f
+	.long	65                              @ 0x41
+	.long	62                              @ 0x3e
+	.long	72                              @ 0x48
+	.long	72                              @ 0x48
+	.long	58                              @ 0x3a
+	.long	61                              @ 0x3d
+	.long	83                              @ 0x53
+	.long	85                              @ 0x55
+	.long	47                              @ 0x2f
+	.long	13                              @ 0xd
+	.long	31                              @ 0x1f
+	.long	85                              @ 0x55
+	.long	105                             @ 0x69
+	.long	71                              @ 0x47
+	.long	30                              @ 0x1e
+	.long	28                              @ 0x1c
+	.long	50                              @ 0x32
+	.long	60                              @ 0x3c
+	.long	49                              @ 0x31
+	.long	40                              @ 0x28
+	.long	45                              @ 0x2d
+	.long	52                              @ 0x34
+	.long	50                              @ 0x32
+	.long	46                              @ 0x2e
+	.long	46                              @ 0x2e
+	.long	47                              @ 0x2f
+	.long	45                              @ 0x2d
+	.long	47                              @ 0x2f
+	.long	50                              @ 0x32
+	.long	47                              @ 0x2f
+	.long	38                              @ 0x26
+	.long	35                              @ 0x23
+	.long	48                              @ 0x30
+	.long	61                              @ 0x3d
+	.long	44                              @ 0x2c
+	.long	3                               @ 0x3
+	.long	4294967279                      @ 0xffffffef
+	.long	10                              @ 0xa
+	.long	52                              @ 0x34
+	.long	57                              @ 0x39
+	.long	24                              @ 0x18
+	.long	10                              @ 0xa
+	.long	40                              @ 0x28
+	.long	66                              @ 0x42
+	.long	40                              @ 0x28
+	.long	4294967291                      @ 0xfffffffb
+	.long	4294967294                      @ 0xfffffffe
+	.long	55                              @ 0x37
+	.long	97                              @ 0x61
+	.long	83                              @ 0x53
+	.long	50                              @ 0x32
+	.long	53                              @ 0x35
+	.long	75                              @ 0x4b
+	.long	76                              @ 0x4c
+	.long	54                              @ 0x36
+	.long	54                              @ 0x36
+	.long	78                              @ 0x4e
+	.long	86                              @ 0x56
+	.long	51                              @ 0x33
+	.long	14                              @ 0xe
+	.long	27                              @ 0x1b
+	.long	78                              @ 0x4e
+	.long	105                             @ 0x69
+	.long	81                              @ 0x51
+	.long	34                              @ 0x22
+	.long	13                              @ 0xd
+	.long	36                              @ 0x24
+	.long	75                              @ 0x4b
+	.long	94                              @ 0x5e
+	.long	77                              @ 0x4d
+	.long	42                              @ 0x2a
+	.long	18                              @ 0x12
+	.long	22                              @ 0x16
+	.long	41                              @ 0x29
+	.long	53                              @ 0x35
+	.long	51                              @ 0x33
+	.long	42                              @ 0x2a
+	.long	37                              @ 0x25
+	.long	38                              @ 0x26
+	.long	47                              @ 0x2f
+	.long	56                              @ 0x38
+	.long	49                              @ 0x31
+	.long	29                              @ 0x1d
+	.long	29                              @ 0x1d
+	.long	66                              @ 0x42
+	.long	104                             @ 0x68
+	.long	88                              @ 0x58
+	.long	26                              @ 0x1a
+	.long	4294967295                      @ 0xffffffff
+	.long	42                              @ 0x2a
+	.long	99                              @ 0x63
+	.long	95                              @ 0x5f
+	.long	39                              @ 0x27
+	.long	10                              @ 0xa
+	.long	34                              @ 0x22
+	.long	52                              @ 0x34
+	.long	30                              @ 0x1e
+	.long	11                              @ 0xb
+	.long	39                              @ 0x27
+	.long	88                              @ 0x58
+	.long	90                              @ 0x5a
+	.long	46                              @ 0x2e
+	.long	16                              @ 0x10
+	.long	27                              @ 0x1b
+	.long	40                              @ 0x28
+	.long	35                              @ 0x23
+	.long	49                              @ 0x31
+	.long	96                              @ 0x60
+	.long	124                             @ 0x7c
+	.long	86                              @ 0x56
+	.long	27                              @ 0x1b
+	.long	29                              @ 0x1d
+	.long	93                              @ 0x5d
+	.long	129                             @ 0x81
+	.long	92                              @ 0x5c
+	.long	41                              @ 0x29
+	.long	44                              @ 0x2c
+	.long	78                              @ 0x4e
+	.long	81                              @ 0x51
+	.long	53                              @ 0x35
+	.long	51                              @ 0x33
+	.long	77                              @ 0x4d
+	.long	83                              @ 0x53
+	.long	50                              @ 0x32
+	.long	36                              @ 0x24
+	.long	80                              @ 0x50
+	.long	134                             @ 0x86
+	.long	133                             @ 0x85
+	.long	90                              @ 0x5a
+	.long	70                              @ 0x46
+	.long	93                              @ 0x5d
+	.long	107                             @ 0x6b
+	.long	91                              @ 0x5b
+	.long	79                              @ 0x4f
+	.long	99                              @ 0x63
+	.long	113                             @ 0x71
+	.long	84                              @ 0x54
+	.long	42                              @ 0x2a
+	.long	44                              @ 0x2c
+	.long	80                              @ 0x50
+	.long	86                              @ 0x56
+	.long	48                              @ 0x30
+	.long	30                              @ 0x1e
+	.long	77                              @ 0x4d
+	.long	141                             @ 0x8d
+	.long	144                             @ 0x90
+	.long	91                              @ 0x5b
+	.long	58                              @ 0x3a
+	.long	85                              @ 0x55
+	.long	128                             @ 0x80
+	.long	137                             @ 0x89
+	.long	120                             @ 0x78
+	.long	123                             @ 0x7b
+	.long	138                             @ 0x8a
+	.long	125                             @ 0x7d
+	.long	83                              @ 0x53
+	.long	62                              @ 0x3e
+	.long	91                              @ 0x5b
+	.long	131                             @ 0x83
+	.long	127                             @ 0x7f
+	.long	89                              @ 0x59
+	.long	74                              @ 0x4a
+	.long	91                              @ 0x5b
+	.long	94                              @ 0x5e
+	.long	46                              @ 0x2e
+	.long	4294967284                      @ 0xfffffff4
+	.long	4294967283                      @ 0xfffffff3
+	.long	45                              @ 0x2d
+	.long	95                              @ 0x5f
+	.long	97                              @ 0x61
+	.long	80                              @ 0x50
+	.long	84                              @ 0x54
+	.long	94                              @ 0x5e
+	.long	80                              @ 0x50
+	.long	48                              @ 0x30
+	.long	38                              @ 0x26
+	.long	52                              @ 0x34
+	.long	50                              @ 0x32
+	.long	24                              @ 0x18
+	.long	9                               @ 0x9
+	.long	39                              @ 0x27
+	.long	91                              @ 0x5b
+	.long	116                             @ 0x74
+	.long	109                             @ 0x6d
+	.long	94                              @ 0x5e
+	.long	82                              @ 0x52
+	.long	64                              @ 0x40
+	.long	45                              @ 0x2d
+	.long	52                              @ 0x34
+	.long	84                              @ 0x54
+	.long	92                              @ 0x5c
+	.long	49                              @ 0x31
+	.long	0                               @ 0x0
+	.long	10                              @ 0xa
+	.long	86                              @ 0x56
+	.long	156                             @ 0x9c
+	.long	150                             @ 0x96
+	.long	89                              @ 0x59
+	.long	46                              @ 0x2e
+	.long	56                              @ 0x38
+	.long	87                              @ 0x57
+	.long	94                              @ 0x5e
+	.long	75                              @ 0x4b
+	.long	70                              @ 0x46
+	.long	94                              @ 0x5e
+	.long	120                             @ 0x78
+	.long	124                             @ 0x7c
+	.long	119                             @ 0x77
+	.long	128                             @ 0x80
+	.long	141                             @ 0x8d
+	.long	125                             @ 0x7d
+	.long	79                              @ 0x4f
+	.long	43                              @ 0x2b
+	.long	43                              @ 0x2b
+	.long	51                              @ 0x33
+	.long	30                              @ 0x1e
+	.long	0                               @ 0x0
+	.long	6                               @ 0x6
+	.long	40                              @ 0x28
+	.long	55                              @ 0x37
+	.long	29                              @ 0x1d
+	.long	9                               @ 0x9
+	.long	36                              @ 0x24
+	.long	83                              @ 0x53
+	.long	93                              @ 0x5d
+	.long	61                              @ 0x3d
+	.long	31                              @ 0x1f
+	.long	33                              @ 0x21
+	.long	41                              @ 0x29
+	.long	24                              @ 0x18
+	.long	4294967292                      @ 0xfffffffc
+	.long	4294967285                      @ 0xfffffff5
+	.long	6                               @ 0x6
+	.long	18                              @ 0x12
+	.long	9                               @ 0x9
+	.long	4294967293                      @ 0xfffffffd
+	.long	1                               @ 0x1
+	.long	15                              @ 0xf
+	.long	12                              @ 0xc
+	.long	4294967290                      @ 0xfffffffa
+	.long	4294967282                      @ 0xfffffff2
+	.long	9                               @ 0x9
+	.long	50                              @ 0x32
+	.long	77                              @ 0x4d
+	.long	86                              @ 0x56
+	.long	92                              @ 0x5c
+	.long	98                              @ 0x62
+	.long	83                              @ 0x53
+	.long	39                              @ 0x27
+	.long	0                               @ 0x0
+	.long	4294967292                      @ 0xfffffffc
+	.long	12                              @ 0xc
+	.long	8                               @ 0x8
+	.long	4294967280                      @ 0xfffffff0
+	.long	4294967289                      @ 0xfffffff9
+	.long	54                              @ 0x36
+	.long	106                             @ 0x6a
+	.long	85                              @ 0x55
+	.long	28                              @ 0x1c
+	.long	27                              @ 0x1b
+	.long	96                              @ 0x60
+	.long	142                             @ 0x8e
+	.long	97                              @ 0x61
+	.long	21                              @ 0x15
+	.long	20                              @ 0x14
+	.long	94                              @ 0x5e
+	.long	140                             @ 0x8c
+	.long	97                              @ 0x61
+	.long	29                              @ 0x1d
+	.long	26                              @ 0x1a
+	.long	82                              @ 0x52
+	.long	107                             @ 0x6b
+	.long	61                              @ 0x3d
+	.long	4294967291                      @ 0xfffffffb
+	.long	4294967272                      @ 0xffffffe8
+	.long	1                               @ 0x1
+	.long	21                              @ 0x15
+	.long	12                              @ 0xc
+	.long	4294967294                      @ 0xfffffffe
+	.long	0                               @ 0x0
+	.long	13                              @ 0xd
+	.long	17                              @ 0x11
+	.long	9                               @ 0x9
+	.long	1                               @ 0x1
+	.long	1                               @ 0x1
+	.long	7                               @ 0x7
+	.long	12                              @ 0xc
+	.long	11                              @ 0xb
+	.long	7                               @ 0x7
+	.long	6                               @ 0x6
+	.long	13                              @ 0xd
+	.long	22                              @ 0x16
+	.long	23                              @ 0x17
+	.long	16                              @ 0x10
+	.long	12                              @ 0xc
+	.long	19                              @ 0x13
+	.long	28                              @ 0x1c
+	.long	19                              @ 0x13
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.long	38                              @ 0x26
+	.long	95                              @ 0x5f
+	.long	123                             @ 0x7b
+	.long	104                             @ 0x68
+	.long	72                              @ 0x48
+	.long	72                              @ 0x48
+	.long	104                             @ 0x68
+	.long	125                             @ 0x7d
+	.long	96                              @ 0x60
+	.long	45                              @ 0x2d
+	.long	25                              @ 0x19
+	.long	55                              @ 0x37
+	.long	92                              @ 0x5c
+	.long	90                              @ 0x5a
+	.long	49                              @ 0x31
+	.long	15                              @ 0xf
+	.long	19                              @ 0x13
+	.long	49                              @ 0x31
+	.long	76                              @ 0x4c
+	.long	94                              @ 0x5e
+	.long	113                             @ 0x71
+	.long	131                             @ 0x83
+	.long	127                             @ 0x7f
+	.long	88                              @ 0x58
+	.long	32                              @ 0x20
+	.long	4294967293                      @ 0xfffffffd
+	.long	4294967288                      @ 0xfffffff8
+	.long	9                               @ 0x9
+	.long	24                              @ 0x18
+	.long	25                              @ 0x19
+	.long	22                              @ 0x16
+	.long	25                              @ 0x19
+	.long	39                              @ 0x27
+	.long	55                              @ 0x37
+	.long	61                              @ 0x3d
+	.long	66                              @ 0x42
+	.long	79                              @ 0x4f
+	.long	98                              @ 0x62
+	.long	101                             @ 0x65
+	.long	79                              @ 0x4f
+	.long	51                              @ 0x33
+	.long	44                              @ 0x2c
+	.long	54                              @ 0x36
+	.long	61                              @ 0x3d
+	.long	56                              @ 0x38
+	.long	52                              @ 0x34
+	.long	64                              @ 0x40
+	.long	84                              @ 0x54
+	.long	93                              @ 0x5d
+	.long	91                              @ 0x5b
+	.long	88                              @ 0x58
+	.long	89                              @ 0x59
+	.long	83                              @ 0x53
+	.long	65                              @ 0x41
+	.long	50                              @ 0x32
+	.long	51                              @ 0x33
+	.long	63                              @ 0x3f
+	.long	74                              @ 0x4a
+	.long	75                              @ 0x4b
+	.long	67                              @ 0x43
+	.long	51                              @ 0x33
+	.long	37                              @ 0x25
+	.long	40                              @ 0x28
+	.long	61                              @ 0x3d
+	.long	79                              @ 0x4f
+	.long	68                              @ 0x44
+	.long	35                              @ 0x23
+	.long	14                              @ 0xe
+	.long	22                              @ 0x16
+	.long	41                              @ 0x29
+	.long	44                              @ 0x2c
+	.long	40                              @ 0x28
+	.long	57                              @ 0x39
+	.long	99                              @ 0x63
+	.long	132                             @ 0x84
+	.long	125                             @ 0x7d
+	.long	95                              @ 0x5f
+	.long	86                              @ 0x56
+	.long	105                             @ 0x69
+	.long	115                             @ 0x73
+	.long	86                              @ 0x56
+	.long	36                              @ 0x24
+	.long	12                              @ 0xc
+	.long	30                              @ 0x1e
+	.long	64                              @ 0x40
+	.long	86                              @ 0x56
+	.long	96                              @ 0x60
+	.long	105                             @ 0x69
+	.long	110                             @ 0x6e
+	.long	99                              @ 0x63
+	.long	78                              @ 0x4e
+	.long	66                              @ 0x42
+	.long	68                              @ 0x44
+	.long	71                              @ 0x47
+	.long	59                              @ 0x3b
+	.long	42                              @ 0x2a
+	.long	34                              @ 0x22
+	.long	45                              @ 0x2d
+	.long	69                              @ 0x45
+	.long	93                              @ 0x5d
+	.long	112                             @ 0x70
+	.long	119                             @ 0x77
+	.long	109                             @ 0x6d
+	.long	91                              @ 0x5b
+	.long	74                              @ 0x4a
+	.long	63                              @ 0x3f
+	.long	55                              @ 0x37
+	.long	50                              @ 0x32
+	.long	57                              @ 0x39
+	.long	67                              @ 0x43
+	.long	61                              @ 0x3d
+	.long	32                              @ 0x20
+	.long	5                               @ 0x5
+	.long	16                              @ 0x10
+	.long	63                              @ 0x3f
+	.long	100                             @ 0x64
+	.long	90                              @ 0x5a
+	.long	52                              @ 0x34
+	.long	33                              @ 0x21
+	.long	46                              @ 0x2e
+	.long	62                              @ 0x3e
+	.long	51                              @ 0x33
+	.long	34                              @ 0x22
+	.long	48                              @ 0x30
+	.long	89                              @ 0x59
+	.long	117                             @ 0x75
+	.long	113                             @ 0x71
+	.long	96                              @ 0x60
+	.long	97                              @ 0x61
+	.long	103                             @ 0x67
+	.long	85                              @ 0x55
+	.long	45                              @ 0x2d
+	.long	18                              @ 0x12
+	.long	29                              @ 0x1d
+	.long	67                              @ 0x43
+	.long	101                             @ 0x65
+	.long	113                             @ 0x71
+	.long	108                             @ 0x6c
+	.long	95                              @ 0x5f
+	.long	83                              @ 0x53
+	.long	71                              @ 0x47
+	.long	57                              @ 0x39
+	.long	41                              @ 0x29
+	.long	28                              @ 0x1c
+	.long	30                              @ 0x1e
+	.long	53                              @ 0x35
+	.long	86                              @ 0x56
+	.long	111                             @ 0x6f
+	.long	116                             @ 0x74
+	.long	111                             @ 0x6f
+	.long	106                             @ 0x6a
+	.long	102                             @ 0x66
+	.long	92                              @ 0x5c
+	.long	75                              @ 0x4b
+	.long	58                              @ 0x3a
+	.long	51                              @ 0x33
+	.long	54                              @ 0x36
+	.long	56                              @ 0x38
+	.long	44                              @ 0x2c
+	.zero	80
+	.size	out_data, 2880
 
 	.type	huart2,%object                  @ @huart2
 	.bss
@@ -1176,13 +2469,6 @@ hspi1:
 	.zero	92
 	.size	hspi1, 92
 
-	.type	Seed,%object                    @ @Seed
-	.globl	Seed
-	.p2align	2, 0x0
-Seed:
-	.long	0                               @ 0x0
-	.size	Seed, 4
-
 	.text
 	.p2align	2, 0x0
 .Ltmp0:
@@ -1190,5 +2476,5 @@ Seed:
 	.p2align	2, 0x0
 .Ltmp1:
 	.long	536936452
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git f70f7242ad3dc55fc7dd91601ac39ce3e54a1096)"
 	.section	".note.GNU-stack","",%progbits

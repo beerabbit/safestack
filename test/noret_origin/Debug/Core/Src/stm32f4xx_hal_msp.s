@@ -616,6 +616,6 @@ HAL_UART_MspDeInit:
 	.cantunwind
 	.fnend
                                         @ -- End function
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 657e45f2db36cd908632137b10e29ed8cb467baf)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git f70f7242ad3dc55fc7dd91601ac39ce3e54a1096)"
 	.section	".note.GNU-stack","",%progbits
 	.eabi_attribute	30, 6	@ Tag_ABI_optimization_goals

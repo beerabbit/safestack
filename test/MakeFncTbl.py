@@ -4,10 +4,11 @@ from pwn import *
 import struct
 import sys
 elf = ELF("/home/creaker00/safestack/test/noret_origin/Debug/noret.elf")
-output = "/home/creaker00/safestack/test/noret_origin/Debug/output.bin"
+output = "/home/creaker00/safestack/test/Results/output_"
 movt = 0x080C0000
 movtext = 0x08000000
-function_names = ["benchmark","BubbleSort","initialise_benchmark","verify_benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+function_names = ["fir_filter_int","verify_benchmark","initialise_benchmark","benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+eof = []
 # retn address -> 각각 table index가 됨
 # functino offset -> 함수의 위치
 # function size -> 사이즈
@@ -16,6 +17,8 @@ def check_call_destination(addr):
         function_addr = elf.functions[i].address
         if function_addr == addr:
             return i
+    if(addr == elf.functions['MasterBackward'].address):
+        return "EOF"
     return 0
 
 def function_start_size_end_addr(function_name):
@@ -36,10 +39,14 @@ def function_start_size_end_addr(function_name):
         #print(f'0x{i.address:x}:\t{i.mnemonic}\t{i.op_str}')    
         if(i.mnemonic == "bl"):
             call_des = check_call_destination(int(i.op_str[1:],16))
-            call_return_fair = [call_des, hex(text_addr + i.address+4-text_addr)]
-            retnbuf.append(call_return_fair)
+            if(call_des != "EOF"):
+                call_return_fair = [call_des, hex(text_addr + i.address+4-text_addr)]
+                retnbuf.append(call_return_fair)
+            else:
+                eof.append(hex(text_addr + i.address+4-text_addr))
     res.append(retnbuf)
     return res
+
 
 function_table = []
 # {function_name : [function_start : function_end]}
@@ -49,6 +56,23 @@ for i in function_names:
     buf = function_start_size_end_addr(i)
     function_info[i] = [buf[0], buf[1]]
     analysis_table.append([i,buf[2]])
+
+for i in function_names:
+    for j in eof:
+        if( function_info[i][1] == j ):
+            eof.remove(j)
+
+if( len(eof) > 0):
+    for i in function_names:
+        mins = function_info[i][0]
+        maxs = function_info[i][1]
+        for j in eof:
+            if( (mins < j) and (maxs > j) ):
+                print("Errs at " + i + " changes " + maxs + " to " + j)
+                function_info[i][1] = j
+                eof.remove(j)
+
+
 print("==============")
 print(function_info)
 print(analysis_table)
@@ -76,7 +100,7 @@ for i in analysis_table:
 print(function_table)
 print("===============")
 
-f = open(output, 'wb')
+f = open(output + str(len(function_table)*3*4) + ".bin", 'wb')
 for i in function_table:
     print(i[2] + " " + i[3][0] + " " + i[3][1])
     ret = struct.pack('I', int(i[2],16))
