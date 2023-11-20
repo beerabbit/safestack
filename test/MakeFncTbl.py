@@ -3,11 +3,13 @@ from capstone import *
 from pwn import *
 import struct
 import sys
+import fncname
 elf = ELF("/home/creaker00/safestack/test/noret_origin/Debug/noret.elf")
 output = "/home/creaker00/safestack/test/Results/output_"
 movt = 0x080C0000
 movtext = 0x08000000
-function_names = ["fir_filter_int","verify_benchmark","initialise_benchmark","benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+#function_names = ["verify_benchmark","initialise_benchmark","benchmark","ludcmp","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+function_names = fncname.fnc
 eof = []
 # retn address -> 각각 table index가 됨
 # functino offset -> 함수의 위치

@@ -8,13 +8,16 @@ target triple = "thumbv7em-none-unknown-eabihf"
 ; Function Attrs: noinline nounwind optnone
 define dso_local i32 @a() #0 {
   %1 = alloca i32, align 4
-  call void asm sideeffect "a_0_FORPUSH:;movw lr, 0;movt lr, 0x080C;push {lr}", ""()
+  call void asm sideeffect "a_0_FORPUSH:;                                push {r0-r2, lr};                                movw lr, 0;                                movt lr, 0x080C;                                ldr r1, =0x20010000;                                ldr r2, [r1];                                str lr, [r2];                                add r2, r2, #4;                                str r2, [r1];                                pop {r0 -r2, lr};                                ", ""()
   %2 = call i32 @b(i32 noundef 1, i32 noundef 2, i32 noundef 3, i32 noundef 4, i32 noundef 5)
+  call void asm sideeffect "push {r0-r2, lr};                                ldr r0, =0x20010000;                                ldr r1, [r0];                                sub r1, r1, #4;                                ldr r2, [r1];                                ldr r2, [r2];                                str r1, [r0];                                mov lr, pc;                                sub lr, lr, #21;                                cmp lr, r2;                                BEQ a_4_SAFE;                                bx lr;a_4_SAFE:;                                pop {r0-r2, lr};                                ", ""()
   store i32 %2, ptr %1, align 4
-  call void asm sideeffect "a_4_FORPUSH:;movw lr, 12;movt lr, 0x080C;push {lr}", ""()
+  call void asm sideeffect "a_4_FORPUSH:;                                push {r0-r2, lr};                                movw lr, 12;                                movt lr, 0x080C;                                ldr r1, =0x20010000;                                ldr r2, [r1];                                str lr, [r2];                                add r2, r2, #4;                                str r2, [r1];                                pop {r0 -r2, lr};                                ", ""()
   call void @c()
-  call void asm sideeffect "a_8_FORPUSH:;movw lr, 24;movt lr, 0x080C;push {lr}", ""()
+  call void asm sideeffect "push {r0-r2, lr};                                ldr r0, =0x20010000;                                ldr r1, [r0];                                sub r1, r1, #4;                                ldr r2, [r1];                                ldr r2, [r2];                                str r1, [r0];                                mov lr, pc;                                sub lr, lr, #21;                                cmp lr, r2;                                BEQ a_8_SAFE;                                bx lr;a_8_SAFE:;                                pop {r0-r2, lr};                                ", ""()
+  call void asm sideeffect "a_8_FORPUSH:;                                push {r0-r2, lr};                                movw lr, 24;                                movt lr, 0x080C;                                ldr r1, =0x20010000;                                ldr r2, [r1];                                str lr, [r2];                                add r2, r2, #4;                                str r2, [r1];                                pop {r0 -r2, lr};                                ", ""()
   %3 = call i32 @b(i32 noundef 1, i32 noundef 2, i32 noundef 3, i32 noundef 4, i32 noundef 6)
+  call void asm sideeffect "push {r0-r2, lr};                                ldr r0, =0x20010000;                                ldr r1, [r0];                                sub r1, r1, #4;                                ldr r2, [r1];                                ldr r2, [r2];                                str r1, [r0];                                mov lr, pc;                                sub lr, lr, #21;                                cmp lr, r2;                                BEQ a_12_SAFE;                                bx lr;a_12_SAFE:;                                pop {r0-r2, lr};                                ", ""()
   store i32 %3, ptr %1, align 4
   %4 = load i32, ptr %1, align 4
   ret i32 %4
@@ -43,8 +46,9 @@ define dso_local i32 @b(i32 noundef %0, i32 noundef %1, i32 noundef %2, i32 noun
   %19 = load i32, ptr %10, align 4
   %20 = add nsw i32 %18, %19
   store i32 %20, ptr %11, align 4
-  call void asm sideeffect "b_12_FORPUSH:;movw lr, 36;movt lr, 0x080C;push {lr}", ""()
+  call void asm sideeffect "b_12_FORPUSH:;                                push {r0-r2, lr};                                movw lr, 36;                                movt lr, 0x080C;                                ldr r1, =0x20010000;                                ldr r2, [r1];                                str lr, [r2];                                add r2, r2, #4;                                str r2, [r1];                                pop {r0 -r2, lr};                                ", ""()
   call void @c()
+  call void asm sideeffect "push {r0-r2, lr};                                ldr r0, =0x20010000;                                ldr r1, [r0];                                sub r1, r1, #4;                                ldr r2, [r1];                                ldr r2, [r2];                                str r1, [r0];                                mov lr, pc;                                sub lr, lr, #21;                                cmp lr, r2;                                BEQ b_16_SAFE;                                bx lr;b_16_SAFE:;                                pop {r0-r2, lr};                                ", ""()
   %21 = load i32, ptr %11, align 4
   ret i32 %21
 }
@@ -60,8 +64,9 @@ define dso_local void @c() #0 {
 define dso_local i32 @main() #0 {
   call void asm sideeffect "ldr r0 , =0x20010000; ldr r1, =0x20010004; str r1, [r0]", ""()
   %1 = alloca i32, align 4
-  call void asm sideeffect "main_16_FORPUSH:;movw lr, 48;movt lr, 0x080C;push {lr}", ""()
+  call void asm sideeffect "main_16_FORPUSH:;                                push {r0-r2, lr};                                movw lr, 48;                                movt lr, 0x080C;                                ldr r1, =0x20010000;                                ldr r2, [r1];                                str lr, [r2];                                add r2, r2, #4;                                str r2, [r1];                                pop {r0 -r2, lr};                                ", ""()
   %2 = call i32 @a()
+  call void asm sideeffect "push {r0-r2, lr};                                ldr r0, =0x20010000;                                ldr r1, [r0];                                sub r1, r1, #4;                                ldr r2, [r1];                                ldr r2, [r2];                                str r1, [r0];                                mov lr, pc;                                sub lr, lr, #21;                                cmp lr, r2;                                BEQ main_20_SAFE;                                bx lr;main_20_SAFE:;                                pop {r0-r2, lr};                                ", ""()
   store i32 %2, ptr %1, align 4
   %3 = load i32, ptr %1, align 4
   %4 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %3)
@@ -69,18 +74,6 @@ define dso_local i32 @main() #0 {
 }
 
 declare dso_local i32 @printf(ptr noundef, ...) #1
-
-define void @MasterForward() {
-MasterForward_:
-  call void asm sideeffect "PUSH {r0 - r3};            ldr r0, [sp, #16];            ldr r1, [r0];            cmp r1, lr;            BNE fail;            ldr r1, =0x20010000;            ldr r2, [r1];            str r0, [r2];            add r2, r2, #4;            str r2, [r1];            pop {r0 -r3, lr};            add lr, lr, 4;            ldr lr, [lr];            BX LR;            fail:", ""()
-  ret void
-}
-
-define void @MasterBackward() {
-MasterBackward_:
-  call void asm sideeffect "ldr r1, =0x20010000;            ldr r2, [r1];            sub r2, r2, 4;            ldr r3, [r2];            add r3, r3, #8;            ldr r3, [r3];            cmp r3, lr;            BNE fail_back;            ldr r3, [r2];            ldr lr, [r3];            str r2, [r1];            bx lr;            fail_back:", ""()
-  ret void
-}
 
 attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
@@ -91,4 +84,4 @@ attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 1, !"min_enum_size", i32 4}
 !2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git f70f7242ad3dc55fc7dd91601ac39ce3e54a1096)"}
+!3 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)"}

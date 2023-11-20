@@ -94,6 +94,6 @@ _sbrk:
 	.type	__sbrk_heap_end,%object         @ @__sbrk_heap_end
 	.local	__sbrk_heap_end
 	.comm	__sbrk_heap_end,4,4
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git f70f7242ad3dc55fc7dd91601ac39ce3e54a1096)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)"
 	.section	".note.GNU-stack","",%progbits
 	.eabi_attribute	30, 6	@ Tag_ABI_optimization_goals

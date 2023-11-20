@@ -1,0 +1,1 @@
+fnc = ["divides","even","prime","swap","benchmark","initialise_benchmark","verify_benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]

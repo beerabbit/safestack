@@ -1,6 +1,7 @@
 import re
 # 파일 경로
 import sys
+import fncname
 file_path = sys.argv[1]
 res_path = sys.argv[2]
 
@@ -8,7 +9,8 @@ res_path = sys.argv[2]
 # 결과를 저장할 임시 리스트
 movt = 0x0000
 movw = 0x080C
-function_names = ["fir_filter_int","verify_benchmark","initialise_benchmark","benchmark","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+#function_names = ["verify_benchmark","initialise_benchmark","benchmark","ludcmp","main","SystemClock_Config","MX_GPIO_Init","MX_I2C1_Init","MX_I2S3_Init","MX_SPI1_Init","MX_USART2_UART_Init","Error_Handler"]
+function_names = fncname.fnc
 # 파일 읽기
 with open(file_path, 'r') as file:
     lines = file.readlines()

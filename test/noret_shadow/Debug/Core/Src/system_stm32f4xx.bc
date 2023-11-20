@@ -1,0 +1,192 @@
+; ModuleID = '../Core/Src/system_stm32f4xx.c'
+source_filename = "../Core/Src/system_stm32f4xx.c"
+target datalayout = "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "thumbv7em-none-unknown-eabihf"
+
+%struct.SCB_Type = type { i32, i32, i32, i32, i32, i32, [12 x i8], i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, [4 x i32], [5 x i32], [5 x i32], i32 }
+%struct.RCC_TypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, [2 x i32], i32, i32 }
+
+@SystemCoreClock = dso_local global i32 16000000, align 4
+@AHBPrescTable = dso_local constant [16 x i8] c"\00\00\00\00\00\00\00\00\01\02\03\04\06\07\08\09", align 1
+@APBPrescTable = dso_local constant [8 x i8] c"\00\00\00\00\01\02\03\04", align 1
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @SystemInit() #0 !dbg !7 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 20), align 4, !dbg !10
+  %2 = or i32 %1, 15728640, !dbg !10
+  store volatile i32 %2, ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 20), align 4, !dbg !10
+  ret void, !dbg !11
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @SystemCoreClockUpdate() #0 !dbg !12 {
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  store i32 0, ptr %1, align 4, !dbg !13
+  store i32 0, ptr %2, align 4, !dbg !14
+  store i32 2, ptr %3, align 4, !dbg !15
+  store i32 0, ptr %4, align 4, !dbg !16
+  store i32 2, ptr %5, align 4, !dbg !17
+  %6 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 2), align 4, !dbg !18
+  %7 = and i32 %6, 12, !dbg !19
+  store i32 %7, ptr %1, align 4, !dbg !20
+  %8 = load i32, ptr %1, align 4, !dbg !21
+  switch i32 %8, label %42 [
+    i32 0, label %9
+    i32 4, label %10
+    i32 8, label %11
+  ], !dbg !22
+
+9:                                                ; preds = %0
+  store i32 16000000, ptr @SystemCoreClock, align 4, !dbg !23
+  br label %43, !dbg !24
+
+10:                                               ; preds = %0
+  store i32 8000000, ptr @SystemCoreClock, align 4, !dbg !25
+  br label %43, !dbg !26
+
+11:                                               ; preds = %0
+  %12 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 1), align 4, !dbg !27
+  %13 = and i32 %12, 4194304, !dbg !28
+  %14 = lshr i32 %13, 22, !dbg !29
+  store i32 %14, ptr %4, align 4, !dbg !30
+  %15 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 1), align 4, !dbg !31
+  %16 = and i32 %15, 63, !dbg !32
+  store i32 %16, ptr %5, align 4, !dbg !33
+  %17 = load i32, ptr %4, align 4, !dbg !34
+  %18 = icmp ne i32 %17, 0, !dbg !35
+  br i1 %18, label %19, label %26, !dbg !34
+
+19:                                               ; preds = %11
+  %20 = load i32, ptr %5, align 4, !dbg !36
+  %21 = udiv i32 8000000, %20, !dbg !37
+  %22 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 1), align 4, !dbg !38
+  %23 = and i32 %22, 32704, !dbg !39
+  %24 = lshr i32 %23, 6, !dbg !40
+  %25 = mul i32 %21, %24, !dbg !41
+  store i32 %25, ptr %2, align 4, !dbg !42
+  br label %33, !dbg !43
+
+26:                                               ; preds = %11
+  %27 = load i32, ptr %5, align 4, !dbg !44
+  %28 = udiv i32 16000000, %27, !dbg !45
+  %29 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 1), align 4, !dbg !46
+  %30 = and i32 %29, 32704, !dbg !47
+  %31 = lshr i32 %30, 6, !dbg !48
+  %32 = mul i32 %28, %31, !dbg !49
+  store i32 %32, ptr %2, align 4, !dbg !50
+  br label %33
+
+33:                                               ; preds = %26, %19
+  %34 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 1), align 4, !dbg !51
+  %35 = and i32 %34, 196608, !dbg !52
+  %36 = lshr i32 %35, 16, !dbg !53
+  %37 = add i32 %36, 1, !dbg !54
+  %38 = mul i32 %37, 2, !dbg !55
+  store i32 %38, ptr %3, align 4, !dbg !56
+  %39 = load i32, ptr %2, align 4, !dbg !57
+  %40 = load i32, ptr %3, align 4, !dbg !58
+  %41 = udiv i32 %39, %40, !dbg !59
+  store i32 %41, ptr @SystemCoreClock, align 4, !dbg !60
+  br label %43, !dbg !61
+
+42:                                               ; preds = %0
+  store i32 16000000, ptr @SystemCoreClock, align 4, !dbg !62
+  br label %43, !dbg !63
+
+43:                                               ; preds = %42, %33, %10, %9
+  %44 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 2), align 4, !dbg !64
+  %45 = and i32 %44, 240, !dbg !65
+  %46 = lshr i32 %45, 4, !dbg !66
+  %47 = getelementptr inbounds [16 x i8], ptr @AHBPrescTable, i32 0, i32 %46, !dbg !67
+  %48 = load i8, ptr %47, align 1, !dbg !67
+  %49 = zext i8 %48 to i32, !dbg !67
+  store i32 %49, ptr %1, align 4, !dbg !68
+  %50 = load i32, ptr %1, align 4, !dbg !69
+  %51 = load i32, ptr @SystemCoreClock, align 4, !dbg !70
+  %52 = lshr i32 %51, %50, !dbg !70
+  store i32 %52, ptr @SystemCoreClock, align 4, !dbg !70
+  ret void, !dbg !71
+}
+
+attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5}
+!llvm.ident = !{!6}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)", isOptimized: false, runtimeVersion: 0, emissionKind: NoDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "../Core/Src/system_stm32f4xx.c", directory: "/home/creaker00/safestack/test/noret_shadow/Debug")
+!2 = !{i32 2, !"Debug Info Version", i32 3}
+!3 = !{i32 1, !"wchar_size", i32 4}
+!4 = !{i32 1, !"min_enum_size", i32 4}
+!5 = !{i32 7, !"frame-pointer", i32 2}
+!6 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)"}
+!7 = distinct !DISubprogram(name: "SystemInit", scope: !1, file: !1, line: 167, type: !8, scopeLine: 168, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!8 = !DISubroutineType(types: !9)
+!9 = !{}
+!10 = !DILocation(line: 171, column: 16, scope: !7)
+!11 = !DILocation(line: 182, column: 1, scope: !7)
+!12 = distinct !DISubprogram(name: "SystemCoreClockUpdate", scope: !1, file: !1, line: 220, type: !8, scopeLine: 221, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!13 = !DILocation(line: 222, column: 12, scope: !12)
+!14 = !DILocation(line: 222, column: 21, scope: !12)
+!15 = !DILocation(line: 222, column: 33, scope: !12)
+!16 = !DILocation(line: 222, column: 43, scope: !12)
+!17 = !DILocation(line: 222, column: 58, scope: !12)
+!18 = !DILocation(line: 225, column: 14, scope: !12)
+!19 = !DILocation(line: 225, column: 19, scope: !12)
+!20 = !DILocation(line: 225, column: 7, scope: !12)
+!21 = !DILocation(line: 227, column: 11, scope: !12)
+!22 = !DILocation(line: 227, column: 3, scope: !12)
+!23 = !DILocation(line: 230, column: 23, scope: !12)
+!24 = !DILocation(line: 231, column: 7, scope: !12)
+!25 = !DILocation(line: 233, column: 23, scope: !12)
+!26 = !DILocation(line: 234, column: 7, scope: !12)
+!27 = !DILocation(line: 240, column: 25, scope: !12)
+!28 = !DILocation(line: 240, column: 33, scope: !12)
+!29 = !DILocation(line: 240, column: 55, scope: !12)
+!30 = !DILocation(line: 240, column: 17, scope: !12)
+!31 = !DILocation(line: 241, column: 19, scope: !12)
+!32 = !DILocation(line: 241, column: 27, scope: !12)
+!33 = !DILocation(line: 241, column: 12, scope: !12)
+!34 = !DILocation(line: 243, column: 11, scope: !12)
+!35 = !DILocation(line: 243, column: 21, scope: !12)
+!36 = !DILocation(line: 246, column: 31, scope: !12)
+!37 = !DILocation(line: 246, column: 29, scope: !12)
+!38 = !DILocation(line: 246, column: 46, scope: !12)
+!39 = !DILocation(line: 246, column: 54, scope: !12)
+!40 = !DILocation(line: 246, column: 74, scope: !12)
+!41 = !DILocation(line: 246, column: 37, scope: !12)
+!42 = !DILocation(line: 246, column: 16, scope: !12)
+!43 = !DILocation(line: 247, column: 7, scope: !12)
+!44 = !DILocation(line: 251, column: 31, scope: !12)
+!45 = !DILocation(line: 251, column: 29, scope: !12)
+!46 = !DILocation(line: 251, column: 46, scope: !12)
+!47 = !DILocation(line: 251, column: 54, scope: !12)
+!48 = !DILocation(line: 251, column: 74, scope: !12)
+!49 = !DILocation(line: 251, column: 37, scope: !12)
+!50 = !DILocation(line: 251, column: 16, scope: !12)
+!51 = !DILocation(line: 254, column: 22, scope: !12)
+!52 = !DILocation(line: 254, column: 30, scope: !12)
+!53 = !DILocation(line: 254, column: 50, scope: !12)
+!54 = !DILocation(line: 254, column: 56, scope: !12)
+!55 = !DILocation(line: 254, column: 62, scope: !12)
+!56 = !DILocation(line: 254, column: 12, scope: !12)
+!57 = !DILocation(line: 255, column: 25, scope: !12)
+!58 = !DILocation(line: 255, column: 32, scope: !12)
+!59 = !DILocation(line: 255, column: 31, scope: !12)
+!60 = !DILocation(line: 255, column: 23, scope: !12)
+!61 = !DILocation(line: 256, column: 7, scope: !12)
+!62 = !DILocation(line: 258, column: 23, scope: !12)
+!63 = !DILocation(line: 259, column: 7, scope: !12)
+!64 = !DILocation(line: 263, column: 30, scope: !12)
+!65 = !DILocation(line: 263, column: 35, scope: !12)
+!66 = !DILocation(line: 263, column: 52, scope: !12)
+!67 = !DILocation(line: 263, column: 9, scope: !12)
+!68 = !DILocation(line: 263, column: 7, scope: !12)
+!69 = !DILocation(line: 265, column: 23, scope: !12)
+!70 = !DILocation(line: 265, column: 19, scope: !12)
+!71 = !DILocation(line: 266, column: 1, scope: !12)

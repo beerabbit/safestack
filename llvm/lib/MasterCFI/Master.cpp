@@ -38,8 +38,8 @@ namespace {
             addMasterBackwardFunction(M);
             getFunctionNameinBC(M);
             addPushBeforeInsertFunctionTable(M);
+            
             for(int i=0; i<table_arr.size(); i++){
-                
                     errs() << "[" << table_name[i] << ", ";
                     errs() << table_arr[i] << "],";
             }
@@ -48,16 +48,24 @@ namespace {
         }
         
         void getFunctionNameinBC(Module &M){
+            string fncname = "[";
             errs() << "[";
             for(Function &F : M){
                 if(!F.isDeclaration()){
                     string buf = F.getName().str();
                     if((buf != "MasterForward") && (buf != "MasterBackward") && (buf != "__io_putchar") ){
+                        fncname = fncname + "\"" + F.getName().str() + "\",";
                         errs() << "\""<< F.getName() << "\",";
                     }
                 }
             }
+            fncname.pop_back();
+            fncname = fncname + "]";
+            fncname = "fnc = " +fncname;
+            system(("echo \'" + fncname + "\' > /home/creaker00/safestack/test/fncname.py").c_str());
             errs() << "]\n";
+
+            
         }
 
         void addMasterForwardFunction(Module &M){

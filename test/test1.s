@@ -8,7 +8,7 @@
 	.eabi_attribute	34, 1	@ Tag_CPU_unaligned_access
 	.eabi_attribute	17, 1	@ Tag_ABI_PCS_GOT_use
 	.eabi_attribute	20, 1	@ Tag_ABI_FP_denormal
-	.eabi_attribute	21, 1	@ Tag_ABI_FP_exceptions
+	.eabi_attribute	21, 0	@ Tag_ABI_FP_exceptions
 	.eabi_attribute	23, 3	@ Tag_ABI_FP_number_model
 	.eabi_attribute	24, 1	@ Tag_ABI_align_needed
 	.eabi_attribute	25, 1	@ Tag_ABI_align_preserved
@@ -34,9 +34,16 @@ a:
 	sub	sp, #24
 	@APP
 a_0_FORPUSH:
+	push	{r0, r1, r2, lr}
 	movw	lr, #0
 	movt	lr, #2060
-	push	{lr}
+	ldr	r1, .Ltmp0
+	ldr	r2, [r1]
+	str.w	lr, [r2]
+	add.w	r2, r2, #4
+	str	r2, [r1]
+	pop.w	{r0, r1, r2, lr}
+
 	@NO_APP
 	mov	r1, sp
 	movs	r0, #5
@@ -50,12 +57,36 @@ a_0_FORPUSH:
 	movs	r3, #4
 	str	r3, [sp, #16]                   @ 4-byte Spill
 	bl	b
+	@APP
+	push	{r0, r1, r2, lr}
+	ldr	r0, .Ltmp0
+	ldr	r1, [r0]
+	sub.w	r1, r1, #4
+	ldr	r2, [r1]
+	ldr	r2, [r2]
+	str	r1, [r0]
+	mov	lr, pc
+	sub.w	lr, lr, #21
+	cmp	lr, r2
+	beq	a_4_SAFE
+	bx	lr
+a_4_SAFE:
+	pop.w	{r0, r1, r2, lr}
+
+	@NO_APP
 	str	r0, [sp, #20]
 	@APP
 a_4_FORPUSH:
+	push	{r0, r1, r2, lr}
 	movw	lr, #12
 	movt	lr, #2060
-	push	{lr}
+	ldr	r1, .Ltmp0
+	ldr	r2, [r1]
+	str.w	lr, [r2]
+	add.w	r2, r2, #4
+	str	r2, [r1]
+	pop.w	{r0, r1, r2, lr}
+
 	@NO_APP
 	bl	c
 	ldr	r0, [sp, #4]                    @ 4-byte Reload
@@ -63,15 +94,56 @@ a_4_FORPUSH:
 	ldr	r2, [sp, #12]                   @ 4-byte Reload
 	ldr	r3, [sp, #16]                   @ 4-byte Reload
 	@APP
+	push	{r0, r1, r2, lr}
+	ldr	r0, .Ltmp0
+	ldr	r1, [r0]
+	sub.w	r1, r1, #4
+	ldr	r2, [r1]
+	ldr	r2, [r2]
+	str	r1, [r0]
+	mov	lr, pc
+	sub.w	lr, lr, #21
+	cmp	lr, r2
+	beq	a_8_SAFE
+	bx	lr
+a_8_SAFE:
+	pop.w	{r0, r1, r2, lr}
+
+	@NO_APP
+	@APP
 a_8_FORPUSH:
+	push	{r0, r1, r2, lr}
 	movw	lr, #24
 	movt	lr, #2060
-	push	{lr}
+	ldr	r1, .Ltmp0
+	ldr	r2, [r1]
+	str.w	lr, [r2]
+	add.w	r2, r2, #4
+	str	r2, [r1]
+	pop.w	{r0, r1, r2, lr}
+
 	@NO_APP
 	mov	lr, sp
 	mov.w	r12, #6
 	str.w	r12, [lr]
 	bl	b
+	@APP
+	push	{r0, r1, r2, lr}
+	ldr	r0, .Ltmp0
+	ldr	r1, [r0]
+	sub.w	r1, r1, #4
+	ldr	r2, [r1]
+	ldr	r2, [r2]
+	str	r1, [r0]
+	mov	lr, pc
+	sub.w	lr, lr, #21
+	cmp	lr, r2
+	beq	a_12_SAFE
+	bx	lr
+a_12_SAFE:
+	pop.w	{r0, r1, r2, lr}
+
+	@NO_APP
 	str	r0, [sp, #20]
 	ldr	r0, [sp, #20]
 	add	sp, #24
@@ -112,11 +184,35 @@ b:
 	str	r0, [sp, #4]
 	@APP
 b_12_FORPUSH:
+	push	{r0, r1, r2, lr}
 	movw	lr, #36
 	movt	lr, #2060
-	push	{lr}
+	ldr	r1, .Ltmp0
+	ldr	r2, [r1]
+	str.w	lr, [r2]
+	add.w	r2, r2, #4
+	str	r2, [r1]
+	pop.w	{r0, r1, r2, lr}
+
 	@NO_APP
 	bl	c
+	@APP
+	push	{r0, r1, r2, lr}
+	ldr	r0, .Ltmp0
+	ldr	r1, [r0]
+	sub.w	r1, r1, #4
+	ldr	r2, [r1]
+	ldr	r2, [r2]
+	str	r1, [r0]
+	mov	lr, pc
+	sub.w	lr, lr, #21
+	cmp	lr, r2
+	beq	b_16_SAFE
+	bx	lr
+b_16_SAFE:
+	pop.w	{r0, r1, r2, lr}
+
+	@NO_APP
 	ldr	r0, [sp, #4]
 	add	sp, #24
 	pop	{r7, pc}
@@ -165,11 +261,35 @@ main:
 	@NO_APP
 	@APP
 main_16_FORPUSH:
+	push	{r0, r1, r2, lr}
 	movw	lr, #48
 	movt	lr, #2060
-	push	{lr}
+	ldr	r1, .Ltmp0
+	ldr	r2, [r1]
+	str.w	lr, [r2]
+	add.w	r2, r2, #4
+	str	r2, [r1]
+	pop.w	{r0, r1, r2, lr}
+
 	@NO_APP
 	bl	a
+	@APP
+	push	{r0, r1, r2, lr}
+	ldr	r0, .Ltmp0
+	ldr	r1, [r0]
+	sub.w	r1, r1, #4
+	ldr	r2, [r1]
+	ldr	r2, [r2]
+	str	r1, [r0]
+	mov	lr, pc
+	sub.w	lr, lr, #21
+	cmp	lr, r2
+	beq	main_20_SAFE
+	bx	lr
+main_20_SAFE:
+	pop.w	{r0, r1, r2, lr}
+
+	@NO_APP
 	str	r0, [sp, #4]
 	ldr	r1, [sp, #4]
 	movw	r0, :lower16:.L.str
@@ -181,64 +301,6 @@ main_16_FORPUSH:
 .Lfunc_end3:
 	.size	main, .Lfunc_end3-main
 	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	MasterForward                   @ -- Begin function MasterForward
-	.p2align	1
-	.type	MasterForward,%function
-	.code	16                              @ @MasterForward
-	.thumb_func
-MasterForward:
-	.fnstart
-@ %bb.0:                                @ %MasterForward_
-	@APP
-	push	{r0, r1, r2, r3}
-	ldr	r0, [sp, #16]
-	ldr	r1, [r0]
-	cmp	r1, lr
-	bne	fail
-	ldr	r1, .Ltmp0
-	ldr	r2, [r1]
-	str	r0, [r2]
-	add.w	r2, r2, #4
-	str	r2, [r1]
-	pop.w	{r0, r1, r2, r3, lr}
-	add.w	lr, lr, #4
-	ldr.w	lr, [lr]
-	bx	lr
-fail:
-	@NO_APP
-	bx	lr
-.Lfunc_end4:
-	.size	MasterForward, .Lfunc_end4-MasterForward
-	.fnend
-                                        @ -- End function
-	.globl	MasterBackward                  @ -- Begin function MasterBackward
-	.p2align	1
-	.type	MasterBackward,%function
-	.code	16                              @ @MasterBackward
-	.thumb_func
-MasterBackward:
-	.fnstart
-@ %bb.0:                                @ %MasterBackward_
-	@APP
-	ldr	r1, .Ltmp0
-	ldr	r2, [r1]
-	sub.w	r2, r2, #4
-	ldr	r3, [r2]
-	add.w	r3, r3, #8
-	ldr	r3, [r3]
-	cmp	r3, lr
-	bne	fail_back
-	ldr	r3, [r2]
-	ldr.w	lr, [r3]
-	str	r2, [r1]
-	bx	lr
-fail_back:
-	@NO_APP
-	bx	lr
-.Lfunc_end5:
-	.size	MasterBackward, .Lfunc_end5-MasterBackward
 	.fnend
                                         @ -- End function
 	.type	.L.str,%object                  @ @.str
@@ -254,5 +316,6 @@ fail_back:
 	.p2align	2, 0x0
 .Ltmp1:
 	.long	536936452
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git f70f7242ad3dc55fc7dd91601ac39ce3e54a1096)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)"
 	.section	".note.GNU-stack","",%progbits
+	.eabi_attribute	30, 6	@ Tag_ABI_optimization_goals
