@@ -13,13 +13,6 @@ make all -j 16
 cd ~/safestack/test/
 python3 MakeFncTbl.py
 
-cp ~/safestack/test/Results/main.c ~/safestack/test/noret_shadow/Core/Src/main.c
-cd ./noret_shadow/Debug
-make clean
-make all -j 16
-cp noret.elf ~/safestack/test/Results/noret_shadow.elf
-cd ~/safestack/test/
-python3 MakeFncTbl_shadow.py
 
 cp ~/safestack/test/Results/main.c ~/safestack/test/origin/Core/Src/main.c
 cd ~/safestack/test/origin/Debug

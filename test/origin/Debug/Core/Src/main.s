@@ -923,6 +923,6 @@ hspi1:
 	.zero	92
 	.size	hspi1, 92
 
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git cedb6cd02f8e3fa90a741ae0c8ea5551a46518ef)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)"
 	.section	".note.GNU-stack","",%progbits
 	.eabi_attribute	30, 6	@ Tag_ABI_optimization_goals

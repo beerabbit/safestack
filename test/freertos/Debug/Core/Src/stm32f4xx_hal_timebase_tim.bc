@@ -1,0 +1,214 @@
+; ModuleID = '../Core/Src/stm32f4xx_hal_timebase_tim.c'
+source_filename = "../Core/Src/stm32f4xx_hal_timebase_tim.c"
+target datalayout = "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "thumbv7em-none-unknown-eabihf"
+
+%struct.TIM_HandleTypeDef = type { ptr, %struct.TIM_Base_InitTypeDef, i32, [7 x ptr], i32, i32, [4 x i32], [4 x i32], i32 }
+%struct.TIM_Base_InitTypeDef = type { i32, i32, i32, i32, i32, i32 }
+%struct.RCC_ClkInitTypeDef = type { i32, i32, i32, i32, i32 }
+%struct.RCC_TypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, [2 x i32], i32, i32 }
+%struct.TIM_TypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32 }
+
+@htim6 = dso_local global %struct.TIM_HandleTypeDef zeroinitializer, align 4
+@uwTickPrio = external dso_local global i32, align 4
+
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @HAL_InitTick(i32 noundef %0) #0 !dbg !7 {
+  %2 = alloca i32, align 4
+  %3 = alloca %struct.RCC_ClkInitTypeDef, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  store i32 0, ptr %5, align 4, !dbg !10
+  store i32 0, ptr %6, align 4, !dbg !11
+  br label %10, !dbg !12
+
+10:                                               ; preds = %1
+  store volatile i32 0, ptr %9, align 4, !dbg !12
+  %11 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !12
+  %12 = or i32 %11, 16, !dbg !12
+  store volatile i32 %12, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !12
+  %13 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073887232 to ptr), i32 0, i32 15), align 4, !dbg !12
+  %14 = and i32 %13, 16, !dbg !12
+  store volatile i32 %14, ptr %9, align 4, !dbg !12
+  %15 = load volatile i32, ptr %9, align 4, !dbg !12
+  br label %16, !dbg !12
+
+16:                                               ; preds = %10
+  call void @HAL_RCC_GetClockConfig(ptr noundef %3, ptr noundef %7), !dbg !13
+  %17 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %3, i32 0, i32 3, !dbg !14
+  %18 = load i32, ptr %17, align 4, !dbg !14
+  store i32 %18, ptr %5, align 4, !dbg !15
+  %19 = load i32, ptr %5, align 4, !dbg !16
+  %20 = icmp eq i32 %19, 0, !dbg !17
+  br i1 %20, label %21, label %23, !dbg !16
+
+21:                                               ; preds = %16
+  %22 = call i32 @HAL_RCC_GetPCLK1Freq(), !dbg !18
+  store i32 %22, ptr %4, align 4, !dbg !19
+  br label %26, !dbg !20
+
+23:                                               ; preds = %16
+  %24 = call i32 @HAL_RCC_GetPCLK1Freq(), !dbg !21
+  %25 = mul i32 2, %24, !dbg !22
+  store i32 %25, ptr %4, align 4, !dbg !23
+  br label %26
+
+26:                                               ; preds = %23, %21
+  %27 = load i32, ptr %4, align 4, !dbg !24
+  %28 = udiv i32 %27, 1000000, !dbg !25
+  %29 = sub i32 %28, 1, !dbg !26
+  store i32 %29, ptr %6, align 4, !dbg !27
+  store ptr inttoptr (i32 1073745920 to ptr), ptr @htim6, align 4, !dbg !28
+  store i32 999, ptr getelementptr inbounds (%struct.TIM_HandleTypeDef, ptr @htim6, i32 0, i32 1, i32 2), align 4, !dbg !29
+  %30 = load i32, ptr %6, align 4, !dbg !30
+  store i32 %30, ptr getelementptr inbounds (%struct.TIM_HandleTypeDef, ptr @htim6, i32 0, i32 1), align 4, !dbg !31
+  store i32 0, ptr getelementptr inbounds (%struct.TIM_HandleTypeDef, ptr @htim6, i32 0, i32 1, i32 3), align 4, !dbg !32
+  store i32 0, ptr getelementptr inbounds (%struct.TIM_HandleTypeDef, ptr @htim6, i32 0, i32 1, i32 1), align 4, !dbg !33
+  store i32 0, ptr getelementptr inbounds (%struct.TIM_HandleTypeDef, ptr @htim6, i32 0, i32 1, i32 5), align 4, !dbg !34
+  %31 = call i32 @HAL_TIM_Base_Init(ptr noundef @htim6), !dbg !35
+  store i32 %31, ptr %8, align 4, !dbg !36
+  %32 = load i32, ptr %8, align 4, !dbg !37
+  %33 = icmp eq i32 %32, 0, !dbg !38
+  br i1 %33, label %34, label %47, !dbg !37
+
+34:                                               ; preds = %26
+  %35 = call i32 @HAL_TIM_Base_Start_IT(ptr noundef @htim6), !dbg !39
+  store i32 %35, ptr %8, align 4, !dbg !40
+  %36 = load i32, ptr %8, align 4, !dbg !41
+  %37 = icmp eq i32 %36, 0, !dbg !42
+  br i1 %37, label %38, label %46, !dbg !41
+
+38:                                               ; preds = %34
+  call void @HAL_NVIC_EnableIRQ(i32 noundef 54), !dbg !43
+  %39 = load i32, ptr %2, align 4, !dbg !44
+  %40 = icmp ult i32 %39, 16, !dbg !45
+  br i1 %40, label %41, label %44, !dbg !44
+
+41:                                               ; preds = %38
+  %42 = load i32, ptr %2, align 4, !dbg !46
+  call void @HAL_NVIC_SetPriority(i32 noundef 54, i32 noundef %42, i32 noundef 0), !dbg !47
+  %43 = load i32, ptr %2, align 4, !dbg !48
+  store i32 %43, ptr @uwTickPrio, align 4, !dbg !49
+  br label %45, !dbg !50
+
+44:                                               ; preds = %38
+  store i32 1, ptr %8, align 4, !dbg !51
+  br label %45
+
+45:                                               ; preds = %44, %41
+  br label %46, !dbg !52
+
+46:                                               ; preds = %45, %34
+  br label %47, !dbg !53
+
+47:                                               ; preds = %46, %26
+  %48 = load i32, ptr %8, align 4, !dbg !54
+  ret i32 %48, !dbg !55
+}
+
+declare dso_local void @HAL_RCC_GetClockConfig(ptr noundef, ptr noundef) #1
+
+declare dso_local i32 @HAL_RCC_GetPCLK1Freq() #1
+
+declare dso_local i32 @HAL_TIM_Base_Init(ptr noundef) #1
+
+declare dso_local i32 @HAL_TIM_Base_Start_IT(ptr noundef) #1
+
+declare dso_local void @HAL_NVIC_EnableIRQ(i32 noundef) #1
+
+declare dso_local void @HAL_NVIC_SetPriority(i32 noundef, i32 noundef, i32 noundef) #1
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @HAL_SuspendTick() #0 !dbg !56 {
+  %1 = load ptr, ptr @htim6, align 4, !dbg !57
+  %2 = getelementptr inbounds %struct.TIM_TypeDef, ptr %1, i32 0, i32 3, !dbg !57
+  %3 = load volatile i32, ptr %2, align 4, !dbg !57
+  %4 = and i32 %3, -2, !dbg !57
+  store volatile i32 %4, ptr %2, align 4, !dbg !57
+  ret void, !dbg !58
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @HAL_ResumeTick() #0 !dbg !59 {
+  %1 = load ptr, ptr @htim6, align 4, !dbg !60
+  %2 = getelementptr inbounds %struct.TIM_TypeDef, ptr %1, i32 0, i32 3, !dbg !60
+  %3 = load volatile i32, ptr %2, align 4, !dbg !60
+  %4 = or i32 %3, 1, !dbg !60
+  store volatile i32 %4, ptr %2, align 4, !dbg !60
+  ret void, !dbg !61
+}
+
+attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5}
+!llvm.ident = !{!6}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)", isOptimized: false, runtimeVersion: 0, emissionKind: NoDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "../Core/Src/stm32f4xx_hal_timebase_tim.c", directory: "/home/creaker00/safestack/test/freertos/Debug")
+!2 = !{i32 2, !"Debug Info Version", i32 3}
+!3 = !{i32 1, !"wchar_size", i32 4}
+!4 = !{i32 1, !"min_enum_size", i32 4}
+!5 = !{i32 7, !"frame-pointer", i32 2}
+!6 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)"}
+!7 = distinct !DISubprogram(name: "HAL_InitTick", scope: !1, file: !1, line: 41, type: !8, scopeLine: 42, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!8 = !DISubroutineType(types: !9)
+!9 = !{}
+!10 = !DILocation(line: 44, column: 37, scope: !7)
+!11 = !DILocation(line: 46, column: 25, scope: !7)
+!12 = !DILocation(line: 51, column: 3, scope: !7)
+!13 = !DILocation(line: 54, column: 3, scope: !7)
+!14 = !DILocation(line: 57, column: 31, scope: !7)
+!15 = !DILocation(line: 57, column: 19, scope: !7)
+!16 = !DILocation(line: 59, column: 7, scope: !7)
+!17 = !DILocation(line: 59, column: 23, scope: !7)
+!18 = !DILocation(line: 61, column: 18, scope: !7)
+!19 = !DILocation(line: 61, column: 16, scope: !7)
+!20 = !DILocation(line: 62, column: 3, scope: !7)
+!21 = !DILocation(line: 65, column: 24, scope: !7)
+!22 = !DILocation(line: 65, column: 22, scope: !7)
+!23 = !DILocation(line: 65, column: 16, scope: !7)
+!24 = !DILocation(line: 69, column: 35, scope: !7)
+!25 = !DILocation(line: 69, column: 46, scope: !7)
+!26 = !DILocation(line: 69, column: 58, scope: !7)
+!27 = !DILocation(line: 69, column: 20, scope: !7)
+!28 = !DILocation(line: 72, column: 18, scope: !7)
+!29 = !DILocation(line: 80, column: 21, scope: !7)
+!30 = !DILocation(line: 81, column: 26, scope: !7)
+!31 = !DILocation(line: 81, column: 24, scope: !7)
+!32 = !DILocation(line: 82, column: 28, scope: !7)
+!33 = !DILocation(line: 83, column: 26, scope: !7)
+!34 = !DILocation(line: 84, column: 32, scope: !7)
+!35 = !DILocation(line: 86, column: 12, scope: !7)
+!36 = !DILocation(line: 86, column: 10, scope: !7)
+!37 = !DILocation(line: 87, column: 7, scope: !7)
+!38 = !DILocation(line: 87, column: 14, scope: !7)
+!39 = !DILocation(line: 90, column: 14, scope: !7)
+!40 = !DILocation(line: 90, column: 12, scope: !7)
+!41 = !DILocation(line: 91, column: 9, scope: !7)
+!42 = !DILocation(line: 91, column: 16, scope: !7)
+!43 = !DILocation(line: 94, column: 9, scope: !7)
+!44 = !DILocation(line: 96, column: 11, scope: !7)
+!45 = !DILocation(line: 96, column: 24, scope: !7)
+!46 = !DILocation(line: 99, column: 45, scope: !7)
+!47 = !DILocation(line: 99, column: 9, scope: !7)
+!48 = !DILocation(line: 100, column: 22, scope: !7)
+!49 = !DILocation(line: 100, column: 20, scope: !7)
+!50 = !DILocation(line: 101, column: 7, scope: !7)
+!51 = !DILocation(line: 104, column: 16, scope: !7)
+!52 = !DILocation(line: 106, column: 5, scope: !7)
+!53 = !DILocation(line: 107, column: 3, scope: !7)
+!54 = !DILocation(line: 110, column: 10, scope: !7)
+!55 = !DILocation(line: 110, column: 3, scope: !7)
+!56 = distinct !DISubprogram(name: "HAL_SuspendTick", scope: !1, file: !1, line: 119, type: !8, scopeLine: 120, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!57 = !DILocation(line: 122, column: 3, scope: !56)
+!58 = !DILocation(line: 123, column: 1, scope: !56)
+!59 = distinct !DISubprogram(name: "HAL_ResumeTick", scope: !1, file: !1, line: 131, type: !8, scopeLine: 132, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!60 = !DILocation(line: 134, column: 3, scope: !59)
+!61 = !DILocation(line: 135, column: 1, scope: !59)

@@ -78,6 +78,8 @@ if( len(eof) > 0):
 print("==============")
 print(function_info)
 print(analysis_table)
+for i in analysis_table:
+    print(i)
 print("==============")
 cnt = 0
 for i in analysis_table:

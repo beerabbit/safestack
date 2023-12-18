@@ -1,0 +1,119 @@
+; ModuleID = '../Core/Src/stm32f4xx_it.c'
+source_filename = "../Core/Src/stm32f4xx_it.c"
+target datalayout = "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "thumbv7em-none-unknown-eabihf"
+
+%struct.TIM_HandleTypeDef = type { ptr, %struct.TIM_Base_InitTypeDef, i32, [7 x ptr], i32, i32, [4 x i32], [4 x i32], i32 }
+%struct.TIM_Base_InitTypeDef = type { i32, i32, i32, i32, i32, i32 }
+%struct.HCD_HandleTypeDef = type { ptr, %struct.USB_OTG_CfgTypeDef, [16 x %struct.USB_OTG_HCTypeDef], i32, i32, i32, ptr }
+%struct.USB_OTG_CfgTypeDef = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.USB_OTG_HCTypeDef = type { i8, i8, i8, i8, i8, i8, i8, i8, i16, i8, ptr, i32, i32, i32, i8, i8, i32, i32, i32, i32 }
+
+@htim6 = external dso_local global %struct.TIM_HandleTypeDef, align 4
+@hhcd_USB_OTG_FS = external dso_local global %struct.HCD_HandleTypeDef, align 4
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @NMI_Handler() #0 !dbg !7 {
+  br label %1, !dbg !10
+
+1:                                                ; preds = %0, %1
+  br label %1, !dbg !10, !llvm.loop !11
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @HardFault_Handler() #0 !dbg !13 {
+  br label %1, !dbg !14
+
+1:                                                ; preds = %0, %1
+  br label %1, !dbg !14, !llvm.loop !15
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @MemManage_Handler() #0 !dbg !17 {
+  br label %1, !dbg !18
+
+1:                                                ; preds = %0, %1
+  br label %1, !dbg !18, !llvm.loop !19
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @BusFault_Handler() #0 !dbg !21 {
+  br label %1, !dbg !22
+
+1:                                                ; preds = %0, %1
+  br label %1, !dbg !22, !llvm.loop !23
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @UsageFault_Handler() #0 !dbg !25 {
+  br label %1, !dbg !26
+
+1:                                                ; preds = %0, %1
+  br label %1, !dbg !26, !llvm.loop !27
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @DebugMon_Handler() #0 !dbg !29 {
+  ret void, !dbg !30
+}
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @TIM6_DAC_IRQHandler() #0 !dbg !31 {
+  call void @HAL_TIM_IRQHandler(ptr noundef @htim6), !dbg !32
+  ret void, !dbg !33
+}
+
+declare dso_local void @HAL_TIM_IRQHandler(ptr noundef) #1
+
+; Function Attrs: noinline nounwind optnone
+define dso_local void @OTG_FS_IRQHandler() #0 !dbg !34 {
+  call void @HAL_HCD_IRQHandler(ptr noundef @hhcd_USB_OTG_FS), !dbg !35
+  ret void, !dbg !36
+}
+
+declare dso_local void @HAL_HCD_IRQHandler(ptr noundef) #1
+
+attributes #0 = { noinline nounwind optnone "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m4" "target-features"="+armv7e-m,+dsp,+fp16,+hwdiv,+strict-align,+thumb-mode,+vfp2sp,+vfp3d16sp,+vfp4d16sp,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16fml,-fp64,-fullfp16,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp3,-vfp3d16,-vfp3sp,-vfp4,-vfp4d16,-vfp4sp" }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5}
+!llvm.ident = !{!6}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)", isOptimized: false, runtimeVersion: 0, emissionKind: NoDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "../Core/Src/stm32f4xx_it.c", directory: "/home/creaker00/safestack/test/freertos/Debug")
+!2 = !{i32 2, !"Debug Info Version", i32 3}
+!3 = !{i32 1, !"wchar_size", i32 4}
+!4 = !{i32 1, !"min_enum_size", i32 4}
+!5 = !{i32 7, !"frame-pointer", i32 2}
+!6 = !{!"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)"}
+!7 = distinct !DISubprogram(name: "NMI_Handler", scope: !1, file: !1, line: 71, type: !8, scopeLine: 72, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!8 = !DISubroutineType(types: !9)
+!9 = !{}
+!10 = !DILocation(line: 77, column: 3, scope: !7)
+!11 = distinct !{!11, !10, !12}
+!12 = !DILocation(line: 79, column: 3, scope: !7)
+!13 = distinct !DISubprogram(name: "HardFault_Handler", scope: !1, file: !1, line: 86, type: !8, scopeLine: 87, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!14 = !DILocation(line: 91, column: 3, scope: !13)
+!15 = distinct !{!15, !14, !16}
+!16 = !DILocation(line: 95, column: 3, scope: !13)
+!17 = distinct !DISubprogram(name: "MemManage_Handler", scope: !1, file: !1, line: 101, type: !8, scopeLine: 102, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!18 = !DILocation(line: 106, column: 3, scope: !17)
+!19 = distinct !{!19, !18, !20}
+!20 = !DILocation(line: 110, column: 3, scope: !17)
+!21 = distinct !DISubprogram(name: "BusFault_Handler", scope: !1, file: !1, line: 116, type: !8, scopeLine: 117, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!22 = !DILocation(line: 121, column: 3, scope: !21)
+!23 = distinct !{!23, !22, !24}
+!24 = !DILocation(line: 125, column: 3, scope: !21)
+!25 = distinct !DISubprogram(name: "UsageFault_Handler", scope: !1, file: !1, line: 131, type: !8, scopeLine: 132, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!26 = !DILocation(line: 136, column: 3, scope: !25)
+!27 = distinct !{!27, !26, !28}
+!28 = !DILocation(line: 140, column: 3, scope: !25)
+!29 = distinct !DISubprogram(name: "DebugMon_Handler", scope: !1, file: !1, line: 146, type: !8, scopeLine: 147, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!30 = !DILocation(line: 154, column: 1, scope: !29)
+!31 = distinct !DISubprogram(name: "TIM6_DAC_IRQHandler", scope: !1, file: !1, line: 166, type: !8, scopeLine: 167, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!32 = !DILocation(line: 171, column: 3, scope: !31)
+!33 = !DILocation(line: 175, column: 1, scope: !31)
+!34 = distinct !DISubprogram(name: "OTG_FS_IRQHandler", scope: !1, file: !1, line: 180, type: !8, scopeLine: 181, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0)
+!35 = !DILocation(line: 185, column: 3, scope: !34)
+!36 = !DILocation(line: 189, column: 1, scope: !34)
