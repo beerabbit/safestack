@@ -37,14 +37,12 @@ def function_start_size_end_addr(function_name):
     md = Cs(CS_ARCH_ARM, CS_MODE_THUMB)
     retnbuf = []
     call_retn_fair = []
-    for i in md.disasm(pos, function_addr):        
-        #print(f'0x{i.address:x}:\t{i.mnemonic}\t{i.op_str}')    
+    for i in md.disasm(pos, function_addr):          
         if(i.mnemonic == "bl"):
             call_des = check_call_destination(int(i.op_str[1:],16))    
-            if(call_des != "EOF"):
+            if(call_des != "EOF" and call_des != 0):
                 call_return_fair = [call_des, hex(text_addr + i.address+4-text_addr)]
                 retnbuf.append(call_return_fair)
-                print(f'0x{i.address:x}:\t{i.mnemonic}\t{i.op_str}')
             else:
                 eof.append(hex(text_addr + i.address+4-text_addr))
     res.append(retnbuf)
@@ -65,6 +63,7 @@ for i in function_names:
         if( function_info[i][1] == j ):
             eof.remove(j)
 
+'''
 if( len(eof) > 0):
     for i in function_names:
         mins = function_info[i][0]
@@ -74,6 +73,7 @@ if( len(eof) > 0):
                 print("Errs at " + i + " changes " + maxs + " to " + j)
                 function_info[i][1] = j
                 eof.remove(j)
+'''
 
 
 print("==============")

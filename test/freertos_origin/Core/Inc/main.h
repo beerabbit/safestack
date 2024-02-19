@@ -127,7 +127,9 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
-
+void forward(uint32_t addr, uint32_t idx);
+uint32_t backward(uint32_t lraddr, uint32_t idx);
+uint32_t getidx();
 #ifdef __cplusplus
 }
 #endif

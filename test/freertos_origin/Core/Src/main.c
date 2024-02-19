@@ -51,10 +51,16 @@ UART_HandleTypeDef huart2;
 
 
 /* Definitions for myTask02 */
+osThreadId_t myTask01Handle;
+const osThreadAttr_t myTask01_attributes = {
+  .name = "myTask01",
+  .stack_size = 0x1000,
+  .priority = (osPriority_t) osPriorityBelowNormal,
+};
 osThreadId_t myTask02Handle;
 const osThreadAttr_t myTask02_attributes = {
   .name = "myTask02",
-  .stack_size = 128 * 4,
+  .stack_size = 0x1000,
   .priority = (osPriority_t) osPriorityBelowNormal,
 };
 /* Definitions for UARTSend */
@@ -71,7 +77,7 @@ static void MX_SPI1_Init(void);
 static void MX_USART2_UART_Init(void);
 void StartDefaultTask(void *argument);
 void StartTask02(void *argument);
-void StartTask03(void *argument);
+void StartTask01(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -86,64 +92,7 @@ void StartTask03(void *argument);
   * @brief  The application entry point.
   * @retval int
   */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-typedef  unsigned char  bool;
-typedef  unsigned long  ulong;
-
-bool divides (ulong n, ulong m);
-bool even (ulong n);
-bool prime (ulong n);
-void swap (ulong* a, ulong* b);
-
-bool divides (ulong n, ulong m) {
-  return (m % n == 0);
-}
-
-bool even (ulong n) {
-  return (divides (2, n));
-}
-
-bool prime (ulong n) {
-  ulong i;
-  if (even (n))
-      return (n == 2);
-  for (i = 3; i * i <= n; i += 2) {
-      if (divides (i, n)) /* ai: loop here min 0 max 357 end; */
-          return 0;
-  }
-  return (n > 1);
-}
-
-void swap (ulong* a, ulong* b) {
-  ulong tmp = *a;
-  *a = *b;
-  *b = tmp;
-}
-
-/* Write to this so call in BENCHMARK is not optimised away.  */
-volatile int result = 0;
-ulong x;
-ulong y;
-
-int benchmark (void)
-{
-  swap (&x, &y);
-  result = (!(prime(x) && prime(y)));
-  return 0;
-}
-
-void initialise_benchmark() {
-  x =  21649L;
-  y = 513239L;
-}
-
-int verify_benchmark(int unused) {
-  int expected = 0;
-  if (result != expected)
-    return 0;
-  return 1;
-}
 int __io_putchar(int ch)
 {
      (void) HAL_UART_Transmit(&huart2, (uint8_t*) &ch, 1, 100);
@@ -210,8 +159,11 @@ int main(void)
 /**
 * @}
 */
-
+  for(int i=0x20010000; i<0x20011000; i++){
+	  *(volatile char *)(i) = 0x00;
+  }
   myTask02Handle = osThreadNew(StartTask02, NULL, &myTask02_attributes);
+  myTask01Handle = osThreadNew(StartTask01, NULL, &myTask01_attributes);
 
   /* Start scheduler */
   osKernelStart();
@@ -524,25 +476,63 @@ static void MX_GPIO_Init(void)
 * @retval None
 */
 /* USER CODE END Header_StartTask02 */
+
+int c(int i,int i1, int i2, int i3, int i4){
+  int p = getidx();
+  printf("idx : %d\r\n", p);
+  printf("C\r\n");
+  return i+i1+i2+i3+i4;
+}
+int b(int i){
+  int p = getidx();
+  printf("idx : %d\r\n", p);
+  printf("B\r\n");
+  return c(123 + i,1,2,3,4);
+}
+void a(){
+  int p = getidx();
+  printf("idx : %d\r\n", p);
+  printf("A\r\n");
+  b(1);
+}
+
 void StartTask02(void *argument)
 {
-	initialise_benchmark();
-	uint32_t curr_tick = HAL_GetTick();
+
+
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
   for(;;)
   {
 	    /* USER CODE END WHILE */
-	    for(int i=0; i<1000; i++){
-	    benchmark();
-	    }
-	    uint32_t tot = HAL_GetTick() - curr_tick;
-	    printf("Total Time : %d\r\n", tot);
-	    curr_tick = HAL_GetTick();
+	  int p = getidx();
+    printf("Task %p idx : %d\r\n", &StartTask02, p);
+    a();
+	  
+	  osDelay(1000);
   }
   /* USER CODE END StartTask02 */
 }
 
+
+void StartTask01(void *argument)
+{
+
+	uint32_t curr_ticks = HAL_GetTick();
+  /* USER CODE BEGIN StartTask02 */
+  /* Infinite loop */
+  for(;;)
+  {
+	    /* USER CODE END WHILE */
+    int p = getidx();
+    printf("Task %p idx : %d\r\n", &StartTask02, p);
+    a();
+	  osDelay(1000);
+
+
+  }
+  /* USER CODE END StartTask02 */
+}
 /* USER CODE BEGIN Header_StartTask03 */
 /**
 * @brief Function implementing the UARTSend thread.

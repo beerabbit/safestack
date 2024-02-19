@@ -18,5 +18,5 @@
 	.eabi_attribute	26, 2	@ Tag_ABI_enum_size
 	.eabi_attribute	14, 0	@ Tag_ABI_PCS_R9_use
 	.file	"freertos.c"
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 924411f7435188d98a0c744016baf7a22cb5b036)"
 	.section	".note.GNU-stack","",%progbits

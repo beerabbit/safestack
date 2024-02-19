@@ -53,7 +53,7 @@ namespace {
             for(Function &F : M){
                 if(!F.isDeclaration()){
                     string buf = F.getName().str();
-                    if((buf != "MasterForward") && (buf != "MasterBackward") && (buf != "__io_putchar") && (buf != "HAL_TIM_PeriodElapsedCallback")){
+                    if((buf != "MasterForward") && (buf != "MasterBackward") && (buf != "__io_putchar") && (buf != "HAL_TIM_PeriodElapsedCallback") && (buf != "StartTask02") && (buf != "StartTask01")){
                         fncname = fncname + "\"" + F.getName().str() + "\",";
                         errs() << "\""<< F.getName() << "\",";
                     }

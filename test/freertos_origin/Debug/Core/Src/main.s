@@ -18,301 +18,6 @@
 	.eabi_attribute	26, 2	@ Tag_ABI_enum_size
 	.eabi_attribute	14, 0	@ Tag_ABI_PCS_R9_use
 	.file	"main.c"
-	.globl	divides                         @ -- Begin function divides
-	.p2align	2
-	.type	divides,%function
-	.code	16                              @ @divides
-	.thumb_func
-divides:
-	.fnstart
-@ %bb.0:
-	.pad	#8
-	sub	sp, #8
-	str	r0, [sp, #4]
-	str	r1, [sp]
-	ldr	r0, [sp]
-	ldr	r1, [sp, #4]
-	udiv	r2, r0, r1
-	mls	r0, r2, r1, r0
-	clz	r0, r0
-	lsrs	r0, r0, #5
-	add	sp, #8
-	bl	MasterBackward
-.Lfunc_end0:
-	.size	divides, .Lfunc_end0-divides
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	even                            @ -- Begin function even
-	.p2align	2
-	.type	even,%function
-	.code	16                              @ @even
-	.thumb_func
-even:
-	.fnstart
-@ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
-	.pad	#8
-	sub	sp, #8
-	str	r0, [sp, #4]
-	ldr	r1, [sp, #4]
-	@APP
-even_0_FORPUSH:
-	movw	lr, #0
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	movs	r0, #2
-	bl	divides
-	add	sp, #8
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end1:
-	.size	even, .Lfunc_end1-even
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	prime                           @ -- Begin function prime
-	.p2align	2
-	.type	prime,%function
-	.code	16                              @ @prime
-	.thumb_func
-prime:
-	.fnstart
-@ %bb.0:
-	.save	{r7, lr}
-	push	{r7, lr}
-	.setfp	r7, sp
-	mov	r7, sp
-	.pad	#16
-	sub	sp, #16
-	str	r0, [sp, #8]
-	ldr	r0, [sp, #8]
-	@APP
-prime_4_FORPUSH:
-	movw	lr, #12
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	even
-	cbz	r0, .LBB2_2
-	b	.LBB2_1
-.LBB2_1:
-	ldr	r0, [sp, #8]
-	subs	r0, #2
-	clz	r0, r0
-	lsrs	r0, r0, #5
-	strb	r0, [r7, #-1]
-	b	.LBB2_9
-.LBB2_2:
-	movs	r0, #3
-	str	r0, [sp, #4]
-	b	.LBB2_3
-.LBB2_3:                                @ =>This Inner Loop Header: Depth=1
-	ldr	r0, [sp, #4]
-	muls	r0, r0, r0
-	ldr	r1, [sp, #8]
-	cmp	r0, r1
-	bhi	.LBB2_8
-	b	.LBB2_4
-.LBB2_4:                                @   in Loop: Header=BB2_3 Depth=1
-	ldr	r0, [sp, #4]
-	ldr	r1, [sp, #8]
-	@APP
-prime_8_FORPUSH:
-	movw	lr, #24
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	divides
-	cbz	r0, .LBB2_6
-	b	.LBB2_5
-.LBB2_5:
-	movs	r0, #0
-	strb	r0, [r7, #-1]
-	b	.LBB2_9
-.LBB2_6:                                @   in Loop: Header=BB2_3 Depth=1
-	b	.LBB2_7
-.LBB2_7:                                @   in Loop: Header=BB2_3 Depth=1
-	ldr	r0, [sp, #4]
-	adds	r0, #2
-	str	r0, [sp, #4]
-	b	.LBB2_3
-.LBB2_8:
-	ldr	r0, [sp, #8]
-	movs	r1, #0
-	cmp	r0, #1
-	it	hi
-	movhi	r1, #1
-	strb	r1, [r7, #-1]
-	b	.LBB2_9
-.LBB2_9:
-	ldrb	r0, [r7, #-1]
-	add	sp, #16
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end2:
-	.size	prime, .Lfunc_end2-prime
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	swap                            @ -- Begin function swap
-	.p2align	2
-	.type	swap,%function
-	.code	16                              @ @swap
-	.thumb_func
-swap:
-	.fnstart
-@ %bb.0:
-	.pad	#12
-	sub	sp, #12
-	str	r0, [sp, #8]
-	str	r1, [sp, #4]
-	ldr	r0, [sp, #8]
-	ldr	r0, [r0]
-	str	r0, [sp]
-	ldr	r0, [sp, #4]
-	ldr	r0, [r0]
-	ldr	r1, [sp, #8]
-	str	r0, [r1]
-	ldr	r0, [sp]
-	ldr	r1, [sp, #4]
-	str	r0, [r1]
-	add	sp, #12
-	bl	MasterBackward
-.Lfunc_end3:
-	.size	swap, .Lfunc_end3-swap
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	benchmark                       @ -- Begin function benchmark
-	.p2align	2
-	.type	benchmark,%function
-	.code	16                              @ @benchmark
-	.thumb_func
-benchmark:
-	.fnstart
-@ %bb.0:
-	.save	{r4, r6, r7, lr}
-	push	{r4, r6, r7, lr}
-	.setfp	r7, sp, #8
-	add	r7, sp, #8
-	@APP
-benchmark_12_FORPUSH:
-	movw	lr, #36
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	movw	r4, :lower16:x
-	movt	r4, :upper16:x
-	movw	r1, :lower16:y
-	movt	r1, :upper16:y
-	mov	r0, r4
-	bl	swap
-	ldr	r0, [r4]
-	@APP
-benchmark_16_FORPUSH:
-	movw	lr, #48
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	prime
-	mov	r1, r0
-	movs	r0, #0
-	cbz	r1, .LBB4_2
-	b	.LBB4_1
-.LBB4_1:
-	movw	r0, :lower16:y
-	movt	r0, :upper16:y
-	ldr	r0, [r0]
-	@APP
-benchmark_20_FORPUSH:
-	movw	lr, #60
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	prime
-	cmp	r0, #0
-	it	ne
-	movne	r0, #1
-	b	.LBB4_2
-.LBB4_2:
-	movs	r1, #1
-	bic.w	r0, r1, r0
-	movw	r1, :lower16:result
-	movt	r1, :upper16:result
-	str	r0, [r1]
-	movs	r0, #0
-	pop	{r4, r6, r7, lr}
-	bl	MasterBackward
-.Lfunc_end4:
-	.size	benchmark, .Lfunc_end4-benchmark
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	initialise_benchmark            @ -- Begin function initialise_benchmark
-	.p2align	2
-	.type	initialise_benchmark,%function
-	.code	16                              @ @initialise_benchmark
-	.thumb_func
-initialise_benchmark:
-	.fnstart
-@ %bb.0:
-	movw	r0, :lower16:x
-	movt	r0, :upper16:x
-	movw	r1, #21649
-	str	r1, [r0]
-	movw	r0, :lower16:y
-	movt	r0, :upper16:y
-	movw	r1, #54487
-	movt	r1, #7
-	str	r1, [r0]
-	bl	MasterBackward
-.Lfunc_end5:
-	.size	initialise_benchmark, .Lfunc_end5-initialise_benchmark
-	.cantunwind
-	.fnend
-                                        @ -- End function
-	.globl	verify_benchmark                @ -- Begin function verify_benchmark
-	.p2align	2
-	.type	verify_benchmark,%function
-	.code	16                              @ @verify_benchmark
-	.thumb_func
-verify_benchmark:
-	.fnstart
-@ %bb.0:
-	.pad	#12
-	sub	sp, #12
-	str	r0, [sp, #4]
-	movs	r0, #0
-	str	r0, [sp]
-	movw	r0, :lower16:result
-	movt	r0, :upper16:result
-	ldr	r0, [r0]
-	ldr	r1, [sp]
-	cmp	r0, r1
-	beq	.LBB6_2
-	b	.LBB6_1
-.LBB6_1:
-	movs	r0, #0
-	str	r0, [sp, #8]
-	b	.LBB6_3
-.LBB6_2:
-	movs	r0, #1
-	str	r0, [sp, #8]
-	b	.LBB6_3
-.LBB6_3:
-	ldr	r0, [sp, #8]
-	add	sp, #12
-	bl	MasterBackward
-.Lfunc_end6:
-	.size	verify_benchmark, .Lfunc_end6-verify_benchmark
-	.cantunwind
-	.fnend
-                                        @ -- End function
 	.globl	__io_putchar                    @ -- Begin function __io_putchar
 	.p2align	2
 	.type	__io_putchar,%function
@@ -337,8 +42,8 @@ __io_putchar:
 	ldr	r0, [sp, #4]
 	add	sp, #8
 	pop	{r7, pc}
-.Lfunc_end7:
-	.size	__io_putchar, .Lfunc_end7-__io_putchar
+.Lfunc_end0:
+	.size	__io_putchar, .Lfunc_end0-__io_putchar
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -356,57 +61,38 @@ main:
 	mov	r7, sp
 	.pad	#8
 	sub	sp, #8
-	@APP
-	ldr	r0, .Ltmp0
-	ldr	r1, .Ltmp1
-	str	r1, [r0]
-	@NO_APP
 	movs	r0, #0
 	str	r0, [sp, #4]
 	bl	HAL_Init
-	@APP
-main_24_FORPUSH:
-	movw	lr, #72
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	SystemClock_Config
-	@APP
-main_28_FORPUSH:
-	movw	lr, #84
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	MX_GPIO_Init
-	@APP
-main_32_FORPUSH:
-	movw	lr, #96
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	MX_I2C1_Init
-	@APP
-main_36_FORPUSH:
-	movw	lr, #108
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	MX_I2S3_Init
-	@APP
-main_40_FORPUSH:
-	movw	lr, #120
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	MX_SPI1_Init
-	@APP
-main_44_FORPUSH:
-	movw	lr, #132
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
 	bl	MX_USART2_UART_Init
 	bl	osKernelInitialize
+	movs	r0, #0
+	movt	r0, #8193
+	str	r0, [sp]
+	b	.LBB1_1
+.LBB1_1:                                @ =>This Inner Loop Header: Depth=1
+	ldr	r0, [sp]
+	movw	r1, #4095
+	movt	r1, #8193
+	cmp	r0, r1
+	bgt	.LBB1_4
+	b	.LBB1_2
+.LBB1_2:                                @   in Loop: Header=BB1_1 Depth=1
+	ldr	r0, [sp]
+	movs	r1, #0
+	strb	r1, [r0]
+	b	.LBB1_3
+.LBB1_3:                                @   in Loop: Header=BB1_1 Depth=1
+	ldr	r0, [sp]
+	adds	r0, #1
+	str	r0, [sp]
+	b	.LBB1_1
+.LBB1_4:
 	movw	r0, :lower16:StartTask02
 	movt	r0, :upper16:StartTask02
 	movw	r2, :lower16:myTask02_attributes
@@ -416,12 +102,21 @@ main_44_FORPUSH:
 	movw	r1, :lower16:myTask02Handle
 	movt	r1, :upper16:myTask02Handle
 	str	r0, [r1]
+	movw	r0, :lower16:StartTask01
+	movt	r0, :upper16:StartTask01
+	movw	r2, :lower16:myTask01_attributes
+	movt	r2, :upper16:myTask01_attributes
+	movs	r1, #0
+	bl	osThreadNew
+	movw	r1, :lower16:myTask01Handle
+	movt	r1, :upper16:myTask01Handle
+	str	r0, [r1]
 	bl	osKernelStart
-	b	.LBB8_1
-.LBB8_1:                                @ =>This Inner Loop Header: Depth=1
-	b	.LBB8_1
-.Lfunc_end8:
-	.size	main, .Lfunc_end8-main
+	b	.LBB1_5
+.LBB1_5:                                @ =>This Inner Loop Header: Depth=1
+	b	.LBB1_5
+.Lfunc_end1:
+	.size	main, .Lfunc_end1-main
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -448,8 +143,8 @@ SystemClock_Config:
 	str	r0, [sp, #20]
 	str	r0, [sp, #16]
 	str	r0, [sp, #12]
-	b	.LBB9_1
-.LBB9_1:
+	b	.LBB2_1
+.LBB2_1:
 	movs	r0, #0
 	str	r0, [sp, #8]
 	movw	r0, #14400
@@ -461,10 +156,10 @@ SystemClock_Config:
 	and	r0, r0, #268435456
 	str	r0, [sp, #8]
 	ldr	r0, [sp, #8]
-	b	.LBB9_2
-.LBB9_2:
-	b	.LBB9_3
-.LBB9_3:
+	b	.LBB2_2
+.LBB2_2:
+	b	.LBB2_3
+.LBB2_3:
 	movs	r0, #0
 	str	r0, [sp, #4]
 	movw	r0, #28672
@@ -476,8 +171,8 @@ SystemClock_Config:
 	and	r0, r0, #16384
 	str	r0, [sp, #4]
 	ldr	r0, [sp, #4]
-	b	.LBB9_4
-.LBB9_4:
+	b	.LBB2_4
+.LBB2_4:
 	movs	r0, #1
 	str	r0, [sp, #32]
 	mov.w	r0, #65536
@@ -495,18 +190,12 @@ SystemClock_Config:
 	str	r0, [sp, #76]
 	add	r0, sp, #32
 	bl	HAL_RCC_OscConfig
-	cbz	r0, .LBB9_6
-	b	.LBB9_5
-.LBB9_5:
-	@APP
-SystemClock_Config_48_FORPUSH:
-	movw	lr, #144
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB2_6
+	b	.LBB2_5
+.LBB2_5:
 	bl	Error_Handler
-	b	.LBB9_6
-.LBB9_6:
+	b	.LBB2_6
+.LBB2_6:
 	movs	r0, #15
 	str	r0, [sp, #12]
 	movs	r0, #2
@@ -520,23 +209,16 @@ SystemClock_Config_48_FORPUSH:
 	add	r0, sp, #12
 	movs	r1, #5
 	bl	HAL_RCC_ClockConfig
-	cbz	r0, .LBB9_8
-	b	.LBB9_7
-.LBB9_7:
-	@APP
-SystemClock_Config_52_FORPUSH:
-	movw	lr, #156
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB2_8
+	b	.LBB2_7
+.LBB2_7:
 	bl	Error_Handler
-	b	.LBB9_8
-.LBB9_8:
+	b	.LBB2_8
+.LBB2_8:
 	add	sp, #80
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end9:
-	.size	SystemClock_Config, .Lfunc_end9-SystemClock_Config
+	pop	{r7, pc}
+.Lfunc_end2:
+	.size	SystemClock_Config, .Lfunc_end2-SystemClock_Config
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -561,8 +243,8 @@ MX_GPIO_Init:
 	str	r0, [sp, #32]
 	str	r0, [sp, #28]
 	str	r0, [sp, #24]
-	b	.LBB10_1
-.LBB10_1:
+	b	.LBB3_1
+.LBB3_1:
 	movs	r0, #0
 	str	r0, [sp, #20]
 	movw	r0, #14384
@@ -574,10 +256,10 @@ MX_GPIO_Init:
 	and	r0, r0, #16
 	str	r0, [sp, #20]
 	ldr	r0, [sp, #20]
-	b	.LBB10_2
-.LBB10_2:
-	b	.LBB10_3
-.LBB10_3:
+	b	.LBB3_2
+.LBB3_2:
+	b	.LBB3_3
+.LBB3_3:
 	movs	r0, #0
 	str	r0, [sp, #16]
 	movw	r0, #14384
@@ -589,10 +271,10 @@ MX_GPIO_Init:
 	and	r0, r0, #4
 	str	r0, [sp, #16]
 	ldr	r0, [sp, #16]
-	b	.LBB10_4
-.LBB10_4:
-	b	.LBB10_5
-.LBB10_5:
+	b	.LBB3_4
+.LBB3_4:
+	b	.LBB3_5
+.LBB3_5:
 	movs	r0, #0
 	str	r0, [sp, #12]
 	movw	r0, #14384
@@ -604,10 +286,10 @@ MX_GPIO_Init:
 	and	r0, r0, #128
 	str	r0, [sp, #12]
 	ldr	r0, [sp, #12]
-	b	.LBB10_6
-.LBB10_6:
-	b	.LBB10_7
-.LBB10_7:
+	b	.LBB3_6
+.LBB3_6:
+	b	.LBB3_7
+.LBB3_7:
 	movs	r0, #0
 	str	r0, [sp, #8]
 	movw	r0, #14384
@@ -619,10 +301,10 @@ MX_GPIO_Init:
 	and	r0, r0, #1
 	str	r0, [sp, #8]
 	ldr	r0, [sp, #8]
-	b	.LBB10_8
-.LBB10_8:
-	b	.LBB10_9
-.LBB10_9:
+	b	.LBB3_8
+.LBB3_8:
+	b	.LBB3_9
+.LBB3_9:
 	movs	r0, #0
 	str	r0, [sp, #4]
 	movw	r0, #14384
@@ -634,10 +316,10 @@ MX_GPIO_Init:
 	and	r0, r0, #2
 	str	r0, [sp, #4]
 	ldr	r0, [sp, #4]
-	b	.LBB10_10
-.LBB10_10:
-	b	.LBB10_11
-.LBB10_11:
+	b	.LBB3_10
+.LBB3_10:
+	b	.LBB3_11
+.LBB3_11:
 	movs	r0, #0
 	str	r0, [sp]
 	movw	r0, #14384
@@ -649,8 +331,8 @@ MX_GPIO_Init:
 	and	r0, r0, #8
 	str	r0, [sp]
 	ldr	r0, [sp]
-	b	.LBB10_12
-.LBB10_12:
+	b	.LBB3_12
+.LBB3_12:
 	movw	r9, #4096
 	movt	r9, #16386
 	mov.w	r8, #8
@@ -748,10 +430,9 @@ MX_GPIO_Init:
 	bl	HAL_GPIO_Init
 	add	sp, #44
 	pop.w	{r8, r9, r10, r11}
-	pop	{r4, r5, r6, r7, lr}
-	bl	MasterBackward
-.Lfunc_end10:
-	.size	MX_GPIO_Init, .Lfunc_end10-MX_GPIO_Init
+	pop	{r4, r5, r6, r7, pc}
+.Lfunc_end3:
+	.size	MX_GPIO_Init, .Lfunc_end3-MX_GPIO_Init
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -784,22 +465,15 @@ MX_I2C1_Init:
 	str	r1, [r0, #28]
 	str	r1, [r0, #32]
 	bl	HAL_I2C_Init
-	cbz	r0, .LBB11_2
-	b	.LBB11_1
-.LBB11_1:
-	@APP
-MX_I2C1_Init_56_FORPUSH:
-	movw	lr, #168
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB4_2
+	b	.LBB4_1
+.LBB4_1:
 	bl	Error_Handler
-	b	.LBB11_2
-.LBB11_2:
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end11:
-	.size	MX_I2C1_Init, .Lfunc_end11-MX_I2C1_Init
+	b	.LBB4_2
+.LBB4_2:
+	pop	{r7, pc}
+.Lfunc_end4:
+	.size	MX_I2C1_Init, .Lfunc_end4-MX_I2C1_Init
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -832,22 +506,15 @@ MX_I2S3_Init:
 	str	r2, [r0, #28]
 	str	r2, [r0, #32]
 	bl	HAL_I2S_Init
-	cbz	r0, .LBB12_2
-	b	.LBB12_1
-.LBB12_1:
-	@APP
-MX_I2S3_Init_60_FORPUSH:
-	movw	lr, #180
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB5_2
+	b	.LBB5_1
+.LBB5_1:
 	bl	Error_Handler
-	b	.LBB12_2
-.LBB12_2:
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end12:
-	.size	MX_I2S3_Init, .Lfunc_end12-MX_I2S3_Init
+	b	.LBB5_2
+.LBB5_2:
+	pop	{r7, pc}
+.Lfunc_end5:
+	.size	MX_I2S3_Init, .Lfunc_end5-MX_I2S3_Init
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -883,22 +550,15 @@ MX_SPI1_Init:
 	movs	r1, #10
 	str	r1, [r0, #44]
 	bl	HAL_SPI_Init
-	cbz	r0, .LBB13_2
-	b	.LBB13_1
-.LBB13_1:
-	@APP
-MX_SPI1_Init_64_FORPUSH:
-	movw	lr, #192
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB6_2
+	b	.LBB6_1
+.LBB6_1:
 	bl	Error_Handler
-	b	.LBB13_2
-.LBB13_2:
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end13:
-	.size	MX_SPI1_Init, .Lfunc_end13-MX_SPI1_Init
+	b	.LBB6_2
+.LBB6_2:
+	pop	{r7, pc}
+.Lfunc_end6:
+	.size	MX_SPI1_Init, .Lfunc_end6-MX_SPI1_Init
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -929,22 +589,15 @@ MX_USART2_UART_Init:
 	str	r1, [r0, #24]
 	str	r1, [r0, #28]
 	bl	HAL_UART_Init
-	cbz	r0, .LBB14_2
-	b	.LBB14_1
-.LBB14_1:
-	@APP
-MX_USART2_UART_Init_68_FORPUSH:
-	movw	lr, #204
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
+	cbz	r0, .LBB7_2
+	b	.LBB7_1
+.LBB7_1:
 	bl	Error_Handler
-	b	.LBB14_2
-.LBB14_2:
-	pop	{r7, lr}
-	bl	MasterBackward
-.Lfunc_end14:
-	.size	MX_USART2_UART_Init, .Lfunc_end14-MX_USART2_UART_Init
+	b	.LBB7_2
+.LBB7_2:
+	pop	{r7, pc}
+.Lfunc_end7:
+	.size	MX_USART2_UART_Init, .Lfunc_end7-MX_USART2_UART_Init
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -960,58 +613,75 @@ StartTask02:
 	push	{r7, lr}
 	.setfp	r7, sp
 	mov	r7, sp
+	.pad	#8
+	sub	sp, #8
+	str	r0, [sp, #4]
+	b	.LBB8_1
+.LBB8_1:                                @ =>This Inner Loop Header: Depth=1
+	bl	getidx
+	str	r0, [sp]
+	ldr	r2, [sp]
+	movw	r0, :lower16:.L.str.6
+	movt	r0, :upper16:.L.str.6
+	movw	r1, :lower16:StartTask02
+	movt	r1, :upper16:StartTask02
+	bl	printf
+	@APP
+StartTask02_0_FORPUSH:
+	cpsid if
+	movw	lr, #0
+	movt	lr, #2060
+	push	{lr}
+	@NO_APP
+	bl	a
+	mov.w	r0, #1000
+	bl	osDelay
+	b	.LBB8_1
+.Lfunc_end8:
+	.size	StartTask02, .Lfunc_end8-StartTask02
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	StartTask01                     @ -- Begin function StartTask01
+	.p2align	2
+	.type	StartTask01,%function
+	.code	16                              @ @StartTask01
+	.thumb_func
+StartTask01:
+	.fnstart
+@ %bb.0:
+	.save	{r7, lr}
+	push	{r7, lr}
+	.setfp	r7, sp
+	mov	r7, sp
 	.pad	#16
 	sub	sp, #16
 	str	r0, [sp, #12]
-	@APP
-StartTask02_72_FORPUSH:
-	movw	lr, #216
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	initialise_benchmark
 	bl	HAL_GetTick
 	str	r0, [sp, #8]
-	b	.LBB15_1
-.LBB15_1:                               @ =>This Loop Header: Depth=1
-                                        @     Child Loop BB15_2 Depth 2
-	movs	r0, #0
+	b	.LBB9_1
+.LBB9_1:                                @ =>This Inner Loop Header: Depth=1
+	bl	getidx
 	str	r0, [sp, #4]
-	b	.LBB15_2
-.LBB15_2:                               @   Parent Loop BB15_1 Depth=1
-                                        @ =>  This Inner Loop Header: Depth=2
-	ldr	r0, [sp, #4]
-	cmp.w	r0, #1000
-	bge	.LBB15_5
-	b	.LBB15_3
-.LBB15_3:                               @   in Loop: Header=BB15_2 Depth=2
-	@APP
-StartTask02_76_FORPUSH:
-	movw	lr, #228
-	movt	lr, #2060
-	push	{lr}
-	@NO_APP
-	bl	benchmark
-	b	.LBB15_4
-.LBB15_4:                               @   in Loop: Header=BB15_2 Depth=2
-	ldr	r0, [sp, #4]
-	adds	r0, #1
-	str	r0, [sp, #4]
-	b	.LBB15_2
-.LBB15_5:                               @   in Loop: Header=BB15_1 Depth=1
-	bl	HAL_GetTick
-	ldr	r1, [sp, #8]
-	subs	r0, r0, r1
-	str	r0, [sp]
-	ldr	r1, [sp]
-	movw	r0, :lower16:.L.str.1
-	movt	r0, :upper16:.L.str.1
+	ldr	r2, [sp, #4]
+	movw	r0, :lower16:.L.str.6
+	movt	r0, :upper16:.L.str.6
+	movw	r1, :lower16:StartTask02
+	movt	r1, :upper16:StartTask02
 	bl	printf
-	bl	HAL_GetTick
-	str	r0, [sp, #8]
-	b	.LBB15_1
-.Lfunc_end15:
-	.size	StartTask02, .Lfunc_end15-StartTask02
+	@APP
+StartTask01_4_FORPUSH:
+	cpsid if
+	movw	lr, #12
+	movt	lr, #2060
+	push	{lr}
+	@NO_APP
+	bl	a
+	mov.w	r0, #1000
+	bl	osDelay
+	b	.LBB9_1
+.Lfunc_end9:
+	.size	StartTask01, .Lfunc_end9-StartTask01
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -1026,11 +696,143 @@ Error_Handler:
 	@APP
 	cpsid i
 	@NO_APP
-	b	.LBB16_1
-.LBB16_1:                               @ =>This Inner Loop Header: Depth=1
-	b	.LBB16_1
-.Lfunc_end16:
-	.size	Error_Handler, .Lfunc_end16-Error_Handler
+	b	.LBB10_1
+.LBB10_1:                               @ =>This Inner Loop Header: Depth=1
+	b	.LBB10_1
+.Lfunc_end10:
+	.size	Error_Handler, .Lfunc_end10-Error_Handler
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	c                               @ -- Begin function c
+	.p2align	2
+	.type	c,%function
+	.code	16                              @ @c
+	.thumb_func
+c:
+	.fnstart
+@ %bb.0:
+	.save	{r7, lr}
+	push	{r7, lr}
+	.setfp	r7, sp
+	mov	r7, sp
+	.pad	#24
+	sub	sp, #24
+	ldr.w	r12, [r7, #8]
+	str	r0, [sp, #20]
+	str	r1, [sp, #16]
+	str	r2, [sp, #12]
+	str	r3, [sp, #8]
+	bl	getidx
+	str	r0, [sp, #4]
+	ldr	r1, [sp, #4]
+	movw	r0, :lower16:.L.str.2
+	movt	r0, :upper16:.L.str.2
+	bl	printf
+	movw	r0, :lower16:.L.str.3
+	movt	r0, :upper16:.L.str.3
+	bl	printf
+	ldr	r0, [sp, #20]
+	ldr	r1, [sp, #16]
+	add	r0, r1
+	ldr	r1, [sp, #12]
+	add	r0, r1
+	ldr	r1, [sp, #8]
+	add	r0, r1
+	ldr	r1, [r7, #8]
+	add	r0, r1
+	add	sp, #24
+	pop	{r7, lr}
+	bl	MasterBackward
+.Lfunc_end11:
+	.size	c, .Lfunc_end11-c
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	b                               @ -- Begin function b
+	.p2align	2
+	.type	b,%function
+	.code	16                              @ @b
+	.thumb_func
+b:
+	.fnstart
+@ %bb.0:
+	.save	{r7, lr}
+	push	{r7, lr}
+	.setfp	r7, sp
+	mov	r7, sp
+	.pad	#16
+	sub	sp, #16
+	str	r0, [sp, #12]
+	bl	getidx
+	str	r0, [sp, #8]
+	ldr	r1, [sp, #8]
+	movw	r0, :lower16:.L.str.2
+	movt	r0, :upper16:.L.str.2
+	bl	printf
+	movw	r0, :lower16:.L.str.4
+	movt	r0, :upper16:.L.str.4
+	bl	printf
+	ldr	r0, [sp, #12]
+	adds	r0, #123
+	@APP
+b_8_FORPUSH:
+	cpsid if
+	movw	lr, #24
+	movt	lr, #2060
+	push	{lr}
+	@NO_APP
+	movs	r1, #4
+	str	r1, [sp]
+	movs	r1, #1
+	movs	r2, #2
+	movs	r3, #3
+	bl	c
+	add	sp, #16
+	pop	{r7, lr}
+	bl	MasterBackward
+.Lfunc_end12:
+	.size	b, .Lfunc_end12-b
+	.cantunwind
+	.fnend
+                                        @ -- End function
+	.globl	a                               @ -- Begin function a
+	.p2align	2
+	.type	a,%function
+	.code	16                              @ @a
+	.thumb_func
+a:
+	.fnstart
+@ %bb.0:
+	.save	{r7, lr}
+	push	{r7, lr}
+	.setfp	r7, sp
+	mov	r7, sp
+	.pad	#8
+	sub	sp, #8
+	bl	getidx
+	str	r0, [sp, #4]
+	ldr	r1, [sp, #4]
+	movw	r0, :lower16:.L.str.2
+	movt	r0, :upper16:.L.str.2
+	bl	printf
+	movw	r0, :lower16:.L.str.5
+	movt	r0, :upper16:.L.str.5
+	bl	printf
+	@APP
+a_12_FORPUSH:
+	cpsid if
+	movw	lr, #36
+	movt	lr, #2060
+	push	{lr}
+	@NO_APP
+	movs	r0, #1
+	bl	b
+	add	sp, #8
+	pop	{r7, lr}
+	bl	MasterBackward
+.Lfunc_end13:
+	.size	a, .Lfunc_end13-a
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -1054,16 +856,16 @@ HAL_TIM_PeriodElapsedCallback:
 	movw	r1, #4096
 	movt	r1, #16384
 	cmp	r0, r1
-	bne	.LBB17_2
-	b	.LBB17_1
-.LBB17_1:
+	bne	.LBB14_2
+	b	.LBB14_1
+.LBB14_1:
 	bl	HAL_IncTick
-	b	.LBB17_2
-.LBB17_2:
+	b	.LBB14_2
+.LBB14_2:
 	add	sp, #8
 	pop	{r7, pc}
-.Lfunc_end17:
-	.size	HAL_TIM_PeriodElapsedCallback, .Lfunc_end17-HAL_TIM_PeriodElapsedCallback
+.Lfunc_end14:
+	.size	HAL_TIM_PeriodElapsedCallback, .Lfunc_end14-HAL_TIM_PeriodElapsedCallback
 	.cantunwind
 	.fnend
                                         @ -- End function
@@ -1075,26 +877,36 @@ HAL_TIM_PeriodElapsedCallback:
 MasterForward:
 	.fnstart
 @ %bb.0:                                @ %MasterForward_
+	.save	{r7, lr}
+	push	{r7, lr}
 	@APP
+	pop.w	{r7, lr}
 	push	{r0, r1, r2, r3}
 	ldr	r0, [sp, #16]
 	ldr	r1, [r0]
+	push	{r0}
 	cmp	r1, lr
 	bne	fail
-	ldr	r1, .Ltmp0
-	ldr	r2, [r1]
-	str	r0, [r2]
-	add.w	r2, r2, #4
-	str	r2, [r1]
+
+	@NO_APP
+	bl	getidx
+	mov	r1, r0
+	@APP
+	pop	{r2}
+	mov	r0, r2
+	@NO_APP
+	bl	forward
+	@APP
 	pop.w	{r0, r1, r2, r3, lr}
 	add.w	lr, lr, #4
 	ldr.w	lr, [lr]
+	cpsie if
 	bx	lr
 fail:
 	@NO_APP
-	bx	lr
-.Lfunc_end18:
-	.size	MasterForward, .Lfunc_end18-MasterForward
+	pop	{r7, pc}
+.Lfunc_end15:
+	.size	MasterForward, .Lfunc_end15-MasterForward
 	.fnend
                                         @ -- End function
 	.globl	MasterBackward                  @ -- Begin function MasterBackward
@@ -1105,71 +917,83 @@ fail:
 MasterBackward:
 	.fnstart
 @ %bb.0:                                @ %MasterBackward_
+	.save	{r7, lr}
+	push	{r7, lr}
 	@APP
-	ldr	r1, .Ltmp0
-	ldr	r2, [r1]
-	sub.w	r2, r2, #4
-	ldr	r3, [r2]
-	add.w	r3, r3, #8
-	ldr	r3, [r3]
-	cmp	r3, lr
-	bne	fail_back
-	ldr	r3, [r2]
-	ldr.w	lr, [r3]
-	str	r2, [r1]
+	cpsid if
+	pop.w	{r7, lr}
+	push	{r0}
+	push	{lr}
+
+	@NO_APP
+	bl	getidx
+	mov	r1, r0
+	@APP
+	pop	{r2}
+
+	@NO_APP
+	@APP
+	mov	r0, r2
+	@NO_APP
+	bl	backward
+	@APP
+	mov	lr, r0
+	pop	{r0}
+	cpsie if
 	bx	lr
 fail_back:
 	@NO_APP
-	bx	lr
-.Lfunc_end19:
-	.size	MasterBackward, .Lfunc_end19-MasterBackward
+	pop	{r7, pc}
+.Lfunc_end16:
+	.size	MasterBackward, .Lfunc_end16-MasterBackward
 	.fnend
                                         @ -- End function
 	.type	.L.str,%object                  @ @.str
 	.section	.rodata.str1.1,"aMS",%progbits,1
 .L.str:
-	.asciz	"myTask02"
+	.asciz	"myTask01"
 	.size	.L.str, 9
+
+	.type	myTask01_attributes,%object     @ @myTask01_attributes
+	.section	.rodata,"a",%progbits
+	.globl	myTask01_attributes
+	.p2align	2, 0x0
+myTask01_attributes:
+	.long	.L.str
+	.long	0                               @ 0x0
+	.long	0
+	.long	0                               @ 0x0
+	.long	0
+	.long	4096                            @ 0x1000
+	.long	16                              @ 0x10
+	.long	0                               @ 0x0
+	.long	0                               @ 0x0
+	.size	myTask01_attributes, 36
+
+	.type	.L.str.1,%object                @ @.str.1
+	.section	.rodata.str1.1,"aMS",%progbits,1
+.L.str.1:
+	.asciz	"myTask02"
+	.size	.L.str.1, 9
 
 	.type	myTask02_attributes,%object     @ @myTask02_attributes
 	.section	.rodata,"a",%progbits
 	.globl	myTask02_attributes
 	.p2align	2, 0x0
 myTask02_attributes:
-	.long	.L.str
+	.long	.L.str.1
 	.long	0                               @ 0x0
 	.long	0
 	.long	0                               @ 0x0
 	.long	0
-	.long	512                             @ 0x200
+	.long	4096                            @ 0x1000
 	.long	16                              @ 0x10
 	.long	0                               @ 0x0
 	.long	0                               @ 0x0
 	.size	myTask02_attributes, 36
 
-	.type	result,%object                  @ @result
-	.bss
-	.globl	result
-	.p2align	2, 0x0
-result:
-	.long	0                               @ 0x0
-	.size	result, 4
-
-	.type	x,%object                       @ @x
-	.globl	x
-	.p2align	2, 0x0
-x:
-	.long	0                               @ 0x0
-	.size	x, 4
-
-	.type	y,%object                       @ @y
-	.globl	y
-	.p2align	2, 0x0
-y:
-	.long	0                               @ 0x0
-	.size	y, 4
-
 	.type	huart2,%object                  @ @huart2
+	.bss
 	.globl	huart2
 	.p2align	2, 0x0
 huart2:
@@ -1183,11 +1007,38 @@ myTask02Handle:
 	.long	0
 	.size	myTask02Handle, 4
 
-	.type	.L.str.1,%object                @ @.str.1
+	.type	myTask01Handle,%object          @ @myTask01Handle
+	.globl	myTask01Handle
+	.p2align	2, 0x0
+myTask01Handle:
+	.long	0
+	.size	myTask01Handle, 4
+
+	.type	.L.str.2,%object                @ @.str.2
 	.section	.rodata.str1.1,"aMS",%progbits,1
-.L.str.1:
-	.asciz	"Total Time : %d\r\n"
-	.size	.L.str.1, 18
+.L.str.2:
+	.asciz	"idx : %d\r\n"
+	.size	.L.str.2, 11
+
+	.type	.L.str.3,%object                @ @.str.3
+.L.str.3:
+	.asciz	"C\r\n"
+	.size	.L.str.3, 4
+
+	.type	.L.str.4,%object                @ @.str.4
+.L.str.4:
+	.asciz	"B\r\n"
+	.size	.L.str.4, 4
+
+	.type	.L.str.5,%object                @ @.str.5
+.L.str.5:
+	.asciz	"A\r\n"
+	.size	.L.str.5, 4
+
+	.type	.L.str.6,%object                @ @.str.6
+.L.str.6:
+	.asciz	"Task %p idx : %d\r\n"
+	.size	.L.str.6, 19
 
 	.type	hi2c1,%object                   @ @hi2c1
 	.bss
@@ -1211,12 +1062,5 @@ hspi1:
 	.zero	92
 	.size	hspi1, 92
 
-	.text
-	.p2align	2, 0x0
-.Ltmp0:
-	.long	536936448
-	.p2align	2, 0x0
-.Ltmp1:
-	.long	536936452
-	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 789cdbd730d0d33650f9940fff17c432b1dc4a4a)"
+	.ident	"clang version 18.0.0 (https://github.com/beerabbit/safestack.git 924411f7435188d98a0c744016baf7a22cb5b036)"
 	.section	".note.GNU-stack","",%progbits
